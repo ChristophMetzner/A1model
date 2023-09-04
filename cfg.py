@@ -22,7 +22,7 @@ cfg = specs.SimConfig()
 #------------------------------------------------------------------------------
 # Run parameters
 #------------------------------------------------------------------------------
-cfg.duration = 0.3*1e3 #0.3*1e3			## Duration of the sim, in ms -- value from M1 cfg.py
+cfg.duration = 6.*1e3 #0.3*1e3			## Duration of the sim, in ms -- value from M1 cfg.py
 cfg.dt = 0.05                   ## Internal Integration Time Step -- value from M1 cfg.py
 cfg.verbose = 0         	## Show detailed messages
 cfg.hParams['celsius'] = 37
@@ -59,7 +59,7 @@ cfg.recordLFP = [[100, y, 100] for y in range(0, 2000, 100)] #+[[100, 2500, 200]
 #cfg.recordLFP = [[x, 1000, 100] for x in range(100, 2200, 200)] #+[[100, 2500, 200], [100,2700,200]]
 #cfg.saveLFPPops =  cfg.allCorticalPops #, "IT3", "SOM3", "PV3", "VIP3", "NGF3", "ITP4", "ITS4", "IT5A", "CT5A", "IT5B", "PT5B", "CT5B", "IT6", "CT6"]
 
-# cfg.recordDipole = True
+cfg.recordDipole = True
 # cfg.saveDipoleCells = ['all']
 # cfg.saveDipolePops = cfg.allpops
 
@@ -68,8 +68,8 @@ cfg.recordLFP = [[100, y, 100] for y in range(0, 2000, 100)] #+[[100, 2500, 200]
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'test'
-cfg.saveFolder = 'data/test'                	## Set file output name
+cfg.simLabel = 'spontaneous'
+cfg.saveFolder = 'data/Resting_state'                	## Set file output name
 cfg.savePickle = True         	## Save pkl file
 cfg.saveJson = False           	## Save json file
 cfg.saveDataInclude = ['simData', 'simConfig', 'netParams', 'net']
