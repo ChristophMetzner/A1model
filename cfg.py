@@ -68,7 +68,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'control_ASSR_Poulami_no_extra_L1_NGF_input'
+cfg.simLabel = 'control_ASSR_Poulami_Thal_PV4_SOM4_factor_05'
 cfg.saveFolder = 'data/ASSR_test'                	## Set file output name
 cfg.savePickle = True         	## Save pkl file
 cfg.saveJson = False           	## Save json file

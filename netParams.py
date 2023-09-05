@@ -428,8 +428,15 @@ if cfg.addConn and cfg.addThalamoCorticalConn:
             if post in pmat[pre]:
                 # for syns use ESynMech, SOMESynMech and SOMISynMech 
                 if pre in TEpops:     # E->E/I
-                    syn = ESynMech
-                    synWeightFactor = cfg.synWeightFractionEE
+                    if post=='PV4':
+                        syn = ESynMech
+                        synWeightFactor = cfg.synWeightFractionEE*0.5
+                    elif post=='SOM4':
+                        syn = ESynMech
+                        synWeightFactor = cfg.synWeightFractionEE*0.5
+                    else:
+                        syn = ESynMech
+                        synWeightFactor = cfg.synWeightFractionEE
                 elif post in Epops:  # I->E
                     syn = SOMESynMech
                     synWeightFactor = cfg.synWeightFractionIE
