@@ -597,7 +597,7 @@ if cfg.addBkgConn:
         ICrates = [x + [0] for x in ICrates] # add trailing zero to avoid long output from inh_poisson_generator() 
         ICtimes = list(np.arange(0, cfg.duration, 1000./fs))  # list with times to set each time-dep rate
         
-        ICrates = ICrates * 10 # 200 cells
+        ICrates = ICrates * 20 # 200 cells
         
         numCells = len(ICrates)
 
