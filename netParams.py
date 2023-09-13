@@ -432,19 +432,19 @@ if cfg.addConn and cfg.addThalamoCorticalConn:
                     if post=='PV4':
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
-                        scaleFactor = 0.9
+                        scaleFactor = 1.0
                     elif post=='SOM4':
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
-                        scaleFactor = 0.9
+                        scaleFactor = 1.0
                     elif post=='ITS4':
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
-                        scaleFactor = 1.1
+                        scaleFactor = 1.0
                     elif post=='ITP4':
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
-                        scaleFactor = 1.1
+                        scaleFactor = 1.0
                     else:
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
