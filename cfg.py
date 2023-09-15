@@ -68,7 +68,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'control_ASSR_default_IC_Thal_weightE_1_weightI_1'
+cfg.simLabel = 'control_ASSR_default_IC_Thal_weightE_0_5_weightI_1_5'
 cfg.saveFolder = 'data/ASSR_test'                	## Set file output name
 cfg.savePickle = True         	## Save pkl file
 cfg.saveJson = False           	## Save json file
@@ -199,7 +199,7 @@ cfg.cochlearThalInput = False #{'numCells': 200, 'freqRange': [9*1e3, 11*1e3], '
 
 # parameters to generate realistic cochlear + IC input ; weight =unitary connection somatic EPSP (mV)
 cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat',
-                    'startTime': 1500, 'weightE': 1.0, 'weightI': 1.0, 'probE': 0.12, 'probI': 0.26, 'seed': 12345}
+                    'startTime': 1500, 'weightE': 0.5, 'weightI': 1.5, 'probE': 0.12, 'probI': 0.26, 'seed': 12345}
 
 #------------------------------------------------------------------------------
 # Current inputs
