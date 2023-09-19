@@ -68,7 +68,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'control_ASSR_default_IC_Thal_weightE_1_15_weightI_1_15_IRE_TC_1_5'
+cfg.simLabel = 'control_ASSR_default_IC_Thal_weightE_1_15_weightI_1_15_Thal_ITP4_ITS4_PV4_1_5'
 cfg.saveFolder = 'data/ASSR_test'                	## Set file output name
 cfg.savePickle = True         	## Save pkl file
 cfg.saveJson = False           	## Save json file
