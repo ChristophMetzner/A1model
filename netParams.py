@@ -379,6 +379,7 @@ TIpops = ['IRE', 'IREM', 'TI', 'TIM']
 if cfg.addConn and cfg.addIntraThalamicConn:
     for pre in TEpops+TIpops:
         for post in TEpops+TIpops:
+            scaleFactor = 1.0
             if post in pmat[pre]:
                 # for syns use ESynMech, SOMESynMech and SOMISynMech 
                 if pre in TEpops:     # E->E/I
@@ -386,7 +387,8 @@ if cfg.addConn and cfg.addIntraThalamicConn:
                     synWeightFactor = cfg.synWeightFractionEE
                 elif post in TEpops:  # I->E
                     syn = SOMESynMech
-                    synWeightFactor = cfg.synWeightFractionIE *1.5
+                    synWeightFactor = cfg.synWeightFractionIE 
+                    scaleFactor = 1.5
                 else:                  # I->I
                     syn = SOMISynMech
                     synWeightFactor = [1.0]
@@ -396,7 +398,7 @@ if cfg.addConn and cfg.addIntraThalamicConn:
                     'postConds': {'pop': post},
                     'synMech': syn,
                     'probability': pmat[pre][post],
-                    'weight': wmat[pre][post] * cfg.intraThalamicGain, 
+                    'weight': wmat[pre][post] * cfg.intraThalamicGain*scaleFactor, 
                     'synMechWeightFactor': synWeightFactor,
                     'delay': 'defaultDelay+dist_3D/propVelocity',
                     'synsPerConn': 1,
