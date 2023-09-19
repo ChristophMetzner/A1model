@@ -386,7 +386,7 @@ if cfg.addConn and cfg.addIntraThalamicConn:
                     synWeightFactor = cfg.synWeightFractionEE
                 elif post in TEpops:  # I->E
                     syn = SOMESynMech
-                    synWeightFactor = cfg.synWeightFractionIE
+                    synWeightFactor = cfg.synWeightFractionIE *1.5
                 else:                  # I->I
                     syn = SOMISynMech
                     synWeightFactor = [1.0]
