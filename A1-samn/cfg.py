@@ -23,7 +23,7 @@ cfg = specs.SimConfig()
 #------------------------------------------------------------------------------
 # Run parameters
 #------------------------------------------------------------------------------
-cfg.duration = 12e3             ## Duration of the sim, in ms
+cfg.duration = 6e3             ## Duration of the sim, in ms
 cfg.dt = 0.05                   ## Internal Integration Time Step
 cfg.verbose = 0         	## Show detailed messages
 cfg.hParams['celsius'] = 37
@@ -67,8 +67,8 @@ cfg.recordLFP = [[100, y, 100] for y in range(0, 2000, 100)] #+[[100, 2500, 200]
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = '23aug30_BBN_B0'  #'v38_NMDAR_test'
-cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
+cfg.simLabel = 'samn_ASSR_test'
+cfg.saveFolder = 'data/ASSR_test'                	## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
 cfg.saveDataInclude = ['simData', 'simConfig', 'netParams', 'net'] 
@@ -301,8 +301,8 @@ cfg.IbkgThalamicGain = cfgLoad['IbkgThalamicGain']
 # UPDATE WMAT VALUES
 cfg.wmat = cfgLoad['wmat']
 
-cfg.ICThalInput = {'file': 'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
-                   'startTime': list(np.arange(5000, 9000, 300)),
+cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat',#'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
+                   'startTime': 1500,#list(np.arange(5000, 9000, 300)),
                    'weightE': 0.375,
                    'weightI': 0.375,
                    'probE': 0.19, 
