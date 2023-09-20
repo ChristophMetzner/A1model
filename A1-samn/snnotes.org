@@ -1,0 +1,1723 @@
+
+* 20mar5 - setting up
+** cloned from https://github.com/NathanKlineInstitute/A1
+
+then made a new branch samn off of salva branch
+for now, will use samn for development ...
+
+** wav files converted to mat to send to model
+
+data is in data/ICoutput/ICoutput_CF_9600_10400_wav_01_ba_peter.mat
+so those are spikes from inferior colliculus
+
+can take a look to see how it looks ...
+
+** make sure using py3env
+
+now setup laptop to use anaconda with neurosim dir structures
+so, that py3env uses python 3.6 with anaconda ... 
+
+** compile
+
+nrnivmodl mod
+
+** run
+
+make a myrun script wrapper
+that contains
+mpiexec -n $1 nrniv -python -mpi init.py
+
+init.py is entry point for network model
+
+which param to scale down so can run on laptop?
+
+sal mentioned:
+cfg.scaleDensity — if you set to 0.025 it's ~400 cells, runs in 60 sec
+
+try out a 2 s sim with scale of 0.025 ...
+
+myrun 8
+
+with scale of 1.0 there are 1607 cells on each node ... for 12856 cells total ... too much
+for lowly laptop ...
+
+with scale of 0.025, 8 cores, ~43-44 cells per node ...
+
+  Done; run time = 28.73 s; real-time ratio: 0.07.
+
+  Cells: 347
+  Connections: 7412 (21.36 per cell)
+  Synaptic contacts: 14473 (41.71 per cell)
+  Spikes: 1830 (2.64 Hz)
+   NGF1 : 0.000 Hz
+   IT2 : 0.083 Hz
+   IT3 : 0.204 Hz
+   SOM3 : 50.000 Hz
+   PV3 : 0.000 Hz
+   VIP3 : 0.000 Hz
+   NGF3 : 0.000 Hz
+   ITP4 : 0.167 Hz
+   ITS4 : 9.633 Hz
+   PV4 : 0.000 Hz
+   IT5A : 3.417 Hz
+   CT5A : 0.083 Hz
+   SOM5A : 38.000 Hz
+   PV5A : 0.000 Hz
+   IT5B : 0.606 Hz
+   CT5B : 0.000 Hz
+   PT5B : 0.061 Hz
+   SOM5B : 34.000 Hz
+   PV5B : 0.000 Hz
+   IT6 : 2.213 Hz
+   CT6 : 0.133 Hz
+   SOM6 : 39.333 Hz
+   PV6 : 0.000 Hz
+   TC : 0.000 Hz
+   TCM : 0.000 Hz
+   IRE : 0.000 Hz
+   IREM : 0.000 Hz
+   IC : 11.373 Hz
+  Simulated time: 2.0 s; 8 workers
+  Run time: 28.73 s
+Saving output as data/v11_manualTune//v11_sim52.json  ...
+
+most cells not firing ...
+
+could run scale of 0.1 for ~1300 cells ...
+
+myrun 8
+
+getting lots of these errors: exp(inf) out of range, returning exp(700)
+
+  Cells: 1313
+  Connections: 130037 (99.04 per cell)
+  Synaptic contacts: 253484 (193.06 per cell)
+  Spikes: 4513 (1.72 Hz)
+   NGF1 : 0.000 Hz
+   IT2 : 0.000 Hz
+   PV2 : 0.000 Hz
+   VIP2 : 0.000 Hz
+   NGF2 : 0.000 Hz
+   IT3 : 0.049 Hz
+   SOM3 : 56.381 Hz
+   PV3 : 0.000 Hz
+   VIP3 : 0.000 Hz
+   NGF3 : 0.000 Hz
+   ITP4 : 0.056 Hz
+   ITS4 : 3.398 Hz
+   SOM4 : 62.667 Hz
+   PV4 : 0.000 Hz
+   VIP4 : 0.000 Hz
+   NGF4 : 0.000 Hz
+   IT5A : 0.248 Hz
+   CT5A : 0.000 Hz
+   SOM5A : 32.667 Hz
+   PV5A : 0.000 Hz
+   VIP5A : 0.000 Hz
+   IT5B : 0.113 Hz
+   CT5B : 0.000 Hz
+   PT5B : 0.014 Hz
+   SOM5B : 37.030 Hz
+   PV5B : 0.000 Hz
+   VIP5B : 0.000 Hz
+   NGF5B : 0.000 Hz
+   IT6 : 2.147 Hz
+   CT6 : 0.100 Hz
+   SOM6 : 34.444 Hz
+   PV6 : 0.000 Hz
+   VIP6 : 0.000 Hz
+   NGF6 : 0.000 Hz
+   TC : 0.000 Hz
+   TCM : 0.000 Hz
+   HTC : 0.000 Hz
+   IRE : 0.000 Hz
+   IREM : 0.000 Hz
+   IC : 10.933 Hz
+  Simulated time: 2.0 s; 8 workers
+  Run time: 359.73 s
+Saving output as data/v11_manualTune//v11_sim52.json  ... 
+Finished saving!
+Done; saving time = 1.06 s.
+
+at this scale, have lots of populations not firing at all as well ...
+
+are there exp(inf) warnings for scale of 1 too?
+
+try 200 ms sim at that scale to see ... (the warnings started before sim reached 100 ms)
+
+myrun 8
+
+yeah, looks like get same errors at scale of 1
+exp(inf) out of range, returning exp(700)
+
+takes a while to get network wired, of course ... millions of synapses per node
+
+then crashes eventually with out of memory problem ... when it gets to gather:
+
+Gathering data...
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+[samndp7730:13791] *** Process received signal ***
+[samndp7730:13791] Signal: Aborted (6)
+[samndp7730:13791] Signal code:  (-6)
+
+* 20mar6 - testing/tuning manually
+** reading code/testing/tuning smaller version of model
+
+in the 0.1 scaledensity simulation, the IC cells are firing ~8 Hz when providing
+the auditory input signal ... but the TC cells are not firing at all
+
+SOM cells fire too much, most other populations do not fire too much
+
+myrun 12
+
+  Cells: 1313
+  Connections: 130037 (99.04 per cell)
+  Synaptic contacts: 253484 (193.06 per cell)
+  Spikes: 4526 (1.72 Hz)
+   NGF1 : 0.000 Hz
+   IT2 : 0.000 Hz
+   PV2 : 0.000 Hz
+   VIP2 : 0.000 Hz
+   NGF2 : 0.000 Hz
+   IT3 : 0.049 Hz
+   SOM3 : 56.381 Hz
+   PV3 : 0.000 Hz
+   VIP3 : 0.000 Hz
+   NGF3 : 0.000 Hz
+   ITP4 : 0.056 Hz
+   ITS4 : 3.398 Hz
+   SOM4 : 62.667 Hz
+   PV4 : 0.000 Hz
+   VIP4 : 0.000 Hz
+   NGF4 : 0.000 Hz
+   IT5A : 0.248 Hz
+   CT5A : 0.000 Hz
+   SOM5A : 32.667 Hz
+   PV5A : 0.000 Hz
+   VIP5A : 0.000 Hz
+   IT5B : 0.113 Hz
+   CT5B : 0.000 Hz
+   PT5B : 0.014 Hz
+   SOM5B : 37.030 Hz
+   PV5B : 0.000 Hz
+   VIP5B : 0.000 Hz
+   NGF5B : 0.000 Hz
+   IT6 : 2.147 Hz
+   CT6 : 0.100 Hz
+   SOM6 : 34.444 Hz
+   PV6 : 0.000 Hz
+   VIP6 : 0.000 Hz
+   NGF6 : 0.000 Hz
+   TC : 0.000 Hz
+   TCM : 0.000 Hz
+   HTC : 0.000 Hz
+   IRE : 0.000 Hz
+   IREM : 0.000 Hz
+   IC : 11.107 Hz
+  Simulated time: 2.0 s; 12 workers
+  Run time: 327.72 s
+  Saving output as data/20mar6//20mar6_A0.pkl ...
+
+so, where is connection from IC -> THAL ?   
+
+in cfg.py have this:
+cfg.ICThalInput = {'file': 'data/ICoutput/ICoutput_CF_9600_10400_wav_01_ba_peter.mat', 'startTime': 500}  # parameters to generate realistic cochlear + IC input
+
+and in netParams.py have this:
+if cfg.ICThalInput:
+which loads spikes from file and then creates VecStims like this:
+netParams.popParams['IC'] = {'cellModel': 'VecStim', 'numCells': numCells, 'ynormRange': layer['cochlear'],'spkTimes': spkTimes}
+but, do not see the weight set ...aha, it's set below as
+    # connect cochlear + IC thalamic inputs
+    if cfg.ICThalInput:
+        netParams.connParams['IC->ThalE'] = { 
+            'preConds': {'pop': 'IC'}, 
+            'postConds': {'cellType': ['TC', 'HTC']},
+            'sec': 'soma', 
+            'loc': 0.5,
+            'synMech': ESynMech,
+            'probability': cfg.probInput['ThalE'],
+            'weight': cfg.weightInput['ThalE'],
+            'synMechWeightFactor': cfg.synWeightFractionEE,
+            'delay': cfg.delayBkg}
+        
+        netParams.connParams['IC->ThalI'] = { 
+            'preConds': {'pop': 'IC'}, 
+            'postConds': {'cellType': ['RE']},
+            'sec': 'soma', 
+            'loc': 0.5,
+            'synMech': ESynMech,
+            'probability': cfg.probInput['ThalI'], 
+            'weight': cfg.weightInput['ThalI'],
+            'synMechWeightFactor': cfg.synWeightFractionEI,
+            'delay': cfg.delayBkg}  
+
+so, to increase weight of those IC inputs just increase cfg.weightInput['ThalE'] and/or cfg.weightInput['ThalI']
+
+try that out . . .
+
+even if that works should have some activity throughout the network in the absence of auditory inputs
+
+hmm, still have 0 TC rates:
+   TC : 0.000 Hz
+   TCM : 0.000 Hz
+   HTC : 0.000 Hz
+   IRE : 0.000 Hz
+   IREM : 0.000 Hz
+   IC : 11.440 Hz
+
+   did not seem to impact TC rates ... or activity
+
+data/20mar6/20mar6_A0_traces_gid_1204.png   
+data/20mar6/20mar6_A0_traces_gid_1215.png
+data/20mar6/20mar6_A0_traces_gid_1230.png
+data/20mar6/20mar6_A0_traces_gid_1233.png
+data/20mar6/20mar6_A0_traces_gid_1248.png
+data/20mar6/20mar6_A0_traces_gid_1263.png
+raster: data/20mar6/20mar6_A0_raster.png
+
+probably because no inputs at all ??
+cfg.probInput = {'ThalE': 0.0, 'ThalI': 0.0} # {'ThalE': 0.25, 'ThalI': 0.25}  # probability of conn
+
+so need to set that to a positive value ...
+
+ok, put those weights back to 0.5 and put the probabilities at 0.25 ... see how it looks
+
+myrun 12
+
+ok, looks a lot different now, though still a lot of types not firing at all:
+
+  Cells: 1313
+  Connections: 130736 (99.57 per cell)
+  Synaptic contacts: 254882 (194.12 per cell)
+  Spikes: 5384 (2.05 Hz)
+   NGF1 : 0.000 Hz
+   IT2 : 0.000 Hz
+   PV2 : 0.000 Hz
+   VIP2 : 0.000 Hz
+   NGF2 : 0.000 Hz
+   IT3 : 0.054 Hz
+   SOM3 : 57.429 Hz
+   PV3 : 0.000 Hz
+   VIP3 : 0.000 Hz
+   NGF3 : 0.000 Hz
+   ITP4 : 0.056 Hz
+   ITS4 : 3.655 Hz
+   SOM4 : 64.000 Hz
+   PV4 : 0.000 Hz
+   VIP4 : 0.000 Hz
+   NGF4 : 0.000 Hz
+   IT5A : 0.248 Hz
+   CT5A : 0.000 Hz
+   SOM5A : 32.833 Hz
+   PV5A : 0.000 Hz
+   VIP5A : 0.000 Hz
+   IT5B : 0.142 Hz
+   CT5B : 0.000 Hz
+   PT5B : 0.014 Hz
+   SOM5B : 39.394 Hz
+   PV5B : 0.000 Hz
+   VIP5B : 0.000 Hz
+   NGF5B : 0.000 Hz
+   IT6 : 2.260 Hz
+   CT6 : 0.113 Hz
+   SOM6 : 34.556 Hz
+   PV6 : 0.083 Hz
+   VIP6 : 0.000 Hz
+   NGF6 : 0.000 Hz
+   TC : 10.727 Hz
+   TCM : 11.156 Hz
+   HTC : 8.222 Hz
+   IRE : 6.089 Hz
+   IREM : 4.800 Hz
+   IC : 11.573 Hz
+  Simulated time: 2.0 s; 12 workers
+  Run time: 353.24 s
+
+data/20mar6/20mar6_A0_traces_gid_1204.png   
+data/20mar6/20mar6_A0_traces_gid_1215.png
+data/20mar6/20mar6_A0_traces_gid_1230.png
+data/20mar6/20mar6_A0_traces_gid_1233.png
+data/20mar6/20mar6_A0_traces_gid_1248.png
+data/20mar6/20mar6_A0_traces_gid_1263.png
+raster: data/20mar6/20mar6_A0_raster.png
+
+seems like SOM cells overactive in every layer ... that's probably leading to suppression of everything else ...
+
+try turning down I -> E gain ... and I -> I gain ... and EIGain (in cfg.py)
+
+cfg.EEGain = 1.0 
+cfg.EIGain = 0.75 # 1.0 #0.75
+cfg.IEGain = 0.75 # 1.0 #0.75
+cfg.IIGain = 0.75 # 1.0 #0.5
+
+cfg.simLabel = '20mar6_A1'
+
+myrun 12
+
+data/20mar6/20mar6_A1_traces_gid_1204.png   
+data/20mar6/20mar6_A1_traces_gid_1215.png
+data/20mar6/20mar6_A1_traces_gid_1230.png
+data/20mar6/20mar6_A1_traces_gid_1233.png
+data/20mar6/20mar6_A1_traces_gid_1248.png
+data/20mar6/20mar6_A1_traces_gid_1263.png
+raster: data/20mar6/20mar6_A1_raster.png
+
+did not make much difference...
+
+SOM still dominating ...
+
+  Cells: 1313
+  Connections: 130736 (99.57 per cell)
+  Synaptic contacts: 254882 (194.12 per cell)
+  Spikes: 5849 (2.23 Hz)
+   NGF1 : 0.000 Hz
+   IT2 : 0.020 Hz
+   PV2 : 0.000 Hz
+   VIP2 : 0.000 Hz
+   NGF2 : 0.000 Hz
+   IT3 : 0.139 Hz
+   SOM3 : 60.952 Hz
+   PV3 : 0.000 Hz
+   VIP3 : 0.000 Hz
+   NGF3 : 0.000 Hz
+   ITP4 : 0.185 Hz
+   ITS4 : 5.390 Hz
+   SOM4 : 65.000 Hz
+   PV4 : 0.000 Hz
+   VIP4 : 0.000 Hz
+   NGF4 : 0.000 Hz
+   IT5A : 0.438 Hz
+   CT5A : 0.000 Hz
+   SOM5A : 34.667 Hz
+   PV5A : 0.000 Hz
+   VIP5A : 0.000 Hz
+   IT5B : 0.113 Hz
+   CT5B : 0.000 Hz
+   PT5B : 0.014 Hz
+   SOM5B : 41.455 Hz
+   PV5B : 0.000 Hz
+   VIP5B : 0.000 Hz
+   NGF5B : 0.000 Hz
+   IT6 : 2.073 Hz
+   CT6 : 0.147 Hz
+   SOM6 : 34.444 Hz
+   PV6 : 0.000 Hz
+   VIP6 : 0.000 Hz
+   NGF6 : 0.000 Hz
+   TC : 8.364 Hz
+   TCM : 10.711 Hz
+   HTC : 9.111 Hz
+   IRE : 5.956 Hz
+   IREM : 4.800 Hz
+   IC : 11.160 Hz
+
+test with IEGain of 0 to see if E cells activate without the inhib inputs ...
+
+cfg.simLabel = '20mar6_A2'
+cfg.IEGain = 0.0 # 0.75 # 1.0 #0.75
+
+myrun 12
+
+data/20mar6/20mar6_A2_traces_gid_1204.png   
+data/20mar6/20mar6_A2_traces_gid_1215.png
+data/20mar6/20mar6_A2_traces_gid_1230.png
+data/20mar6/20mar6_A2_traces_gid_1233.png
+data/20mar6/20mar6_A2_traces_gid_1248.png
+data/20mar6/20mar6_A2_traces_gid_1263.png
+raster: data/20mar6/20mar6_A2_raster.png
+
+well, it has some impact but E populations are mostly silent ...
+
+  Spikes: 14203 (5.41 Hz)
+   NGF1 : 0.000 Hz
+   IT2 : 10.222 Hz
+   PV2 : 0.000 Hz
+   VIP2 : 0.000 Hz
+   NGF2 : 0.000 Hz
+   IT3 : 0.555 Hz
+   SOM3 : 105.333 Hz
+   PV3 : 41.882 Hz
+   VIP3 : 0.000 Hz
+   NGF3 : 0.000 Hz
+   ITP4 : 0.000 Hz
+   ITS4 : 17.839 Hz
+   SOM4 : 96.667 Hz
+   PV4 : 19.704 Hz
+   VIP4 : 0.000 Hz
+   NGF4 : 0.000 Hz
+   IT5A : 0.000 Hz
+   CT5A : 0.000 Hz
+   SOM5A : 44.667 Hz
+   PV5A : 0.000 Hz
+   VIP5A : 0.000 Hz
+   IT5B : 0.000 Hz
+   CT5B : 0.000 Hz
+   PT5B : 1.830 Hz
+   SOM5B : 54.485 Hz
+   PV5B : 0.000 Hz
+   VIP5B : 0.000 Hz
+   NGF5B : 0.000 Hz
+   IT6 : 3.627 Hz
+   CT6 : 0.280 Hz
+   SOM6 : 36.333 Hz
+   PV6 : 7.750 Hz
+   VIP6 : 0.000 Hz
+   NGF6 : 0.000 Hz
+   TC : 7.455 Hz
+   TCM : 8.889 Hz
+   HTC : 3.333 Hz
+   IRE : 6.756 Hz
+   IREM : 5.956 Hz
+   IC : 10.640 Hz
+
+and try another with cortical connectivity turned off ... (may need to adjust the noise inputs)
+cfg.simLabel = '20mar6_A3'   
+cfg.addConn = 0   
+
+myrun 12
+
+  Spikes: 6048 (2.30 Hz)
+   NGF1 : 0.000 Hz
+   IT2 : 0.020 Hz
+   PV2 : 0.000 Hz
+   VIP2 : 0.000 Hz
+   NGF2 : 0.000 Hz
+   IT3 : 0.081 Hz
+   SOM3 : 38.190 Hz
+   PV3 : 0.000 Hz
+   VIP3 : 0.000 Hz
+   NGF3 : 0.000 Hz
+   ITP4 : 0.120 Hz
+   ITS4 : 10.048 Hz
+   SOM4 : 42.333 Hz
+   PV4 : 0.000 Hz
+   VIP4 : 0.000 Hz
+   NGF4 : 0.000 Hz
+   IT5A : 3.048 Hz
+   CT5A : 0.133 Hz
+   SOM5A : 35.833 Hz
+   PV5A : 0.000 Hz
+   VIP5A : 0.000 Hz
+   IT5B : 0.922 Hz
+   CT5B : 0.099 Hz
+   PT5B : 0.071 Hz
+   SOM5B : 41.030 Hz
+   PV5B : 0.000 Hz
+   VIP5B : 0.000 Hz
+   NGF5B : 0.000 Hz
+   IT6 : 2.733 Hz
+   CT6 : 0.120 Hz
+   SOM6 : 33.333 Hz
+   PV6 : 0.000 Hz
+   VIP6 : 0.000 Hz
+   NGF6 : 0.000 Hz
+   TC : 8.970 Hz
+   TCM : 8.622 Hz
+   HTC : 5.111 Hz
+   IRE : 6.133 Hz
+   IREM : 5.911 Hz
+   IC : 10.853 Hz
+
+data/20mar6/20mar6_A3_traces_gid_1204.png   
+data/20mar6/20mar6_A3_traces_gid_1215.png
+data/20mar6/20mar6_A3_traces_gid_1230.png
+data/20mar6/20mar6_A3_traces_gid_1233.png
+data/20mar6/20mar6_A3_traces_gid_1248.png
+data/20mar6/20mar6_A3_traces_gid_1263.png
+raster: data/20mar6/20mar6_A3_raster.png
+   
+ok, SOM still firing but not much from the other types ... can adjust noise inputs first;
+to aim for ~1 Hz firing of all types ... ? or perhaps only E types ... 
+
+* 20oct22 - back to model
+** back to model -- git merge samn with salva so have latest
+
+cloned onto cycle
+
+git clone git@github.com:NathanKlineInstitute/A1.git
+cd A1
+git branch
+git pull origin salva
+git branch
+git checkout samn
+git merge origin/salva
+Auto-merging netParams.py
+CONFLICT (content): Merge conflict in netParams.py
+Auto-merging cfg.py
+CONFLICT (content): Merge conflict in cfg.py
+Automatic merge failed; fix conflicts and then commit the result.
+git add netParams.py cfg.py
+git commit -m 'merge'
+git push origin samn
+git mv snnotes.dol snnotes.org
+git commit -m 'to org'
+git push origin samn
+
+** homeostatic synapses to regulate/tune firing rates
+
+can either do via hsyn.mod or in py with periodic callbacks - similar to smartagent weight normalizations
+
+http://www.netpyne.org/reference.html?highlight=hsyn
+
+** old NetPyNE slack discussion on using hsyn.mod in NetPyNE (from 5/4/20)
+
+Haroon Anwar It appears that homeostatic synaptic plasticity is associated with the synaptic
+mechanism (and therefore should be set/declared in netParams.synMechParams) instead of synaptic
+connection (as in case of STDP rule). I see the following lines on NetPyNe website but it is not
+clear to me how to use this option: selfNetCon (optional) - dictionary with the parameters of a
+NetCon between the cell voltage and the synapse, required by some synaptic mechanisms such as the
+homeostatic synapse (hsyn). e.g. 'selfNetCon': {'sec': 'soma' , 'threshold': -15, 'weight': -1,
+'delay': 0}
+salvadord think we had an example with homeostatic syns — did you find that? otherwise I’ll look for it after lunch
+Haroon Anwar no i didn’t find. If you can look for it, would be great help.
+salvadord not finding the example… what was the name of the mod file for homeostatic syns?
+samn:speech_balloon: hsyn.mod
+salvadord thx
+salvadord haroon, found this in sam’s netpyne version of m1 model from ~2017 … maybe try
+something similar and let me know if works: netParams.synMechParams['AMPA'] =
+{'mod':'hsyn','tau1':0.05,'tau2':5.3,'e':0,'scaling':1,'targetrate':5,'scalefactor':1.0,'scaleratefctr':scaleratefctr,
+'selfNetCon': {'threshold': -15, 'weight': -1, 'delay': 0}}
+Haroon Anwar ok
+let me try
+Haroon Anwar salva, can you please send me the link to this m1 model?
+salvadord this version is in /u/samn/m1np
+Haroon Anwar thanks
+
+** test net
+
+using a scaled down version for testing
+cfg.scaledensity=0.1
+
+for plotting, do not call matplotlib.use('Agg') on cycle ... just on server (gcp)
+
+./myrun 30
+
+** replace AMPA with hsyn 
+
+will need diff AMPA mech for E and I neurons ...
+
+netParams.synMechParams['AMPA'] = {'mod':'hsyn','tau1':0.05,'tau2':5.3,'e':0,'scaling':1,'targetrate':5,'scalefactor':1.0,'scaleratefctr':scaleratefctr,
+'selfNetCon': {'threshold': -15, 'weight': -1, 'delay': 0}}
+
+ok, adjusting to have option whether to use the homeostatic scaling ... ideally would want to have param
+for different target rates for each population ... will add that in if/when basic mechanism is working
+
+* 23aug2
+** sz modeling
+
+EG had szdelta branch, pull from there and merge with samn
+
+git pull origin szdelta
+
+From github.com:NathanKlineInstitute/A1
+ * branch            szdelta    -> FETCH_HEAD
+Auto-merging netParams.py
+CONFLICT (content): Merge conflict in netParams.py
+Auto-merging init.py
+CONFLICT (content): Merge conflict in init.py
+Auto-merging cfg.py
+CONFLICT (content): Merge conflict in cfg.py
+Automatic merge failed; fix conflicts and then commit the result.
+
+ok, fixed/updated those files and commited ... will stick with samn branch moving forward
+
+* 23aug3
+** test run
+
+nrnivmodl mod
+
+./myrun 30
+
+  Cells: 1273
+  Connections: 0 (0.00 per cell)
+  Spikes: 112493 (8.84 Hz)
+  Simulated time: 10.0 s; 30 workers
+  Run time: 205.01 s
+   NGF1 : 3.421 Hz
+   IT2 : 4.434 Hz
+   PV2 : 132.900 Hz
+   VIP2 : 15.700 Hz
+   NGF2 : 13.400 Hz
+   IT3 : 3.694 Hz
+   SOM3 : 22.914 Hz
+   PV3 : 27.712 Hz
+   VIP3 : 19.390 Hz
+   NGF3 : 6.540 Hz
+   ITP4 : 7.131 Hz
+   ITS4 : 5.891 Hz
+   SOM4 : 14.650 Hz
+   PV4 : 21.100 Hz
+   VIP4 : 29.400 Hz
+   NGF4 : 7.700 Hz
+   IT5A : 2.309 Hz
+   CT5A : 1.300 Hz
+   SOM5A : 22.200 Hz
+   PV5A : 41.467 Hz
+   VIP5A : 62.700 Hz
+   IT5B : 6.496 Hz
+   CT5B : 0.373 Hz
+   PT5B : 0.615 Hz
+   SOM5B : 48.440 Hz
+   PV5B : 32.569 Hz
+   VIP5B : 7.000 Hz
+   NGF5B : 5.300 Hz
+   IT6 : 15.431 Hz
+   CT6 : 12.926 Hz
+   SOM6 : 60.150 Hz
+   PV6 : 37.138 Hz
+   NGF6 : 94.100 Hz
+   TC : 41.000 Hz
+   TCM : 39.147 Hz
+   HTC : 57.750 Hz
+   IRE : 4.027 Hz
+   IREM : 3.107 Hz
+   TI : 18.380 Hz
+   TIM : 18.300 Hz
+Saving output as data/23aug3_A0/23aug3_A0_data.pkl ... 
+Finished saving!
+  Done; saving time = 2.56 s.
+
+pretty fast runtime ... a little over 3 minutes for 10 s of simulation ...
+
+but this was at 10% density:
+cfg.scaleDensity # 0.1
+
+ok, much slower with 100% density ... (on cycle with 30 cores)
+
+  Cells: 12908
+  Connections: 0 (0.00 per cell)
+  Spikes: 273942 (2.12 Hz)
+  Simulated time: 10.0 s; 30 workers
+  Run time: 7604.76 s
+   NGF1 : 1.752 Hz
+   IT2 : 0.484 Hz
+   SOM2 : 32.900 Hz
+   PV2 : 12.138 Hz
+   VIP2 : 24.233 Hz
+   NGF2 : 10.791 Hz
+   IT3 : 0.209 Hz
+   SOM3 : 1.147 Hz
+   PV3 : 9.172 Hz
+   VIP3 : 20.003 Hz
+   NGF3 : 5.747 Hz
+   ITP4 : 0.495 Hz
+   ITS4 : 0.475 Hz
+   SOM4 : 1.639 Hz
+   PV4 : 5.221 Hz
+   VIP4 : 15.131 Hz
+   NGF4 : 8.023 Hz
+   IT5A : 2.140 Hz
+   CT5A : 0.779 Hz
+   SOM5A : 3.250 Hz
+   PV5A : 4.764 Hz
+   VIP5A : 18.070 Hz
+   NGF5A : 14.550 Hz
+   IT5B : 4.446 Hz
+   CT5B : 0.242 Hz
+   PT5B : 0.196 Hz
+   SOM5B : 13.161 Hz
+   PV5B : 2.560 Hz
+   VIP5B : 13.600 Hz
+   NGF5B : 15.643 Hz
+   IT6 : 1.339 Hz
+   CT6 : 0.892 Hz
+   SOM6 : 47.630 Hz
+   PV6 : 0.363 Hz
+   VIP6 : 8.275 Hz
+   NGF6 : 81.697 Hz
+   TC : 4.940 Hz
+   TCM : 5.097 Hz
+   HTC : 4.384 Hz
+   IRE : 2.783 Hz
+   IREM : 3.198 Hz
+   TI : 1.976 Hz
+   TIM : 3.241 Hz
+
+will setup simdat.py for easier load/analysis of sim data ... 
+
+* 23aug5
+** info from eg
+
+Hi all, 
+
+Hope you are doing well! I made a summary of those latest results as requested. 
+
+Here is a google drive directory with data files, summary documents, and slides:  https://drive.google.com/drive/folders/16XWvAeeessXokFPRn3B7PBM7zKy-qdko?usp=sharing 
+
+The Summary_BBN google slides doc shows the figures, and the notes section of each slide shows how to reproduce those figures. 
+
+Data files and more detailed summaries are located in each of the two main subdirectories of that google drive folder (they are called model_vs_NHP and NMDA). Each of those subdirs has a summary document that details the steps I took. 
+
+Let me know if there are any permissions issues or any issues reproducing the figs.
+
+* 23aug7
+** continue
+* 23aug10
+** continue test on edge
+
+with 30 cores: 
+  Done; run time = 4884.62 s; real-time ratio: 0.00.
+
+Gathering data...
+  Done; gather time = 50.09 s.
+
+Analyzing...
+  Cells: 12908
+  Connections: 0 (0.00 per cell)
+  Spikes: 235909 (1.83 Hz)
+  Simulated time: 10.0 s; 30 workers
+  Run time: 4884.62 s
+   NGF1 : 1.697 Hz
+   IT2 : 0.261 Hz
+   SOM2 : 16.040 Hz
+   PV2 : 8.469 Hz
+   VIP2 : 24.775 Hz
+   NGF2 : 8.727 Hz
+   IT3 : 0.156 Hz
+   SOM3 : 0.843 Hz
+   PV3 : 4.789 Hz
+   VIP3 : 15.738 Hz
+   NGF3 : 4.935 Hz
+   ITP4 : 0.287 Hz
+   ITS4 : 0.287 Hz
+   SOM4 : 0.946 Hz
+   PV4 : 2.958 Hz
+   VIP4 : 12.131 Hz
+   NGF4 : 6.050 Hz
+   IT5A : 1.557 Hz
+   CT5A : 0.464 Hz
+   SOM5A : 2.291 Hz
+   PV5A : 1.893 Hz
+   VIP5A : 8.710 Hz
+   NGF5A : 10.750 Hz
+   IT5B : 3.406 Hz
+   CT5B : 0.133 Hz
+   PT5B : 0.130 Hz
+   SOM5B : 11.856 Hz
+   PV5B : 0.940 Hz
+   VIP5B : 7.076 Hz
+   NGF5B : 9.617 Hz
+   IT6 : 0.678 Hz
+   CT6 : 0.532 Hz
+   SOM6 : 22.943 Hz
+   PV6 : 44.274 Hz
+   VIP6 : 52.917 Hz
+   NGF6 : 45.032 Hz
+   TC : 4.501 Hz
+   TCM : 4.436 Hz
+   HTC : 4.087 Hz
+   IRE : 2.546 Hz
+   IREM : 3.082 Hz
+   TI : 1.800 Hz
+   TIM : 3.067 Hz
+
+hmm, number of spikes is much different compared to the run on cycle ... 
+also does not finish saving data 
+
+  Saving output as: 23aug3_B0_node_8.pkl ... 
+  Done; saving time = 3.65 s.
+
+Searching for .pkl node files in data/23aug3_B0/23aug3_B0_node_data ...
+
+Gathering data from files for simulation: 23aug3_B0 ...
+  Merging data file: 23aug3_B0_node_0.pkl
+Traceback (most recent call last):
+  File "init.py", line 48, in <module>
+    sim.gatherDataFromFiles()
+  File "/home/samn/netpyne/netpyne/sim/gather.py", line 426, in gatherDataFromFiles
+    allCells.extend([cell.__getstate__() for cell in data['cells']])
+  File "/home/samn/netpyne/netpyne/sim/gather.py", line 426, in <listcomp>
+    allCells.extend([cell.__getstate__() for cell in data['cells']])
+AttributeError: 'dict' object has no attribute '__getstate__'
+bash: /opt/miniconda3/envs/py376/lib/libtinfo.so.6: no version information available (required by bash)
+
+(py376) samn@edge:~/A1$ python
+Python 3.7.6 (default, Jan  8 2020, 19:59:22) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import neuron
+>>> neuron.__version__
+'8.2.2'
+>>> import netpyne
+>>> netpyne.__version__
+'1.0.4.2'
+>>> 
+
+and on cycle:
+(base) samn@cycle:~/accumnavnet$ python
+Python 3.7.6 (default, Jan  8 2020, 19:59:22) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import netpyne
+>>> netpyne.__version__
+'1.0.2.1'
+>>> import neuron
+>>> neuron.__version__
+'8.0.2'
+>>> 
+
+so, older versions of both on cycle ... 
+
+can also try on edge w/o the gatherdatafromfiles ... 
+
+had an extra call to gatherdata ... will try again w/o it...
+
+and try with 60 cores ... see if that speeds up (took ~180 minutes with 30 cores on edge)
+
+./myrun 60
+
+  Done; run time = 4239.55 s; real-time ratio: 0.00.
+
+took ~70 minutes ...
+
+Saving an output file for each node in: data/23aug10_A0/23aug10_A0_node_data
+Searching for .pkl node files in data/23aug10_A0/23aug10_A0_node_data ...
+
+Gathering data from files for simulation: 23aug10_A0 ...
+  Merging data file: 23aug10_A0_node_0.pkl
+Traceback (most recent call last):
+  File "init.py", line 48, in <module>
+    sim.gatherDataFromFiles()
+  File "/home/samn/netpyne/netpyne/sim/gather.py", line 426, in gatherDataFromFiles
+    allCells.extend([cell.__getstate__() for cell in data['cells']])
+  File "/home/samn/netpyne/netpyne/sim/gather.py", line 426, in <listcomp>
+    allCells.extend([cell.__getstate__() for cell in data['cells']])
+AttributeError: 'dict' object has no attribute '__getstate__'
+
+so, get the same error as before ...
+
+will install versions used on cycle
+
+pip uninstall neuron
+pip uninstall netpyne
+
+pip install neuron==8.0.2
+pip install netpyne==1.0.2.1
+
+ok, try that again ...
+
+./myrun 48
+
+  Cells: 12908
+  Connections: 0 (0.00 per cell)
+  Spikes: 205839 (1.59 Hz)
+  Simulated time: 10.0 s; 48 workers
+  Run time: 3904.57 s
+   NGF1 : 1.673 Hz
+   IT2 : 0.193 Hz
+   SOM2 : 12.540 Hz
+   PV2 : 4.015 Hz
+   VIP2 : 23.019 Hz
+   NGF2 : 7.960 Hz
+   IT3 : 0.141 Hz
+   SOM3 : 0.858 Hz
+   PV3 : 2.888 Hz
+   VIP3 : 11.005 Hz
+   NGF3 : 4.669 Hz
+   ITP4 : 0.189 Hz
+   ITS4 : 0.204 Hz
+   SOM4 : 0.804 Hz
+   PV4 : 1.532 Hz
+   VIP4 : 7.777 Hz
+   NGF4 : 4.979 Hz
+   IT5A : 1.247 Hz
+   CT5A : 0.242 Hz
+   SOM5A : 2.129 Hz
+   PV5A : 0.571 Hz
+   VIP5A : 3.378 Hz
+   NGF5A : 6.300 Hz
+   IT5B : 2.579 Hz
+   CT5B : 0.063 Hz
+   PT5B : 0.082 Hz
+   SOM5B : 12.238 Hz
+   PV5B : 0.248 Hz
+   VIP5B : 1.731 Hz
+   NGF5B : 5.279 Hz
+   IT6 : 0.540 Hz
+   CT6 : 0.340 Hz
+   SOM6 : 12.087 Hz
+   PV6 : 66.013 Hz
+   VIP6 : 68.082 Hz
+   NGF6 : 31.905 Hz
+   TC : 4.322 Hz
+   TCM : 4.186 Hz
+   HTC : 4.057 Hz
+   IRE : 2.533 Hz
+   IREM : 2.982 Hz
+   TI : 1.858 Hz
+   TIM : 3.162 Hz
+Saving output as data/23aug10_A0/23aug10_A0_data.pkl ... 
+Finished saving!
+  Done; saving time = 30.59 s.
+
+ok, ran to completion ... and took ~65 minutes with 48 cores
+
+** neuron/netpyne version used in A1 paper: neuron==7.8.2 and netpyne==1.0.2.1
+* 23aug14
+** check output from 23aug10_A0_
+
+python -i simdat.py
+
+loading data from 23aug10_A0
+Traceback (most recent call last):
+  File "simdat.py", line 132, in <module>
+    simConfig, dstartidx, dendidx, dnumc, dspkID, dspkT = loadsimdat(name,lpop=[])
+  File "simdat.py", line 28, in loadsimdat
+    if simConfig['net']['pops'][p]['tags']['numCells'] > 0:
+KeyError: 'tags'
+
+no 'tags' used here
+
+name = '23aug10_A0'
+simConfig = pickle.load(open('data/'+name+'/'+name+'_data.pkl','rb'))
+simConfig['net']['pops'].keys()
+odict_keys(['NGF1', 'IT2', 'SOM2', 'PV2', 'VIP2', 'NGF2', 'IT3', 'SOM3', 'PV3', 'VIP3', 'NGF3', 'ITP4', 'ITS4', 'SOM4', 'PV4', 'VIP4', 'NGF4', 'IT5A', 'CT5A', 'SOM5A', 'PV5A', 'VIP5A', 'NGF5A', 'IT5B', 'CT5B', 'PT5B', 'SOM5B', 'PV5B', 'VIP5B', 'NGF5B', 'IT6', 'CT6', 'SOM6', 'PV6', 'VIP6', 'NGF6', 'TC', 'TCM', 'HTC', 'IRE', 'IREM', 'TI', 'TIM'])
+simConfig['net']['pops']['NGF1'].keys() # odict_keys(['cellType', 'cellModel', 'ynormRange', 'density', 'pop', 'numCells', 'cellGids'])
+simConfig['net']['pops']['NGF1']['numCells'] # 151
+
+python -i simdat.py
+
+** updated code from repro branch
+
+this was the branch eg used for BBN, ERP, NMDA adjustment figures
+
+most of the changes were in analysis subfolder
+
+** next runs -- BBN
+* 23aug15
+** check LFP presence
+
+python -i simdat.py
+
+savefig('gif/23aug15_rast_a0.png') # [[./gif/23aug15_rast_a0.png]]
+
+xlim((9e3,10e3))
+
+savefig('gif/23aug15_rast_a0b.png') # [[./gif/23aug15_rast_a0b.png]]
+
+some rhythmicity there in thalamic populations, have to check if providing auditory stim
+
+len(simConfig['simData']['LFP']) # 100000
+
+clf()
+
+plot(simConfig['simData']['t'],simConfig['simData']['LFP'])
+
+savefig('gif/23aug15_LFP_a1.png') # [[./gif/23aug15_LFP_a1.png]]
+
+strange transition at the end
+
+xlim((2e3,3e3)); ylim((-1.1,.65))
+
+savefig('gif/23aug15_LFP_a2.png') # [[./gif/23aug15_LFP_a2.png]]
+
+some useful plotting routines already in analysis subfolder (some of it is from OEvent code)
+
+from analysis.simDataAnalysis import *
+
+** setting up rhythmic BBN input
+* 23aug23
+** how to run BBN
+
+check here
+https://github.com/NathanKlineInstitute/A1/commit/c4011870a4c1617ca8b4d056dbed494e3e18f706
+
+uses batch.py in repro branch, and there's a custom_BBN function there
+that runs with and without the BBN stimulus ... 
+
+* 23aug24
+** testing BBN batch
+
+http://www.netpyne.org/tutorial.html#tutorial-8-running-batch-simulations
+
+mpiexec -np 48 nrniv -python -mpi batch.py
+
+hmm, getting issues running using mpiexec ... creates configs but does not actually run them
+
+** info from SD
+
+sd: for BBN here’s the data: https://drive.google.com/drive/folders/1FYnlTBrS2WVvHAa6LWNoeq03v-O9496P?usp=drive_link
+and this some summary erica sent: https://docs.google.com/document/d/1E0EHdja1HpzQKHa0q5WqGRP386xjEYs_wHDLz2xanLI/edit
+sn: thanks...will try run it...for BBN using the ICThalInput
+sd:  this also best ERP matches from erica: https://docs.google.com/document/d/1eY1Vfk0wmd62bgWuM-FA1WA2Ma2RDSHecWJ6oDKTMTY/edit?usp=sharing
+and best BBN CSD matches: https://docs.google.com/document/d/1Lnt68zwRfQ8hzUx_B0DguUBNeyEr05m0abCs1JMn5IE/edit?usp=sharing
+the ERP fig I shared above is for SOA850
+sn: if i was going to optimize model to match ERPs to experiment ... could focus on dipoles, CSD, or LFP ... and adjust the strength/timing of inputs probably ...
+sd: yeah that makes sense
+
+** try a single sim with BBN
+
+use this in cfg.py : 
+
+cfg.ICThalInput = {'file': 'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
+                   'startTime': 2500,
+                   'weightE': 0.25,
+                   'weightI': 0.25,
+                   'probE': 0.12, 
+                   'probI': 0.12,
+                   'seed': 1}  # SHOULD THIS BE ZERO?                   
+
+./myrun 48
+
+  Done; gather time = 76.08 s.
+
+Analyzing...
+  Cells: 13108
+  Connections: 0 (0.00 per cell)
+  Spikes: 241557 (1.54 Hz)
+  Simulated time: 12.0 s; 48 workers
+  Run time: 5834.21 s
+   NGF1 : 1.696 Hz
+   IT2 : 0.161 Hz
+   SOM2 : 9.467 Hz
+   PV2 : 3.583 Hz
+   VIP2 : 22.328 Hz
+   NGF2 : 7.775 Hz
+   IT3 : 0.130 Hz
+   SOM3 : 0.715 Hz
+   PV3 : 2.794 Hz
+   VIP3 : 10.702 Hz
+   NGF3 : 4.684 Hz
+   ITP4 : 0.167 Hz
+   ITS4 : 0.165 Hz
+   SOM4 : 0.670 Hz
+   PV4 : 1.695 Hz
+   VIP4 : 7.006 Hz
+   NGF4 : 5.423 Hz
+   IT5A : 1.077 Hz
+   CT5A : 0.201 Hz
+   SOM5A : 2.054 Hz
+   PV5A : 0.462 Hz
+   VIP5A : 2.815 Hz
+   NGF5A : 5.448 Hz
+   IT5B : 2.698 Hz
+   CT5B : 0.058 Hz
+   PT5B : 0.078 Hz
+   SOM5B : 13.307 Hz
+   PV5B : 0.206 Hz
+   VIP5B : 1.516 Hz
+   NGF5B : 4.538 Hz
+   IT6 : 0.438 Hz
+   CT6 : 0.294 Hz
+   SOM6 : 10.228 Hz
+   PV6 : 66.888 Hz
+   VIP6 : 61.333 Hz
+   NGF6 : 28.491 Hz
+   TC : 4.613 Hz
+   TCM : 4.504 Hz
+   HTC : 4.200 Hz
+   IRE : 2.397 Hz
+   IREM : 2.975 Hz
+   TI : 1.872 Hz
+   TIM : 3.187 Hz
+   IC : 0.242 Hz
+Saving output as data/23aug24_A0/23aug24_A0_data.pkl ... 
+Finished saving!
+  Done; saving time = 31.39 s.
+
+* 23aug25
+** 23aug24_A0 -- check BBN sim
+
+python -i simdat.py
+
+NGF1 1.68 Hz
+IT2 0.16 Hz
+SOM2 9.57 Hz
+PV2 3.66 Hz
+VIP2 22.55 Hz
+NGF2 7.2 Hz
+IT3 0.13 Hz
+SOM3 0.72 Hz
+PV3 2.79 Hz
+VIP3 10.64 Hz
+NGF3 4.68 Hz
+ITP4 0.17 Hz
+ITS4 0.16 Hz
+SOM4 0.66 Hz
+PV4 1.71 Hz
+VIP4 7.05 Hz
+NGF4 5.53 Hz
+IT5A 0.97 Hz
+CT5A 0.12 Hz
+SOM5A 2.03 Hz
+PV5A 0.45 Hz
+VIP5A 2.39 Hz
+NGF5A 5.29 Hz
+IT5B 2.69 Hz
+CT5B 0.06 Hz
+PT5B 0.08 Hz
+SOM5B 13.16 Hz
+PV5B 0.19 Hz
+VIP5B 1.26 Hz
+NGF5B 4.43 Hz
+IT6 0.4 Hz
+CT6 0.25 Hz
+SOM6 9.94 Hz
+PV6 67.26 Hz
+VIP6 57.13 Hz
+NGF6 28.51 Hz
+TC 4.48 Hz
+TCM 4.47 Hz
+HTC 4.07 Hz
+IRE 2.37 Hz
+IREM 2.93 Hz
+TI 1.87 Hz
+TIM 3.18 Hz
+IC 0.24 Hz
+
+drawraster(dspkT,dspkID)
+savefig(gifpath()+'_rast.png') # [[./gif/23aug25__rast.png]]
+
+xlim((2e3,4e3))
+savefig(gifpath()+'_rastB.png') # [[./gif/23aug25__rastB.png]]
+
+only looks like one activation of IC population ... 
+even during that activation, do not see much impact on L4 ... 
+
+check the parameters for IC -> THAL and THAL -> CTX
+
+looks like it's only applied a single time at 2.5 s ... 
+
+cfg.ICThalInput = {'file': 'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
+                   'startTime': 2500,
+                   'weightE': 0.25,
+                   'weightI': 0.25,
+                   'probE': 0.12, 
+                   'probI': 0.12,
+                   'seed': 1}  # SHOULD THIS BE ZERO?                   
+
+moved params into cfg.py ... 
+
+  Spikes: 262669 (1.67 Hz)
+  Simulated time: 12.0 s; 48 workers
+  Run time: 5662.20 s
+   NGF1 : 1.714 Hz
+   IT2 : 0.160 Hz
+   SOM2 : 9.700 Hz
+   PV2 : 3.032 Hz
+   VIP2 : 16.359 Hz
+   NGF2 : 7.000 Hz
+   IT3 : 0.115 Hz
+   SOM3 : 0.715 Hz
+   PV3 : 2.851 Hz
+   VIP3 : 8.468 Hz
+   NGF3 : 4.515 Hz
+   ITP4 : 0.135 Hz
+   ITS4 : 0.158 Hz
+   SOM4 : 0.678 Hz
+   PV4 : 2.138 Hz
+   VIP4 : 5.532 Hz
+   NGF4 : 5.167 Hz
+   IT5A : 1.002 Hz
+   CT5A : 0.202 Hz
+   SOM5A : 1.754 Hz
+   PV5A : 0.458 Hz
+   VIP5A : 2.815 Hz
+   NGF5A : 5.146 Hz
+   IT5B : 2.198 Hz
+   CT5B : 0.082 Hz
+   PT5B : 0.080 Hz
+   SOM5B : 12.832 Hz
+   PV5B : 0.209 Hz
+   VIP5B : 1.495 Hz
+   NGF5B : 4.028 Hz
+   IT6 : 0.547 Hz
+   CT6 : 0.294 Hz
+   SOM6 : 10.343 Hz
+   PV6 : 86.855 Hz
+   VIP6 : 79.076 Hz
+   NGF6 : 29.401 Hz
+   TC : 5.033 Hz
+   TCM : 4.918 Hz
+   HTC : 4.716 Hz
+   IRE : 2.494 Hz
+   IREM : 2.955 Hz
+   TI : 1.795 Hz
+   TIM : 3.070 Hz
+   IC : 3.392 Hz
+Saving output as data/23aug24_BBN0/23aug24_BBN0_data.pkl ... 
+
+* 23aug30 - adjusting for BBN
+** check output from 23aug24_BBN0
+
+python -i simdat.py 23aug24_BBN0
+
+loaded simulation data 23aug24_BBN0 on 23aug30_
+NGF1 1.69 Hz
+IT2 0.16 Hz
+SOM2 9.8 Hz
+PV2 3.1 Hz
+VIP2 16.45 Hz
+NGF2 6.48 Hz
+IT3 0.11 Hz
+SOM3 0.72 Hz
+PV3 2.85 Hz
+VIP3 8.4 Hz
+NGF3 4.51 Hz
+ITP4 0.13 Hz
+ITS4 0.16 Hz
+SOM4 0.66 Hz
+PV4 2.14 Hz
+VIP4 5.55 Hz
+NGF4 5.27 Hz
+IT5A 0.9 Hz
+CT5A 0.12 Hz
+SOM5A 1.73 Hz
+PV5A 0.45 Hz
+VIP5A 2.39 Hz
+NGF5A 4.98 Hz
+IT5B 2.19 Hz
+CT5B 0.08 Hz
+PT5B 0.08 Hz
+SOM5B 12.68 Hz
+PV5B 0.2 Hz
+VIP5B 1.24 Hz
+NGF5B 3.9 Hz
+IT6 0.51 Hz
+CT6 0.25 Hz
+SOM6 10.05 Hz
+PV6 87.41 Hz
+VIP6 73.74 Hz
+NGF6 29.44 Hz
+TC 4.89 Hz
+TCM 4.89 Hz
+HTC 4.58 Hz
+IRE 2.46 Hz
+IREM 2.91 Hz
+TI 1.79 Hz
+TIM 3.06 Hz
+IC 3.38 Hz
+
+drawraster(dspkT,dspkID)
+savefig(gifpath()+'_rast.png') # [[./gif/23aug30_23aug24_BBN0_rast.png]]
+
+xlim((4e3,6e3))
+savefig(gifpath()+'_rastB.png') # [[./gif/23aug30_23aug24_BBN0_rastB.png]]
+
+does not look like any increase in L4 during the BBNs ... compared to the version
+used in paper, so params must still differ
+
+lk = ['IC', 'TC', 'TCM', 'ITP4','ITS4']
+lclr = ['r','g','b','c','m']
+sh = {k:getspikehist(dspkT[k], dnumc[k], 25, 12e3) for k in lk}
+
+for k,clr in zip(lk, lclr): plot(sh[k][0],sh[k][1],clr)
+xlim((4e3,6e3))
+ax=gca()
+lpatch = [mpatches.Patch(color=c,label=s) for c,s in zip(lclr,lk)]
+ax.legend(handles=lpatch,handlelength=1)
+
+savefig(gifpath()+'_spikehist.png') # [[./gif/23aug30_23aug24_BBN0_spikehist.png]]
+
+so IC, TC, TCM rates are increasing, but not L4 ITP4, ITS4 (L4 pyramidal and stellate neurons)
+
+xlim((4e3,8e3))
+
+savefig(gifpath()+'_spikehistB.png') # [[./gif/23aug30_23aug24_BBN0_spikehistB.png]]
+
+so params used must not be correct ... 
+
+** discuss
+
+sn: those params i mentioned above must be incorrect, since look pretty different in terms of responses to BBN (almost negligible in L4)
+[[./gif/23aug30_23aug24_BBN0_rast.png]]
+[[./gif/23aug30_23aug24_BBN0_rastB.png]]
+[[./gif/23aug30_23aug24_BBN0_spikehistB.png]]
+sd: not sure if params right, but unfortunately there’s not much L4 activity in BBN sims… not sure if due to depol block
+sn: i should prob. start from ones used in paper
+that one had more noticeable response in L4
+sd: above was referring to paper sims, not much L4 activity either
+sn: so as long as maintain physiological firing rates during spontaneous and stimulation, tweaking thalamocortical and
+corticothalamic gain within ~25% range reasonable?
+will try that or something similar
+sd: yeah I think reasonable ... can play with IC->Thal and Thal->Cx prob conn and weights
+
+** adjust conn/weights for getting stronger BBN response
+
+some of the relevant parameters:
+    # params[('ICThalInput', 'probE')] = [0.12, 0.26]     # [0.26]    # 0,1,2  
+    # params[('ICThalInput', 'probI')] = [0.12, 0.26]                 # 0,1,2
+    #params[('ICThalInput', 'weightE')] = [0.25, 0.5]
+    #params[('ICThalInput', 'weightI')] = [0.25, 0.5]
+
+values used in previous simulation (23aug24_BBN0_):
+                            'weightE': 0.25,
+                            'weightI': 0.25,
+                            'probE': 0.12, 
+                            'probI': 0.12,
+
+here are the other params taken from the json file (data/v34_batch25/trial_2142/trial_2142_cfg.json):
+    updateParams2 = ['thalamoCorticalGain', 'intraThalamicGain', 'EbkgThalamicGain', 'IbkgThalamicGain', 'wmat']
+
+        "thalamoCorticalGain": 2.1111391118965863,
+        "intraThalamicGain": 0.9843624229766335,
+        "EbkgThalamicGain": 3.9181565363409163,
+        "IbkgThalamicGain": 3.9227144872233324,
+
+and the whole wmat is also specified in json ... 
+
+also, the json file was already getting loaded, so did not need the extra function to 'load from batch' config
+
+easiest to just change IC -> Thal, that way spontaneous dynamics do not require retuning
+
+*** 23aug30_BBN_A0
+
+weightE = 0.375, weightI = 0.25, probE = 0.19, probI = 0.12
+
+./myrun 48
+
+  Spikes: 268783 (1.71 Hz)
+  Simulated time: 12.0 s; 48 workers
+  Run time: 9613.97 s
+   NGF1 : 1.707 Hz
+   IT2 : 0.160 Hz
+   SOM2 : 9.633 Hz
+   PV2 : 3.128 Hz
+   VIP2 : 15.802 Hz
+   NGF2 : 6.925 Hz
+   IT3 : 0.112 Hz
+   SOM3 : 0.715 Hz
+   PV3 : 3.202 Hz
+   VIP3 : 8.334 Hz
+   NGF3 : 4.535 Hz
+   ITP4 : 0.134 Hz
+   ITS4 : 0.149 Hz
+   SOM4 : 0.663 Hz
+   PV4 : 2.853 Hz
+   VIP4 : 5.679 Hz
+   NGF4 : 5.155 Hz
+   IT5A : 0.962 Hz
+   CT5A : 0.202 Hz
+   SOM5A : 1.716 Hz
+   PV5A : 0.468 Hz
+   VIP5A : 3.019 Hz
+   NGF5A : 5.104 Hz
+   IT5B : 2.301 Hz
+   CT5B : 0.113 Hz
+   PT5B : 0.071 Hz
+   SOM5B : 13.554 Hz
+   PV5B : 0.207 Hz
+   VIP5B : 2.047 Hz
+   NGF5B : 3.962 Hz
+   IT6 : 0.541 Hz
+   CT6 : 0.292 Hz
+   SOM6 : 10.314 Hz
+   PV6 : 88.349 Hz
+   VIP6 : 83.212 Hz
+   NGF6 : 29.702 Hz
+   TC : 5.342 Hz
+   TCM : 5.195 Hz
+   HTC : 5.041 Hz
+   IRE : 2.679 Hz
+   IREM : 3.188 Hz
+   TI : 1.672 Hz
+   TIM : 2.897 Hz
+   IC : 3.392 Hz
+
+*** 23aug30_BBN_B0
+
+weightE = 0.375, weightI = 0.375, probE = 0.19, probI = 0.19
+
+./myrun 48
+
+  Spikes: 289178 (1.84 Hz)
+  Simulated time: 12.0 s; 48 workers
+  Run time: 9605.40 s
+   NGF1 : 1.736 Hz
+   IT2 : 0.160 Hz
+   SOM2 : 9.517 Hz
+   PV2 : 3.032 Hz
+   VIP2 : 15.990 Hz
+   NGF2 : 6.650 Hz
+   IT3 : 0.101 Hz
+   SOM3 : 0.715 Hz
+   PV3 : 4.125 Hz
+   VIP3 : 7.869 Hz
+   NGF3 : 4.456 Hz
+   ITP4 : 0.117 Hz
+   ITS4 : 0.138 Hz
+   SOM4 : 0.663 Hz
+   PV4 : 4.173 Hz
+   VIP4 : 6.128 Hz
+   NGF4 : 5.077 Hz
+   IT5A : 0.873 Hz
+   CT5A : 0.204 Hz
+   SOM5A : 1.661 Hz
+   PV5A : 0.514 Hz
+   VIP5A : 3.315 Hz
+   NGF5A : 5.052 Hz
+   IT5B : 2.402 Hz
+   CT5B : 0.177 Hz
+   PT5B : 0.067 Hz
+   SOM5B : 14.359 Hz
+   PV5B : 0.226 Hz
+   VIP5B : 1.818 Hz
+   NGF5B : 4.118 Hz
+   IT6 : 0.559 Hz
+   CT6 : 0.308 Hz
+   SOM6 : 10.388 Hz
+   PV6 : 102.047 Hz
+   VIP6 : 87.780 Hz
+   NGF6 : 30.684 Hz
+   TC : 5.927 Hz
+   TCM : 5.983 Hz
+   HTC : 5.532 Hz
+   IRE : 2.738 Hz
+   IREM : 3.038 Hz
+   TI : 1.672 Hz
+   TIM : 2.863 Hz
+   IC : 3.392 Hz
+
+* 23aug31
+** check outputs from last two sims
+*** 23aug30_BBN_A0
+
+weightE = 0.375, weightI = 0.25, probE = 0.19, probI = 0.12
+
+python -i simdat.py 23aug30_BBN_A0
+
+NGF1 1.69 Hz
+IT2 0.16 Hz
+SOM2 9.74 Hz
+PV2 3.19 Hz
+VIP2 15.88 Hz
+NGF2 6.41 Hz
+IT3 0.11 Hz
+SOM3 0.72 Hz
+PV3 3.2 Hz
+VIP3 8.27 Hz
+NGF3 4.53 Hz
+ITP4 0.13 Hz
+ITS4 0.15 Hz
+SOM4 0.65 Hz
+PV4 2.86 Hz
+VIP4 5.7 Hz
+NGF4 5.26 Hz
+IT5A 0.86 Hz
+CT5A 0.12 Hz
+SOM5A 1.69 Hz
+PV5A 0.46 Hz
+VIP5A 2.58 Hz
+NGF5A 4.94 Hz
+IT5B 2.29 Hz
+CT5B 0.11 Hz
+PT5B 0.07 Hz
+SOM5B 13.4 Hz
+PV5B 0.2 Hz
+VIP5B 1.77 Hz
+NGF5B 3.84 Hz
+IT6 0.5 Hz
+CT6 0.25 Hz
+SOM6 10.02 Hz
+PV6 88.91 Hz
+VIP6 77.61 Hz
+NGF6 29.75 Hz
+TC 5.2 Hz
+TCM 5.17 Hz
+HTC 4.9 Hz
+IRE 2.65 Hz
+IREM 3.14 Hz
+TI 1.67 Hz
+TIM 2.89 Hz
+IC 3.38 Hz
+
+drawraster(dspkT,dspkID)
+savefig(gifpath()+'_rast.png') # [[./gif/23aug31_23aug30_BBN_A0_rast.png]]
+
+xlim((4e3,6e3))
+savefig(gifpath()+'_rastB.png') # [[./gif/23aug31_23aug30_BBN_A0_rastB.png]]
+
+lk = ['IC', 'TC', 'TCM', 'IT2', 'IT3', 'ITP4','ITS4']
+lclr = ['r','g','b','c','m','y','k']
+sh = {k:getspikehist(dspkT[k], dnumc[k], 25, 12e3) for k in lk}
+
+for k,clr in zip(lk, lclr): plot(sh[k][0],sh[k][1],clr)
+xlim((4e3,6e3))
+ax=gca()
+lpatch = [mpatches.Patch(color=c,label=s) for c,s in zip(lclr,lk)]
+ax.legend(handles=lpatch,handlelength=1)
+
+savefig(gifpath()+'_spikehist.png') # [[./gif/23sep7_23aug30_BBN_A0_spikehist.png]]
+
+xlim((4e3,8e3))
+
+savefig(gifpath()+'_spikehistB.png') # [[./gif/23sep7_23aug30_BBN_A0_spikehistB.png]]
+
+put thal, ctx hist in diff subplots
+
+lplt = [1,1,1,2,2,2,2]
+
+for k,clr,gdx in zip(lk, lclr,lplt): 
+  subplot(2,1,gdx)
+  plot(sh[k][0],sh[k][1],clr)
+
+ax=subplot(2,1,1)
+lpatch = [mpatches.Patch(color=c,label=s) for c,s in zip(lclr[0:3],lk[0:3])]
+ax.legend(handles=lpatch,handlelength=1)
+ax=subplot(2,1,2)
+lpatch = [mpatches.Patch(color=c,label=s) for c,s in zip(lclr[3:],lk[3:])]
+ax.legend(handles=lpatch,handlelength=1)
+
+savefig(gifpath()+'_spikehistC.png') # [[./gif/23sep7_23aug30_BBN_A0_spikehistC.png]]
+
+ylim((0,.65))
+savefig(gifpath()+'_spikehistD.png') # [[./gif/23sep7_23aug30_BBN_A0_spikehistD.png]]
+
+looks like IT3 increases slightly for some of the stimuli, while other E neurons decrease
+activation during stimulus, due to activation of interneurons ... 
+
+dnumc
+{'NGF1': 150, 'IT2': 338, 'SOM2': 5, 'PV2': 13, 'VIP2': 16, 'NGF2': 11, 'IT3': 4461, 'SOM3': 70, 'PV3': 176, 'VIP3': 211, 'NGF3': 150, 'ITP4': 837, 'ITS4': 837, 'SOM4': 24, 'PV4': 92, 'VIP4': 13, 'NGF4': 14, 'IT5A': 359, 'CT5A': 359, 'SOM5A': 43, 'PV5A': 73, 'VIP5A': 10, 'NGF5A': 8, 'IT5B': 471, 'CT5B': 471, 'PT5B': 471, 'SOM5B': 112, 'PV5B': 134, 'VIP5B': 17, 'NGF5B': 24, 'IT6': 1009, 'CT6': 1009, 'SOM6': 63, 'PV6': 84, 'VIP6': 12, 'NGF6': 38, 'TC': 116, 'TCM': 155, 'HTC': 38, 'IRE': 155, 'IREM': 155, 'TI': 51, 'TIM': 51, 'IC': 200}
+
+sh = {k:getspikehist(dspkT[k], dnumc[k], 25, 12e3) for k in dnumc.keys()}
+
+lkectx = ['IT2', 'IT3', 'ITP4', 'ITS4']
+lkictx = ['NGF1', 'SOM2', 'PV2', 'VIP2', 'NGF2', 'SOM3', 'PV3', 'VIP3', 'NGF3', 'SOM4', 'PV4', 'VIP4', 'NGF4']
+
+sh['ECTX'] = getspikehistpops(dspkT, lkectx, dnumc, 25, 12e3)
+sh['ICTX'] = getspikehistpops(dspkT, lkictx, dnumc, 25, 12e3)
+
+lk = ['NGF1', 'SOM2', 'PV2', 'VIP2', 'NGF2', 'SOM3', 'PV3', 'VIP3', 'NGF3', 'SOM4', 'PV4', 'VIP4', 'NGF4']
+sh['ICTX'] = sh[k]
+
+llk = [ ['IC', 'TC', 'TCM'], ['ECTX'], ['ICTX']]
+llclr = [['r','g','b'], ['r'], ['b']]
+
+for lk,lclr,gdx in zip(llk, llclr,[1,2,3]): 
+  ax=subplot(3,1,gdx)
+  for k,clr in zip(lk,lclr):
+    plot(sh[k][0],sh[k][1],clr); xlabel('Time (ms)'); ylabel('Hz')
+  lpatch = [mpatches.Patch(color=c,label=s) for c,s in zip(lclr,lk)]
+  ax.legend(handles=lpatch,handlelength=1)
+
+savefig(gifpath()+'_spikehistE.png') # [[./gif/23sep7_23aug30_BBN_A0_spikehistE.png]]
+
+subplot(3,1,2); ylim((0,.35)); subplot(3,1,3); ylim((1,7))
+
+savefig(gifpath()+'_spikehistF.png') # [[./gif/23sep7_23aug30_BBN_A0_spikehistF.png]]
+
+for gdx in [1,2,3]: subplot(3,1,gdx); xlim((3e3,11e3))
+
+savefig(gifpath()+'_spikehistG.png') # [[./gif/23sep7_23aug30_BBN_A0_spikehistG.png]]
+
+so does look like inhib ramping up during stimulus ... check next simulation with diff params
+
+*** 23aug30_BBN_B0
+
+weightE = 0.375, weightI = 0.375, probE = 0.19, probI = 0.19
+
+python -i simdat.py 23aug30_BBN_B0
+
+NGF1 1.72 Hz
+IT2 0.16 Hz
+SOM2 9.62 Hz
+PV2 3.1 Hz
+VIP2 16.07 Hz
+NGF2 6.15 Hz
+IT3 0.1 Hz
+SOM3 0.72 Hz
+PV3 4.12 Hz
+VIP3 7.8 Hz
+NGF3 4.45 Hz
+ITP4 0.12 Hz
+ITS4 0.14 Hz
+SOM4 0.65 Hz
+PV4 4.16 Hz
+VIP4 6.15 Hz
+NGF4 5.18 Hz
+IT5A 0.77 Hz
+CT5A 0.12 Hz
+SOM5A 1.64 Hz
+PV5A 0.51 Hz
+VIP5A 2.85 Hz
+NGF5A 4.88 Hz
+IT5B 2.39 Hz
+CT5B 0.18 Hz
+PT5B 0.07 Hz
+SOM5B 14.2 Hz
+PV5B 0.22 Hz
+VIP5B 1.55 Hz
+NGF5B 4.0 Hz
+IT6 0.52 Hz
+CT6 0.27 Hz
+SOM6 10.1 Hz
+PV6 102.74 Hz
+VIP6 81.89 Hz
+NGF6 30.75 Hz
+TC 5.78 Hz
+TCM 5.96 Hz
+HTC 5.39 Hz
+IRE 2.71 Hz
+IREM 2.99 Hz
+TI 1.67 Hz
+TIM 2.85 Hz
+IC 3.38 Hz
+
+drawraster(dspkT,dspkID)
+savefig(gifpath()+'_rast.png') # [[./gif/23sep7_23aug30_BBN_B0_rast.png]]
+
+xlim((4e3,6e3))
+savefig(gifpath()+'_rastB.png') # [[./gif/23sep7_23aug30_BBN_B0_rastB.png]]
+
+sh = {k:getspikehist(dspkT[k], dnumc[k], 25, 12e3) for k in dnumc.keys()}
+
+lkectx = ['IT2', 'IT3', 'ITP4', 'ITS4']
+lkictx = ['NGF1', 'SOM2', 'PV2', 'VIP2', 'NGF2', 'SOM3', 'PV3', 'VIP3', 'NGF3', 'SOM4', 'PV4', 'VIP4', 'NGF4']
+
+sh['ECTX'] = getspikehistpops(dspkT, lkectx, dnumc, 25, 12e3)
+sh['ICTX'] = getspikehistpops(dspkT, lkictx, dnumc, 25, 12e3)
+
+lk = ['NGF1', 'SOM2', 'PV2', 'VIP2', 'NGF2', 'SOM3', 'PV3', 'VIP3', 'NGF3', 'SOM4', 'PV4', 'VIP4', 'NGF4']
+sh['ICTX'] = sh[k]
+
+llk = [ ['IC', 'TC', 'TCM'], ['ECTX'], ['ICTX']]
+llclr = [['r','g','b'], ['r'], ['b']]
+
+for lk,lclr,gdx in zip(llk, llclr,[1,2,3]): 
+  ax=subplot(3,1,gdx)
+  for k,clr in zip(lk,lclr):
+    plot(sh[k][0],sh[k][1],clr); xlabel('Time (ms)'); ylabel('Hz')
+  lpatch = [mpatches.Patch(color=c,label=s) for c,s in zip(lclr,lk)]
+  ax.legend(handles=lpatch,handlelength=1)
+
+savefig(gifpath()+'_spikehistE.png') # [[./gif/23sep7_23aug30_BBN_B0_spikehistE.png]]
+
+subplot(3,1,2); ylim((0,.35)); subplot(3,1,3); ylim((1,7))
+
+savefig(gifpath()+'_spikehistF.png') # [[./gif/23sep7_23aug30_BBN_B0_spikehistF.png]]
+
+for gdx in [1,2,3]: subplot(3,1,gdx); xlim((3e3,11e3))
+
+savefig(gifpath()+'_spikehistG.png') # [[./gif/23sep7_23aug30_BBN_B0_spikehistG.png]]
+
+during stimulus looks like even less ECTX firing here, but more synchronized, partly through
+higher inhibition
+
+* 23sep7
+** next simulations (less inhib from IC -> Thal)
+
+hmm, that may not help since thalamus to cortex is the current issue leading
+to too much cortical inhibition activated ... adjusting thalamic to cortical
+drive for E vs I will cause changes in spontaneous activity
+
+ran before: 
+ 23aug30_BBN_A0 : weightE = 0.375, weightI = 0.25, probE = 0.19, probI = 0.12
+ 23aug30_BBN_B0 : weightE = 0.375, weightI = 0.375, probE = 0.19, probI = 0.19
+both had too much cortical inhibition activated ... ? 
+
+some parameters that may need adjustment:
+cfg.EbkgThalamicGain = 4.0
+cfg.IbkgThalamicGain = 4.0
+
+cfg.thalamoCorticalGain = 1.0
+cfg.intraThalamicGain = 1.0
+cfg.corticoThalamicGain = 1.0
+
+also TC and TCM should probably get activated differently from IC inputs
+so may need to add separate gain factor for IC -> TC and IC -> TCM 
+
+*** 23sep7_BBN_A0
+*** 23sep7_BBN_B0
+

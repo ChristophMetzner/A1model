@@ -1,0 +1,1 @@
+mpiexec --use-hwthread-cpus -n $1 nrniv -python -mpi init.py
