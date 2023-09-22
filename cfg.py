@@ -69,7 +69,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'samn_BBN_test'
+cfg.simLabel = 'samn_ASSR_test'
 cfg.saveFolder = 'data/ASSR_test'                	## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -304,7 +304,7 @@ cfg.IbkgThalamicGain = cfgLoad['IbkgThalamicGain']
 cfg.wmat = cfgLoad['wmat']
 
 cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat',#'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
-                   'startTime': list(np.arange(5000, 9000, 300)),
+                   'startTime': 1500,#list(np.arange(5000, 9000, 300)),
                    'weightE': 0.375,
                    'weightI': 0.375,
                    'probE': 0.19, 
