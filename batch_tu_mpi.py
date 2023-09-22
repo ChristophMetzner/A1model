@@ -92,7 +92,7 @@ def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
             'nodes': 5,
-            'coresPerNode': 1,
+            'coresPerNode': 4,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
             'skip': True}
