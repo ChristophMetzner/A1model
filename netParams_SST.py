@@ -324,7 +324,7 @@ if cfg.addConn and cfg.IEGain > 0.0:
                             	    factor = 0.7 # SST reduction 33%
                                 if l=='5B':
                             	    factor = 0.7 # SST reduction 33%
-                            	if l=='6':
+                                if l=='6':
                             	    factor = 0.7 # SST reduction 33%	
                             elif 'PV' in pre:
                                 synMech = PVSynMech
