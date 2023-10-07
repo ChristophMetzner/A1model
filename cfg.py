@@ -23,8 +23,8 @@ cfg = specs.SimConfig()
 #------------------------------------------------------------------------------
 # Run parameters
 #------------------------------------------------------------------------------
-cfg.duration = 6e3 #30e3             ## Duration of the sim, in ms
-cfg.dt = 0.05                   ## Internal Integration Time Step
+cfg.duration = 20e3 #30e3             ## Duration of the sim, in ms
+cfg.dt = 0.05                   ## Internal Integration Time Stepy
 cfg.verbose = 0         	## Show detailed messages
 cfg.hParams['celsius'] = 37
 cfg.createNEURONObj = 1
@@ -302,11 +302,14 @@ cfg.IbkgThalamicGain = cfgLoad['IbkgThalamicGain']
 
 # UPDATE WMAT VALUES
 cfg.wmat = cfgLoad['wmat']
+cfg.ICThalInput = False
 
-cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat',#'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
-                   'startTime': 1500,#list(np.arange(5000, 9000, 300)),
-                   'weightE': 1.5, # default=0.375
-                   'weightI': 1.0, # default=0.375
-                   'probE': 0.19, 
-                   'probI': 0.19,
-                   'seed': 1}  # SHOULD THIS BE ZERO?                   
+# cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat',#'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat',
+#                    'startTime': 1500,#list(np.arange(5000, 9000, 300)),
+#                    'weightE': 1.5, # default=0.375
+#                    'weightI': 1.0, # default=0.375
+#                    'probE': 0.19,
+#                    'probI': 0.19,
+#                    'seed': 1}  # SHOULD THIS BE ZERO?
+
+
