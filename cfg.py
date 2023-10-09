@@ -69,7 +69,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'samn_ASSR_wE_1_75_wI_0_375'
+cfg.simLabel = 'samn_ASSR_wE_1_75_wI_0_5'
 cfg.saveFolder = 'data/ASSR_test'                	## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
