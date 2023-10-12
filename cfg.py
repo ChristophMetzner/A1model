@@ -23,7 +23,7 @@ cfg = specs.SimConfig()
 #------------------------------------------------------------------------------
 # Run parameters
 #------------------------------------------------------------------------------
-cfg.duration = 20e3 #30e3             ## Duration of the sim, in ms
+cfg.duration = 4e3 #30e3             ## Duration of the sim, in ms
 cfg.dt = 0.05                   ## Internal Integration Time Stepy
 cfg.verbose = 0         	## Show detailed messages
 cfg.hParams['celsius'] = 37
@@ -69,8 +69,8 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'samn_ASSR_wE_1_5_wI_1_0'
-cfg.saveFolder = 'data/ASSR_test'                	## Set file output name
+cfg.simLabel = 'HPC_test_4e3ms'
+cfg.saveFolder = 'data/HPC_test'                	## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
 cfg.saveDataInclude = ['simData', 'simConfig', 'netParams', 'net'] 

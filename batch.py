@@ -3018,6 +3018,20 @@ def setRunCfg(b, type='mpi_bulletin'):
             'mpiCommand': 'mpirun', # comet='ibrun', bridges='mpirun'
             'skip': True}
 
+    elif type == 'hpc_slurm_TUB':
+        b.runCfg = {'type': 'hpc_slurm',
+                    'allocation': 'ni',
+                    'walltime': '24:00:00',
+                    'nodes': 1,
+                    'coresPerNode': 32,
+                    'email': 'jasmin.m.hulha@campus.tu-berlin.de',
+                    'folder': '/home/users/j/jasmin.hulha/A1model',
+                    'script': 'init.py',
+                    'custom': '#SBATCH --partition=standard',
+                    'mpiCommand': 'mpirun',
+                    # 'nrnCommand': 'nrniv -mpi -python3.8',
+                    'skip': True}
+
 
 
 # ----------------------------------------------------------------------------------------------
@@ -3042,10 +3056,10 @@ if __name__ == '__main__':
     #b = bkgWeights2D(pops = ['ITS4'], weights = list(np.arange(0,150,10)))
     #b = fIcurve(pops=['ITS4']) 
 
-    b.batchLabel = 'v35_batch6'
+    b.batchLabel = 'v35_batch6_jh'
     b.saveFolder = 'data/'+b.batchLabel
 
-    setRunCfg(b, 'hpc_slurm_gcp') #'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+    setRunCfg(b, 'hpc_slurm_TUB') #'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
     b.run() # run batch
 
 
