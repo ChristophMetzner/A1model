@@ -3018,7 +3018,7 @@ def setRunCfg(b, type='mpi_bulletin'):
             'mpiCommand': 'mpirun', # comet='ibrun', bridges='mpirun'
             'skip': True}
 
-    elif type == 'hpc_slurm_TUB':
+    elif type=='hpc_slurm_TUB':
         b.runCfg = {'type': 'hpc_slurm',
             'allocation': 'ni',
             'walltime': '24:00:00',
@@ -3029,7 +3029,6 @@ def setRunCfg(b, type='mpi_bulletin'):
             'script': 'init.py',
             'custom': '#SBATCH --partition=standard',
             'mpiCommand': 'mpirun',
-            # 'nrnCommand': 'nrniv -mpi -python3.8',
             'skip': True}
 
 
