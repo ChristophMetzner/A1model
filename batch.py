@@ -3046,12 +3046,12 @@ if __name__ == '__main__':
     # b = evolRates()
     # b = asdRates()
     #b = optunaRates()
-    # b = optunaRatesLayers()
+    # NBSPb = optunaRatesLayers()
     # b = optunaRatesLayersThalL2345A5B()
     # b = optunaRatesLayersThalL12345A5B6()
     #b = optunaRatesLayersWmat()
 
-    # b = bkgWeights(pops = cellTypes, weights = list(np.arange(1,100)))
+    #NBSPb = bkgWeights(pops = cellTypes, weights = list(np.arange(1,100)))
     #b = bkgWeights2D(pops = ['ITS4'], weights = list(np.arange(0,150,10)))
     #b = fIcurve(pops=['ITS4']) 
 
