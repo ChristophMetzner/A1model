@@ -154,7 +154,7 @@ if __name__ == '__main__':
 
 
 
-    b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
+    b = assr_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
     b.batchLabel = 'ASSR_opt'   
     b.saveFolder = 'data/'+b.batchLabel
