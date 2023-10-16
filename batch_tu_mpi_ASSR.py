@@ -101,7 +101,7 @@ def assr_batch(filename):
         s = 1.75*fs
 
         electrodes = [3,4,5,6,7,8,9,10,11,12]
-        powers = np.zeros((len(electrodes,))
+        powers = np.zeros((len(electrodes),))
 
         for e in electrodes:
             lfp = simData['LFP'][s:,e]
