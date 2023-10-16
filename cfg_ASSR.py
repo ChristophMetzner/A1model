@@ -23,7 +23,7 @@ cfg = specs.SimConfig()
 #------------------------------------------------------------------------------
 # Run parameters
 #------------------------------------------------------------------------------
-cfg.duration = 4e3 #30e3             ## Duration of the sim, in ms
+cfg.duration = 2.5e3 #30e3             ## Duration of the sim, in ms
 cfg.dt = 0.05                   ## Internal Integration Time Step
 cfg.verbose = 0         	## Show detailed messages
 cfg.hParams['celsius'] = 37
@@ -229,6 +229,16 @@ cfg.addNetStim = 0 #1
 
 
 cfg.tune = {}
+
+
+#------------------------------------------------------------------------------
+# ASSR tuning inputs
+#------------------------------------------------------------------------------
+cfg.thalL4PV  = 1.0
+cfg.thalL4SOM = 1.0
+cfg.thalL4E   = 1.0
+
+
 
 
 # ------------------------ ADD PARAM VALUES FROM .JSON FILES: 

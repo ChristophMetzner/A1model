@@ -25,9 +25,15 @@ def assr_batch(filename):
         cfgLoad = json.load(f)['simConfig']
     cfgLoad2 = cfgLoad
 
-    # #### SET CONN AND STIM SEEDS #### 
-    params = ??
 
+    minF = 0.1 
+    maxF = 2.0
+
+
+    # #### SET CONN AND STIM SEEDS #### 
+    params[('thalL4PV ')] = [minF,maxF]
+    params[('thalL4SOM ')] = [minF,maxF]
+    params[('thalL4E ')] = [minF,maxF]
     #### GROUPED PARAMS #### 
     groupedParams = [] 
 
@@ -35,8 +41,8 @@ def assr_batch(filename):
     # initial config
     initCfg = {} # set default options from prev sim
     
-    initCfg['duration'] = 4000 #11500 
-    initCfg['printPopAvgRates'] = [1500, 3500]
+    initCfg['duration'] = 2500 #11500 
+    initCfg['printPopAvgRates'] = [1500, 2500]
     initCfg['scaleDensity'] = 1.0 
     initCfg['recordStep'] = 0.05
 
@@ -84,25 +90,28 @@ def assr_batch(filename):
     # fitness function
     fitnessFuncArgs = {}
 
+    fitnessFuncArgs['maxFitness'] = 2000
+
     def fitnessFunc(simData, **kwargs):
         import numpy as np
         from scipy import signal as ss
         
         fs = 10000
-        nperseg = fs*3
+        nperseg = int(fs/2)
+        s = 1.75*fs
 
 	electrodes = [3,4,5,6,7,8,9,10,11,12]
 	powers = np.zeros((len(electrodes,))
 
         for e in electrodes:
-        	lfp = simData['']
+        	lfp = simData['LFP'][s:,e]
         	freq_wel, ps_wel = ss.welch(lfp,fs=fs,nperseg=nperseg)
-        	powers[e] = 
+        	powers[e] = ps_wel[38:42]
         
-        fitness = 
+        fitness = (10**4)*np.mean(powers)
 
-        popInfo = '; '.join(['%s rate=%.1f fit=%1.f' % (p, np.mean(list(simData['popRates'][p].values())), popFitness[i]) for i,p in enumerate(pops)])
-        print('  ' + popInfo)
+        info = '; '.join(['%s power=%.1f fit=%1.f' % (p, fitness) for p in power])
+        print('  ' + info)
 
         return fitness
 
@@ -131,8 +140,8 @@ def assr_batch(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'nodes': 5,
-            'coresPerNode': 4,
+            'nodes': 1,
+            'coresPerNode': 24,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
             'skip': True}
@@ -147,7 +156,7 @@ if __name__ == '__main__':
 
     b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'SNR_PV'   
+    b.batchLabel = 'ASSR_opt'   
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
