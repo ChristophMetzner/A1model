@@ -79,6 +79,7 @@ def spont_batch(filename):
             initCfg.update({p: cfgLoad2[p]})
 
 
+
     #b = Batch(params=params, netParamsFile='netParams.py', cfgFile='cfg.py', initCfg=initCfg, groupedParams=groupedParams)
     #b = Batch(params=params, netParamsFile='netParams_SST.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
     b = Batch(params=params, netParamsFile='netParams_PV.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
