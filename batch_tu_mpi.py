@@ -81,8 +81,8 @@ def spont_batch(filename):
 
 
     #b = Batch(params=params, netParamsFile='netParams.py', cfgFile='cfg.py', initCfg=initCfg, groupedParams=groupedParams)
-    #b = Batch(params=params, netParamsFile='netParams_SST.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
-    b = Batch(params=params, netParamsFile='netParams_PV.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
+    b = Batch(params=params, netParamsFile='netParams_SST.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
+    #b = Batch(params=params, netParamsFile='netParams_PV.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
     b.method = 'grid'
 
     return b
@@ -110,7 +110,7 @@ if __name__ == '__main__':
 
     b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'SNR_PV'   
+    b.batchLabel = 'SNR_SST'   
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
