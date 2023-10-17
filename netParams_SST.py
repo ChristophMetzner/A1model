@@ -319,13 +319,13 @@ if cfg.addConn and cfg.IEGain > 0.0:
                                 if l=='3':
                             	    factor = 0.701 # SST reduction 29.9%
                                 if l=='4':
-                            	    factor = 0.7 # SST reduction 33%
+                            	    factor = 0.67 # SST reduction 33%
                                 if l=='5A':
-                            	    factor = 0.7 # SST reduction 33%
+                            	    factor = 0.67 # SST reduction 33%
                                 if l=='5B':
-                            	    factor = 0.7 # SST reduction 33%
+                            	    factor = 0.67 # SST reduction 33%
                                 if l=='6':
-                            	    factor = 0.7 # SST reduction 33%	
+                            	    factor = 0.67 # SST reduction 33%	
                             elif 'PV' in pre:
                                 synMech = PVSynMech
                             elif 'VIP' in pre:
@@ -364,13 +364,13 @@ if cfg.addConn and cfg.IIGain > 0.0:
                         if l=='3':
                             factor = 0.701 # SST reduction 29.9%
                         if l=='4':
-                            factor = 0.7 # SST reduction 33%
+                            factor = 0.67 # SST reduction 33%
                         if l=='5A':
-                            factor = 0.7 # SST reduction 33%
+                            factor = 0.67 # SST reduction 33%
                         if l=='5B':
-                            factor = 0.7 # SST reduction 33%
+                            factor = 0.67 # SST reduction 33%
                         if l=='6':
-                            factor = 0.7 # SST reduction 33%
+                            factor = 0.67 # SST reduction 33%
                     elif 'PV' in pre:
                         synMech = PVSynMech
                     elif 'VIP' in pre:

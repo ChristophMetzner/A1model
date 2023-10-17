@@ -316,6 +316,10 @@ if cfg.addConn and cfg.IEGain > 0.0:
                                 synMech = SOMESynMech
                             elif 'PV' in pre:
                                 synMech = PVSynMech
+                                if l=='3':
+                                    factor = 0.71 # SST reduction 29%
+                                if l=='4':
+                                    factor = 0.65 # SST reduction 35%
                             elif 'VIP' in pre:
                                 synMech = VIPSynMech
                             elif 'NGF' in pre:
@@ -349,6 +353,10 @@ if cfg.addConn and cfg.IIGain > 0.0:
                         synMech = SOMISynMech
                     elif 'PV' in pre:
                         synMech = PVSynMech
+                        if l=='3':
+                            factor = 0.71 # SST reduction 29%
+                        if l=='4':
+                            factor = 0.65 # SST reduction 35%
                     elif 'VIP' in pre:
                         synMech = VIPSynMech
                     elif 'NGF' in pre:
