@@ -112,7 +112,7 @@ def assr_batch(filename):
         
         fitness = (10**4)*np.mean(powers)
 
-        info = '; '.join(['%s power=%.6f fit=%.2f' % (p, fitness) for p in powers])
+        info = '; '.join(['power=%.6f fit=%.2f' % (p, fitness) for p in powers])
         print('  ' + info)
 
         return fitness
@@ -126,7 +126,7 @@ def assr_batch(filename):
         'fitnessFunc': fitnessFunc, # fitness expression (should read simData)
         'fitnessFuncArgs': fitnessFuncArgs,
         'maxFitness': fitnessFuncArgs['maxFitness'],
-        'maxiters':     1e2,    #    Maximum number of iterations (1 iteration = 1 function evaluation)
+        'maxiters':     5,    #    Maximum number of iterations (1 iteration = 1 function evaluation)
         'maxtime':      None,    #    Maximum time allowed, in seconds
         'maxiter_wait': 60,
         'time_sleep': 150,
