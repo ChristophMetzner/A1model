@@ -23,7 +23,7 @@ cfg = specs.SimConfig()
 #------------------------------------------------------------------------------
 # Run parameters
 #------------------------------------------------------------------------------
-cfg.duration = 2.5e3 #30e3             ## Duration of the sim, in ms
+cfg.duration = 50 #2.5e3 #30e3             ## Duration of the sim, in ms
 cfg.dt = 0.05                   ## Internal Integration Time Step
 cfg.verbose = 0         	## Show detailed messages
 cfg.hParams['celsius'] = 37

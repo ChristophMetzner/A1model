@@ -41,8 +41,8 @@ def assr_batch(filename):
     # initial config
     initCfg = {} # set default options from prev sim
     
-    initCfg['duration'] = 2500 #11500 
-    initCfg['printPopAvgRates'] = [1500, 2500]
+    initCfg['duration'] = 50 #2500 #11500 
+    #initCfg['printPopAvgRates'] = [1500, 2500]
     initCfg['scaleDensity'] = 1.0 
     initCfg['recordStep'] = 0.05
 
@@ -98,19 +98,20 @@ def assr_batch(filename):
         
         fs = 10000
         nperseg = int(fs/2)
-        s = 1.75*fs
+        #s = int(1.75*fs)
+        s = 0 
 
         electrodes = [3,4,5,6,7,8,9,10,11,12]
         powers = np.zeros((len(electrodes),))
 
-        for e in electrodes:
+        for i,e in enumerate(electrodes):
             lfp = simData['LFP'][s:,e]
             freq_wel, ps_wel = ss.welch(lfp,fs=fs,nperseg=nperseg)
-            powers[e] = ps_wel[38:42]
+            powers[i] = np.sum(ps_wel[38:42])
         
         fitness = (10**4)*np.mean(powers)
 
-        info = '; '.join(['%s power=%.1f fit=%1.f' % (p, fitness) for p in power])
+        info = '; '.join(['%s power=%.6f fit=%.2f' % (p, fitness) for p in power])
         print('  ' + info)
 
         return fitness
