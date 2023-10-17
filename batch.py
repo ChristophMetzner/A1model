@@ -719,7 +719,7 @@ def fIcurve(pops = [], amps = list(np.arange(0.0, 6.5, 0.5)/10.0) ):
 # ----------------------------------------------------------------------------------------------
 # Custom
 # ----------------------------------------------------------------------------------------------
-def custom_spont(filename):
+def custom_spont(filename, sim_duration=11500):
     params = specs.ODict()
 
     if not filename:
@@ -731,13 +731,13 @@ def custom_spont(filename):
         cfgLoad = json.load(f)['simConfig']
     cfgLoad2 = cfgLoad
 
-    
+
     #params['thalamoCorticalGain'] = [cfgLoad['thalamoCorticalGain']] # [cfgLoad['thalamoCorticalGain']*0.75, cfgLoad['thalamoCorticalGain'], cfgLoad['thalamoCorticalGain']*1.25]
     #params[('seeds', 'conn')] = [3, 3] #list(range(1)) #[4321+(17*i) for i in range(5)]
     #params[('seeds', 'stim')] = [2, 3] #list(range(1)) #[1234+(17*i) for i in range(5)]
 
-    params['ihGbar'] = [0.25, 0.5] #[0.75, 1.0, 1.25]
-    params['KgbarFactor'] = [0.25, 0.5] #[0.75, 1.0, 1.25]
+    #params['ihGbar'] = [0.25, 0.5] #[0.75, 1.0, 1.25]
+    #params['KgbarFactor'] = [0.25, 0.5] #[0.75, 1.0, 1.25]
 
     groupedParams = [] #('ICThalInput', 'probE'), ('ICThalInput', 'probI')] #('IELayerGain', '1-3'), ('IELayerGain', '4'), ('IELayerGain', '5'), ('IELayerGain', '6')]
 
@@ -745,8 +745,8 @@ def custom_spont(filename):
     # initial config
     initCfg = {} # set default options from prev sim
     
-    initCfg['duration'] = 11500
-    initCfg['printPopAvgRates'] = [1500, initCfg['duration']] 
+    initCfg['duration'] = sim_duration
+    initCfg['printPopAvgRates'] = [1000, sim_duration]
     initCfg['scaleDensity'] = 1.0
     initCfg['recordStep'] = 0.05
 
@@ -3041,7 +3041,15 @@ if __name__ == '__main__':
 
     cellTypes = ['IT2', 'PV2', 'SOM2', 'VIP2', 'NGF2', 'IT3', 'ITP4', 'ITS4', 'IT5A', 'CT5A', 'IT5B', 'PT5B', 'CT5B', 'IT6', 'CT6', 'TC', 'HTC', 'IRE', 'TI']
 
-    b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json')
+    sim_durations = [5000, 10000, 15000, 20000]
+
+    for duration in sim_durations:
+        b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', duration)
+        b.batchLabel = f'v35_batch6_jh_{duration}ms'
+        b.saveFolder = 'data/' + b.batchLabel
+        setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+        b.run()  # run batch
+
     #b = custom_stim('data/v34_batch25/trial_2142/trial_2142_cfg.json')
     # b = evolRates()
     # b = asdRates()
@@ -3055,11 +3063,11 @@ if __name__ == '__main__':
     #b = bkgWeights2D(pops = ['ITS4'], weights = list(np.arange(0,150,10)))
     #b = fIcurve(pops=['ITS4']) 
 
-    b.batchLabel = 'v35_batch6_jh'
-    b.saveFolder = 'data/'+b.batchLabel
 
-    setRunCfg(b, 'hpc_slurm_TUB') #'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-    b.run() # run batch
+
+
+
+
 
 
     #trials = [5421, 5214, 5383, 3719, 3606, 4005, 3079, 4300]
