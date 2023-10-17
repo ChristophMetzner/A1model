@@ -99,13 +99,14 @@ def assr_batch(filename):
         fs = 10000
         nperseg = int(fs/2)
         #s = int(1.75*fs)
-        s = 0 
+        s = int(0) 
 
         electrodes = [3,4,5,6,7,8,9,10,11,12]
         powers = np.zeros((len(electrodes),))
 
         for i,e in enumerate(electrodes):
-            lfp = simData['LFP'][s:,e]
+            lfps = np.array(simData['LFP'])
+            lfp = lfps[s:,e]
             freq_wel, ps_wel = ss.welch(lfp,fs=fs,nperseg=nperseg)
             powers[i] = np.sum(ps_wel[38:42])
         
