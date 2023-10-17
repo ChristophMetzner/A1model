@@ -112,7 +112,7 @@ def assr_batch(filename):
         
         fitness = (10**4)*np.mean(powers)
 
-        info = '; '.join(['%s power=%.6f fit=%.2f' % (p, fitness) for p in power])
+        info = '; '.join(['%s power=%.6f fit=%.2f' % (p, fitness) for p in powers])
         print('  ' + info)
 
         return fitness
