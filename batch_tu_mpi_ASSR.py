@@ -41,8 +41,8 @@ def assr_batch(filename):
     # initial config
     initCfg = {} # set default options from prev sim
     
-    initCfg['duration'] = 50 #2500 #11500 
-    #initCfg['printPopAvgRates'] = [1500, 2500]
+    initCfg['duration'] = 6000 #11500 
+    initCfg['printPopAvgRates'] = [1500, 2500]
     initCfg['scaleDensity'] = 1.0 
     initCfg['recordStep'] = 0.05
 
@@ -126,7 +126,7 @@ def assr_batch(filename):
         'fitnessFunc': fitnessFunc, # fitness expression (should read simData)
         'fitnessFuncArgs': fitnessFuncArgs,
         'maxFitness': fitnessFuncArgs['maxFitness'],
-        'maxiters':     5,    #    Maximum number of iterations (1 iteration = 1 function evaluation)
+        'maxiters':     2,    #    Maximum number of iterations (1 iteration = 1 function evaluation)
         'maxtime':      None,    #    Maximum time allowed, in seconds
         'maxiter_wait': 60,
         'time_sleep': 150,
