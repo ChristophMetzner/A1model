@@ -128,7 +128,7 @@ def assr_batch(filename):
         'maxFitness': fitnessFuncArgs['maxFitness'],
         'maxiters':     2,    #    Maximum number of iterations (1 iteration = 1 function evaluation)
         'maxtime':      None,    #    Maximum time allowed, in seconds
-        'maxiter_wait': 60,
+        'maxiter_wait': 500,
         'time_sleep': 150,
         'popsize': 1  # unused - run with mpi 
     }
