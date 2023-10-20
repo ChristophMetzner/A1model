@@ -719,7 +719,7 @@ def fIcurve(pops = [], amps = list(np.arange(0.0, 6.5, 0.5)/10.0) ):
 # ----------------------------------------------------------------------------------------------
 # Custom
 # ----------------------------------------------------------------------------------------------
-def custom_spont(filename, sim_duration=11500):
+def custom_spont(filename, sim_duration=11500, seed=0):
     params = specs.ODict()
 
     if not filename:
@@ -750,7 +750,7 @@ def custom_spont(filename, sim_duration=11500):
     initCfg['scaleDensity'] = 1.0
     initCfg['recordStep'] = 0.05
 
-    initCfg[('seeds', 'conn')] = 0
+    initCfg[('seeds', 'conn')] = seed
     initCfg[('seeds', 'stim')] = 0
 
     # plotting and saving params
@@ -3042,13 +3042,15 @@ if __name__ == '__main__':
     cellTypes = ['IT2', 'PV2', 'SOM2', 'VIP2', 'NGF2', 'IT3', 'ITP4', 'ITS4', 'IT5A', 'CT5A', 'IT5B', 'PT5B', 'CT5B', 'IT6', 'CT6', 'TC', 'HTC', 'IRE', 'TI']
 
     sim_durations = [5000, 10000, 15000, 20000]
+    seeds = [0, 1, 2, 3, 4]
 
     for duration in sim_durations:
-        b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', duration)
-        b.batchLabel = f'v35_batch6_jh_{duration}ms'
-        b.saveFolder = 'data/' + b.batchLabel
-        setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-        b.run()  # run batch
+        for seed in seeds:
+            b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', duration, seed)
+            b.batchLabel = f'v35_batch6_jh_{duration}ms_seed_{seed}'
+            b.saveFolder = 'data/' + b.batchLabel
+            setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+            b.run()  # run batch
 
     #b = custom_stim('data/v34_batch25/trial_2142/trial_2142_cfg.json')
     # b = evolRates()
