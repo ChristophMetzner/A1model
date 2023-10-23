@@ -142,8 +142,8 @@ def assr_batch(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'nodes': 1,
-            'coresPerNode': 24,
+            'nodes': 2,
+            'coresPerNode': 12,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
             'skip': True}
