@@ -3041,16 +3041,34 @@ if __name__ == '__main__':
 
     cellTypes = ['IT2', 'PV2', 'SOM2', 'VIP2', 'NGF2', 'IT3', 'ITP4', 'ITS4', 'IT5A', 'CT5A', 'IT5B', 'PT5B', 'CT5B', 'IT6', 'CT6', 'TC', 'HTC', 'IRE', 'TI']
 
-    sim_durations = [5000, 10000, 15000, 20000]
-    seeds = [0, 1, 2, 3, 4]
+    # sim_durations = [5000, 10000, 15000, 20000]
+    # seeds = [0, 1, 2, 3, 4]
+    #
+    # for duration in sim_durations:
+    #     for seed in seeds:
+    #         b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', duration, seed)
+    #         b.batchLabel = f'v35_batch6_jh_{duration}ms_seed_{seed}'
+    #         b.saveFolder = 'data/' + b.batchLabel
+    #         setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+    #         b.run()  # run batch
 
-    for duration in sim_durations:
-        for seed in seeds:
-            b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', duration, seed)
-            b.batchLabel = f'v35_batch6_jh_{duration}ms_seed_{seed}'
-            b.saveFolder = 'data/' + b.batchLabel
-            setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-            b.run()  # run batch
+    b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 10000, 2)
+    b.batchLabel = 'v35_batch6_jh_10000_ms_seed_2'
+    b.saveFolder = 'data/' + b.batchLabel
+    setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+    b.run()  # run batch
+
+    b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 15000, 1)
+    b.batchLabel = 'v35_batch6_jh_15000_ms_seed_1'
+    b.saveFolder = 'data/' + b.batchLabel
+    setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+    b.run()  # run batch
+
+    b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 15000, 2)
+    b.batchLabel = 'v35_batch6_jh_15000_ms_seed_2'
+    b.saveFolder = 'data/' + b.batchLabel
+    setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+    b.run()  # run batch
 
     # seeds = [1, 2, 3, 4]
     #
