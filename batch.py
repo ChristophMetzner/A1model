@@ -3027,7 +3027,7 @@ def setRunCfg(b, type='mpi_bulletin'):
             'email': 'jasmin.m.hulha@campus.tu-berlin.de',
             'folder': '/home/users/j/jasmin.hulha/A1model',
             'script': 'init.py',
-            'custom': '#SBATCH --partition=standard\n#SBATCH --mem=16G',
+            'custom': '#SBATCH --partition=standard',
             'mpiCommand': 'mpirun',
             'skip': True}
 
