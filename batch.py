@@ -3052,32 +3052,21 @@ if __name__ == '__main__':
     #         setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
     #         b.run()  # run batch
 
-    b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 10000, 2)
-    b.batchLabel = 'v35_batch6_jh_10000_ms_seed_3'
-    b.saveFolder = 'data/' + b.batchLabel
-    setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-    b.run()  # run batch
+    # b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 10000, 2)
+    # b.batchLabel = 'v35_batch6_jh_10000_ms_seed_3'
+    # b.saveFolder = 'data/' + b.batchLabel
+    # setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+    # b.run()  # run batch
 
-    b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 15000, 1)
-    b.batchLabel = 'v35_batch6_jh_15000_ms_seed_1'
-    b.saveFolder = 'data/' + b.batchLabel
-    setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-    b.run()  # run batch
 
-    b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 15000, 2)
-    b.batchLabel = 'v35_batch6_jh_15000_ms_seed_2'
-    b.saveFolder = 'data/' + b.batchLabel
-    setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-    b.run()  # run batch
+    seeds = [5, 6, 7, 8, 9]
 
-    # seeds = [1, 2, 3, 4]
-    #
-    # for seed in seeds:
-    #     b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 20000, seed)
-    #     b.batchLabel = f'v35_batch6_jh_{20000}ms_seed_{seed}'
-    #     b.saveFolder = 'data/' + b.batchLabel
-    #     setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-    #     b.run()  # run batch
+    for seed in seeds:
+        b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 20000, seed)
+        b.batchLabel = f'v35_batch6_jh_20000ms_seed_{seed}'
+        b.saveFolder = 'data/' + b.batchLabel
+        setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+        b.run()  # run batch
 
 
     #b = custom_stim('data/v34_batch25/trial_2142/trial_2142_cfg.json')
