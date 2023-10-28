@@ -3059,7 +3059,7 @@ if __name__ == '__main__':
     # b.run()  # run batch
 
 
-    seeds = [5, 6, 7, 8, 9]
+    seeds = [8, 9]
 
     for seed in seeds:
         b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 20000, seed)
