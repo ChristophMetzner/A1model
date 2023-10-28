@@ -3027,7 +3027,7 @@ def setRunCfg(b, type='mpi_bulletin'):
             'email': 'jasmin.m.hulha@campus.tu-berlin.de',
             'folder': '/home/users/j/jasmin.hulha/A1model',
             'script': 'init.py',
-            'custom': '#SBATCH --partition=standard',
+            'custom': '#SBATCH --partition=standard\n#SBATCH --mem=10G',
             'mpiCommand': 'mpirun',
             'skip': True}
 
@@ -3059,7 +3059,7 @@ if __name__ == '__main__':
     # b.run()  # run batch
 
 
-    seeds = [8, 9]
+    seeds = [9]
 
     for seed in seeds:
         b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 20000, seed)
