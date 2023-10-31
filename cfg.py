@@ -72,7 +72,7 @@ cfg.recordDipole = True
 cfg.simLabel = 'samn_ASSR_wE_1_5_wI_1_0'
 cfg.saveFolder = 'data/ASSR_test'                	## Set file output name
 cfg.savePickle = True         							## Save pkl file
-cfg.saveJson = False           							## Save json file
+cfg.saveJson = True           							## Save json file
 cfg.saveDataInclude = ['simData', 'simConfig', 'netParams', 'net'] 
 cfg.backupCfgFile = None
 cfg.gatherOnlySimData = False
@@ -144,8 +144,6 @@ cfg.scaleDensity = 1.0 #0.25 #1.0 #0.075 # Should be 1.0 unless need lower cell 
 #------------------------------------------------------------------------------
 # Connectivity
 #------------------------------------------------------------------------------
-cfg.synWeightFractionEE = [0.5, 0.5] # E->E AMPA to NMDA ratio
-cfg.synWeightFractionEI = [0.5, 0.5] # E->I AMPA to NMDA ratio
 cfg.synWeightFractionIE = [0.9, 0.1]  # SOM -> E GABAASlow to GABAB ratio (update this)
 cfg.synWeightFractionII = [0.9, 0.1]  # SOM -> E GABAASlow to GABAB ratio (update this)
 
