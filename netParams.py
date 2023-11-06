@@ -20,7 +20,7 @@ except:
 #------------------------------------------------------------------------------
 # VERSION 
 #------------------------------------------------------------------------------
-netParams.version = 35
+netParams.version = 39
 
 #------------------------------------------------------------------------------
 #
@@ -77,38 +77,96 @@ cellParamLabels = ['IT2_reduced', 'IT3_reduced', 'ITP4_reduced', 'ITS4_reduced',
                     'IT5A_reduced', 'CT5A_reduced', 'IT5B_reduced',
                     'PT5B_reduced', 'CT5B_reduced', 'IT6_reduced', 'CT6_reduced',
                     'PV_reduced', 'SOM_reduced', 'VIP_reduced', 'NGF_reduced',
-                    'RE_reduced', 'TC_reduced', 'HTC_reduced', 'TI_reduced']
+                    'RE_reduced', 'TC_reduced', 'HTC_reduced', 'TI_reduced']  # , 'TI_reduced']
 
 for ruleLabel in cellParamLabels:
     netParams.loadCellParamsRule(label=ruleLabel, fileName='cells/' + ruleLabel + '_cellParams.json')  # Load cellParams for each of the above cell subtype
 
-# change weightNorm 
-for k in cfg.weightNormScaling:
-    for sec in netParams.cellParams[k]['secs'].values():
-        for i in range(len(sec['weightNorm'])):
-            sec['weightNorm'][i] *= cfg.weightNormScaling[k]
 
 
-# Parametrize PT ih_gbar and exc cells K_gmax to simulate NA/ACh neuromodulation
-for cellLabel in ['PT5B_reduced']:
-    cellParam = netParams.cellParams[cellLabel] 
+# ## Reduce T-type calcium channel conductances (cfg.tTypeCorticalFactor ; cfg.tTypeThalamicFactor)
+# for cellLabel in ['TC_reduced', 'HTC_reduced', 'RE_reduced']:
+#     cellParam = netParams.cellParams[cellLabel]
+#     for secName in cellParam['secs']:
+#         #print('cellType: ' + cellLabel + ', section: ' + secName)
+#         for mechName,mech in cellParam['secs'][secName]['mechs'].items():
+#             if mechName in ['itre', 'ittc']:
+#                 #print('gmax of ' + mechName + ' ' + str(cellParam['secs'][secName]['mechs'][mechName]['gmax']))  # ADD A TEST PRINT STATEMENT PRE-CHANGE
+#                 cellParam['secs'][secName]['mechs'][mechName]['gmax'] *= cfg.tTypeThalamicFactor
+#                 print('new gmax of ' + mechName + ' ' + str(cellParam['secs'][secName]['mechs'][mechName]['gmax']))  # ADD A TEST PRINT STATEMENT POST-CHANGE
 
-    for secName in cellParam['secs']:
-        # Adapt ih params based on cfg param
-        for mechName,mech in cellParam['secs'][secName]['mechs'].items():
-            if mechName in ['ih','h','h15', 'hd']: 
-                mech['gbar'] = [g*cfg.ihGbar for g in mech['gbar']] if isinstance(mech['gbar'],list) else mech['gbar']*cfg.ihGbar
+# for cellLabel in ['TI_reduced']:
+#     cellParam = netParams.cellParams[cellLabel]
+#     for secName in cellParam['secs']:
+#         #print('cellType: ' + cellLabel + ', section: ' + secName)
+#         for mechName,mech in cellParam['secs'][secName]['mechs'].items():
+#             if mechName == 'it2INT':
+#                 #print('gcabar of ' + mechName + ' ' + str(cellParam['secs'][secName]['mechs'][mechName]['gcabar'])) # ADD A TEST PRINT STATEMENT PRE-CHANGE
+#                 cellParam['secs'][secName]['mechs'][mechName]['gcabar'] *= cfg.tTypeThalamicFactor
+#                 print('new gcabar of ' + mechName + ' ' + str(cellParam['secs'][secName]['mechs'][mechName]['gcabar'])) # ADD A TEST PRINT STATEMENT POST-CHANGE
+
+# for cellLabel in ['IT2_reduced', 'IT3_reduced', 'ITP4_reduced', 'ITS4_reduced',
+#                     'IT5A_reduced', 'CT5A_reduced', 'IT5B_reduced', 'CT5B_reduced', 
+#                     'IT6_reduced', 'CT6_reduced']:
+#     cellParam = netParams.cellParams[cellLabel]
+#     for secName in cellParam['secs']:
+#         #print('cellType: ' + cellLabel + ', section: ' + secName)
+#         for mechName,mech in cellParam['secs'][secName]['mechs'].items():
+#             if mechName == 'cat':
+#                 #print('gcatbar of ' + mechName + ' ' + str(cellParam['secs'][secName]['mechs'][mechName]['gcatbar']))# ADD A TEST PRINT STATEMENT PRE-CHANGE
+#                 cellParam['secs'][secName]['mechs'][mechName]['gcatbar'] *= cfg.tTypeCorticalFactor
+#                 print('new gcatbar of ' + mechName + ' ' + str(cellParam['secs'][secName]['mechs'][mechName]['gcatbar'])) # ADD A TEST PRINT STATEMENT POST-CHANGE
 
 
-# Adapt Kgbar
-for cellLabel in ['IT2_reduced', 'IT3_reduced', 'ITP4_reduced', 'ITS4_reduced',
-                    'IT5A_reduced', 'CT5A_reduced', 'IT5B_reduced',
-                    'PT5B_reduced', 'CT5B_reduced', 'IT6_reduced', 'CT6_reduced',]:
-    cellParam = netParams.cellParams[cellLabel] 
 
-    for secName in cellParam['secs']:
-        for kmech in [k for k in cellParam['secs'][secName]['mechs'].keys() if k in ['kap','kdr']]:
-            cellParam['secs'][secName]['mechs'][kmech]['gbar'] *= cfg.KgbarFactor 
+## Manipulate NMDAR weights to Inhibitory Populations 
+
+
+
+# # Thalamic Interneuron Version:
+# TI_version = 'default' # IAHP # IL # default
+
+# if TI_version == 'IAHP': 
+#     netParams.loadCellParamsRule(label='TI_reduced', fileName='cells/TI_reduced_cellParams_IAHP.json') 
+#     print('IAHP reduced conductance version loaded')
+# elif TI_version == 'IL':
+#     netParams.loadCellParamsRule(label='TI_reduced', fileName='cells/TI_reduced_cellParams_IL.json') 
+#     print('IL reduced conductance version loaded')
+# else: 
+#     netParams.loadCellParamsRule(label='TI_reduced', fileName='cells/TI_reduced_cellParams.json')
+#     print('Default thal int model loaded')
+
+
+
+# # change weightNorm 
+# for k in cfg.weightNormScaling:
+#     for sec in netParams.cellParams[k]['secs'].values():
+#         for i in range(len(sec['weightNorm'])):
+#             sec['weightNorm'][i] *= cfg.weightNormScaling[k]
+
+
+# # Parametrize PT ih_gbar and exc cells K_gmax to simulate NA/ACh neuromodulation
+# for cellLabel in ['PT5B_reduced']:
+#     cellParam = netParams.cellParams[cellLabel] 
+
+#     for secName in cellParam['secs']:
+#         # Adapt ih params based on cfg param
+#         for mechName,mech in cellParam['secs'][secName]['mechs'].items():
+#             if mechName in ['ih','h','h15', 'hd']: 
+#                 mech['gbar'] = [g*cfg.ihGbar for g in mech['gbar']] if isinstance(mech['gbar'],list) else mech['gbar']*cfg.ihGbar
+
+
+# # Adapt Kgbar
+# for cellLabel in ['IT2_reduced', 'IT3_reduced', 'ITP4_reduced', 'ITS4_reduced',
+#                     'IT5A_reduced', 'CT5A_reduced', 'IT5B_reduced',
+#                     'PT5B_reduced', 'CT5B_reduced', 'IT6_reduced', 'CT6_reduced']:
+#     cellParam = netParams.cellParams[cellLabel] 
+
+#     for secName in cellParam['secs']:
+#         for kmech in [k for k in cellParam['secs'][secName]['mechs'].keys() if k in ['kap','kdr']]:
+#             cellParam['secs'][secName]['mechs'][kmech]['gbar'] *= cfg.KgbarFactor 
+
+
 
 
 
@@ -211,7 +269,6 @@ netParams.synMechParams['NMDA'] = {'mod': 'MyExp2SynNMDABB', 'tau1NMDA': 15, 'ta
 netParams.synMechParams['AMPA'] = {'mod':'MyExp2SynBB', 'tau1': 0.05, 'tau2': 5.3*cfg.AMPATau2Factor, 'e': 0}
 netParams.synMechParams['GABAB'] = {'mod':'MyExp2SynBB', 'tau1': 3.5, 'tau2': 260.9, 'e': -93} 
 netParams.synMechParams['GABAA'] = {'mod':'MyExp2SynBB', 'tau1': 0.07, 'tau2': 18.2, 'e': -80}
-#netParams.synMechParams['GABAA'] = {'mod':'MyExp2SynBB', 'tau1': 0.07, 'tau2': 8.2, 'e': -80}
 netParams.synMechParams['GABAA_VIP'] = {'mod':'MyExp2SynBB', 'tau1': 0.3, 'tau2': 6.4, 'e': -80}  # Pi et al 2013
 netParams.synMechParams['GABAASlow'] = {'mod': 'MyExp2SynBB','tau1': 2, 'tau2': 100, 'e': -80}
 netParams.synMechParams['GABAASlowSlow'] = {'mod': 'MyExp2SynBB', 'tau1': 200, 'tau2': 400, 'e': -80}
@@ -263,7 +320,7 @@ if cfg.addConn and cfg.EEGain > 0.0:
                     
 
 #------------------------------------------------------------------------------
-## E -> I
+## E -> I       ## MODIFIED FOR NMDAR MANIPULATION!! 
 if cfg.addConn and cfg.EIGain > 0.0:
     for pre in Epops:
         for post in Ipops:
@@ -278,7 +335,7 @@ if cfg.addConn and cfg.EIGain > 0.0:
                         if 'NGF' in post:
                             synWeightFactor = cfg.synWeightFractionENGF
                         else:
-                            synWeightFactor = cfg.synWeightFractionEI
+                            synWeightFactor = cfg.synWeightFractionEI #cfg.synWeightFractionEI_CustomCort  #cfg.synWeightFractionEI
                         netParams.connParams['EI_'+pre+'_'+post+'_'+postType+'_'+l] = { 
                             'preConds': {'pop': pre}, 
                             'postConds': {'pop': post, 'cellType': postType, 'ynorm': layer[l]},
@@ -290,6 +347,8 @@ if cfg.addConn and cfg.EIGain > 0.0:
                             'synsPerConn': 1,
                             'sec': 'proximal'}
                 
+
+# cfg.NMDARfactor * wmat[pre][post] * cfg.EIGain * cfg.EICellTypeGain[postType] * cfg.EILayerGain[l]]
 
 #------------------------------------------------------------------------------
 ## I -> E
@@ -380,7 +439,6 @@ TIpops = ['IRE', 'IREM', 'TI', 'TIM']
 if cfg.addConn and cfg.addIntraThalamicConn:
     for pre in TEpops+TIpops:
         for post in TEpops+TIpops:
-            scaleFactor = 1.0
             if post in pmat[pre]:
                 # for syns use ESynMech, SOMESynMech and SOMISynMech 
                 if pre in TEpops:     # E->E/I
@@ -388,8 +446,7 @@ if cfg.addConn and cfg.addIntraThalamicConn:
                     synWeightFactor = cfg.synWeightFractionEE
                 elif post in TEpops:  # I->E
                     syn = SOMESynMech
-                    synWeightFactor = cfg.synWeightFractionIE 
-                    scaleFactor = 1.0 # 1.5
+                    synWeightFactor = cfg.synWeightFractionIE
                 else:                  # I->I
                     syn = SOMISynMech
                     synWeightFactor = [1.0]
@@ -399,7 +456,7 @@ if cfg.addConn and cfg.addIntraThalamicConn:
                     'postConds': {'pop': post},
                     'synMech': syn,
                     'probability': pmat[pre][post],
-                    'weight': wmat[pre][post] * cfg.intraThalamicGain*scaleFactor, 
+                    'weight': wmat[pre][post] * cfg.intraThalamicGain, 
                     'synMechWeightFactor': synWeightFactor,
                     'delay': 'defaultDelay+dist_3D/propVelocity',
                     'synsPerConn': 1,
@@ -428,6 +485,35 @@ if cfg.addConn and cfg.addCorticoThalamicConn:
 if cfg.addConn and cfg.addThalamoCorticalConn:
     for pre in TEpops+TIpops:
         for post in Epops+Ipops:
+            if post in pmat[pre]:
+                # for syns use ESynMech, SOMESynMech and SOMISynMech 
+                if pre in TEpops:     # E->E/I
+                    syn = ESynMech
+                    synWeightFactor = cfg.synWeightFractionEE
+                elif post in Epops:  # I->E
+                    syn = SOMESynMech
+                    synWeightFactor = cfg.synWeightFractionIE
+                else:                  # I->I
+                    syn = SOMISynMech
+                    synWeightFactor = [1.0]
+
+                netParams.connParams['ThCx_'+pre+'_'+post] = { 
+                    'preConds': {'pop': pre}, 
+                    'postConds': {'pop': post},
+                    'synMech': syn,
+                    'probability': '%f * exp(-dist_2D/%f)' % (pmat[pre][post], lmat[pre][post]),
+                    'weight': wmat[pre][post] * cfg.thalamoCorticalGain, 
+                    'synMechWeightFactor': synWeightFactor,
+                    'delay': 'defaultDelay+dist_3D/propVelocity',
+                    'synsPerConn': 1,
+                    'sec': 'soma'}  
+
+
+#------------------------------------------------------------------------------
+## Thalamocortical - this was added from Christoph Metzner's branch
+if cfg.addConn and cfg.addThalamoCorticalConn:
+    for pre in TEpops+TIpops:
+        for post in Epops+Ipops:
             scaleFactor = 1.0
             if post in pmat[pre]:
                 # for syns use ESynMech, SOMESynMech and SOMISynMech 
@@ -435,19 +521,19 @@ if cfg.addConn and cfg.addThalamoCorticalConn:
                     if post=='PV4':
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
-                        scaleFactor = 1.0#25
+                        scaleFactor = cfg.thalL4PV#25
                     elif post=='SOM4':
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
-                        scaleFactor = 1.0
+                        scaleFactor = cfg.thalL4SOM
                     elif post=='ITS4':
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
-                        scaleFactor = 1.0#25
+                        scaleFactor = cfg.thalL4E#25
                     elif post=='ITP4':
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
-                        scaleFactor = 1.0#25
+                        scaleFactor = cfg.thalL4E#25
                     else:
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
@@ -468,8 +554,7 @@ if cfg.addConn and cfg.addThalamoCorticalConn:
                     'delay': 'defaultDelay+dist_3D/propVelocity',
                     'synsPerConn': 1,
                     'sec': 'soma'}  
-
-
+                
 #------------------------------------------------------------------------------
 # Subcellular connectivity (synaptic distributions)
 #------------------------------------------------------------------------------  
@@ -620,7 +705,31 @@ if cfg.addBkgConn:
         from input import inh_poisson_generator
         
         maxLen = min(len(ICrates[0]), len(ICtimes))
-        spkTimes = [[x+cfg.ICThalInput['startTime'] for x in inh_poisson_generator(ICrates[i][:maxLen], ICtimes[:maxLen], cfg.duration, cfg.ICThalInput['seed']+i)] for i in range(len(ICrates))]
+
+        ### ADDED BY EYG 9/23/2022 TO ALLOW FOR MULTIPLE START TIMES (TEST)
+        if type(cfg.ICThalInput['startTime']) == list:
+
+            from collections import OrderedDict
+            spkTimesDict = OrderedDict()
+            startTimes = cfg.ICThalInput['startTime']
+            for startTime in startTimes:
+                keyName = 'startTime_' + str(startTime)
+                print('KEY NAME: ' + keyName)
+                spkTimesDict[keyName] = [[x+startTime for x in inh_poisson_generator(ICrates[i][:maxLen], ICtimes[:maxLen], cfg.duration, cfg.ICThalInput['seed']+i)] for i in range(len(ICrates))]
+
+            spkTimes = [None] * len(ICrates) #[]
+
+            for i in range(len(ICrates)):
+                for key in spkTimesDict.keys():
+                    if spkTimes[i] is None:
+                        spkTimes[i] = spkTimesDict[key][i]
+                    else:
+                        spkTimes[i] = spkTimes[i] + spkTimesDict[key][i]
+
+        else:
+            ## Can change the t_stop arg in the inh_poisson_generator fx from cfg.duration to the length of the BBN stimulus (>100 ms)
+            spkTimes = [[x+cfg.ICThalInput['startTime'] for x in inh_poisson_generator(ICrates[i][:maxLen], ICtimes[:maxLen], cfg.duration, cfg.ICThalInput['seed']+i)] for i in range(len(ICrates))]
+
         netParams.popParams['IC'] = {'cellModel': 'VecStim', 'numCells': numCells, 'ynormRange': layer['cochlear'],
             'spkTimes': spkTimes}
 
@@ -684,26 +793,50 @@ if cfg.addBkgConn:
 
     # cochlea/IC -> thal
     if cfg.ICThalInput:
-        netParams.connParams['IC->ThalE'] = { 
+        # IC -> thalamic core
+        netParams.connParams['IC->ThalECore'] = { 
             'preConds': {'pop': 'IC'}, 
-            'postConds': {'cellType': ['TC', 'HTC']},
+            'postConds': {'pop': ['TC', 'HTC']},
             'sec': 'soma', 
             'loc': 0.5,
             'synMech': ESynMech,
-            'probability': cfg.ICThalInput['probE'],
-            'weight': cfg.ICThalInput['weightE'],
+            'probability': cfg.ICThalInput['probECore'],
+            'weight': cfg.ICThalInput['weightECore'],
             'synMechWeightFactor': cfg.synWeightFractionEE,
             'delay': cfg.delayBkg}
         
-        netParams.connParams['IC->ThalI'] = { 
+        netParams.connParams['IC->ThalICore'] = { 
             'preConds': {'pop': 'IC'}, 
-            'postConds': {'cellType': ['RE', 'TI']},
+            'postConds': {'pop': ['RE', 'TI']},
             'sec': 'soma', 
             'loc': 0.5,
             'synMech': 'GABAA',
-            'probability': cfg.ICThalInput['probI'],
-            'weight': cfg.ICThalInput['weightI'],
+            'probability': cfg.ICThalInput['probICore'],
+            'weight': cfg.ICThalInput['weightICore'],
+            'delay': cfg.delayBkg}
+
+        # IC -> thalamic matrix
+        netParams.connParams['IC->ThalEMatrix'] = { 
+            'preConds': {'pop': 'IC'}, 
+            'postConds': {'pop': ['TCM']},
+            'sec': 'soma', 
+            'loc': 0.5,
+            'synMech': ESynMech,
+            'probability': cfg.ICThalInput['probEMatrix'],
+            'weight': cfg.ICThalInput['weightEMatrix'],
+            'synMechWeightFactor': cfg.synWeightFractionEE,
+            'delay': cfg.delayBkg}
+        
+        netParams.connParams['IC->ThalIMatrix'] = { 
+            'preConds': {'pop': 'IC'}, 
+            'postConds': {'pop': ['IREM', 'TIM']},
+            'sec': 'soma', 
+            'loc': 0.5,
+            'synMech': 'GABAA',
+            'probability': cfg.ICThalInput['probIMatrix'],
+            'weight': cfg.ICThalInput['weightIMatrix'],
             'delay': cfg.delayBkg}  
+        
 
 
 #------------------------------------------------------------------------------
@@ -786,4 +919,8 @@ v32 - Added IE presyn-cell-type specific gains
 v33 - Fixed bug in matrix thalamocortical conn (were very low)
 v34 - Added missing conn from cortex to matrix thalamus IREM and TIM
 v35 - Parametrize L5B PT Ih and exc cell K+ conductance (to simulate NA/ACh modulation) 
+v36 - Looped speech stimulus capability added for cfg.ICThalInput
+v37 - Adding in code to modulate t-type calcium conductances in thalamic and cortical cells
+v38 - Adding in code to modulate NMDA synaptic weight from E --> I populations 
+v39 - Changed E --> I cfg.NMDARfactor such that weight is not a list, but instead a single value 
 """

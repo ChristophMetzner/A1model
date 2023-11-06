@@ -23,7 +23,7 @@ cfg = specs.SimConfig()
 #------------------------------------------------------------------------------
 # Run parameters
 #------------------------------------------------------------------------------
-cfg.duration = 6e3 #30e3             ## Duration of the sim, in ms
+cfg.duration = 11e3             ## Duration of the sim, in ms
 cfg.dt = 0.05                   ## Internal Integration Time Step
 cfg.verbose = 0         	## Show detailed messages
 cfg.hParams['celsius'] = 37
@@ -40,8 +40,6 @@ cfg.oneSynPerNetcon = False
 cfg.includeParamsLabel = False
 cfg.printPopAvgRates = [0, cfg.duration]   # "printPopAvgRates": [[1500,1750],[1750,2000],[2000,2250],[2250,2500]]
 cfg.validateNetParams = False
-
-#cfg.seeds = {'conn':1, 'stim':1, 'loc':1,}
 
 #------------------------------------------------------------------------------
 # Recording 
@@ -61,7 +59,7 @@ cfg.recordLFP = [[100, y, 100] for y in range(0, 2000, 100)] #+[[100, 2500, 200]
 # cfg.recordLFP = [[x, 1000, 100] for x in range(100, 2200, 200)] #+[[100, 2500, 200], [100,2700,200]]
 # cfg.saveLFPPops =  cfg.allCorticalPops #, "IT3", "SOM3", "PV3", "VIP3", "NGF3", "ITP4", "ITS4", "IT5A", "CT5A", "IT5B", "PT5B", "CT5B", "IT6", "CT6"]
 
-cfg.recordDipole = True
+# cfg.recordDipole = True
 # cfg.saveDipoleCells = ['all']
 # cfg.saveDipolePops = cfg.allpops
 
@@ -69,10 +67,10 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'samn_ASSR_wE_1_5_wI_1_0'
-cfg.saveFolder = 'data/ASSR_test'                	## Set file output name
+cfg.simLabel = '23nov3_BBN_B0'
+cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
-cfg.saveJson = True           							## Save json file
+cfg.saveJson = False           							## Save json file
 cfg.saveDataInclude = ['simData', 'simConfig', 'netParams', 'net'] 
 cfg.backupCfgFile = None
 cfg.gatherOnlySimData = False
@@ -84,7 +82,7 @@ cfg.saveCellConns = False
 #----------------------------------------------------------------------------- 
 #
 
-#cfg.analysis['plotTraces'] = {'include': [(pop, 0) for pop in cfg.allpops], 'oneFigPer': 'trace', 'overlay': True, 'saveFig': True, 'showFig': False, 'figSize':(12,8)} #[(pop,0) for pop in alltypes]		## Seen in M1 cfg.py (line 68) 
+cfg.analysis['plotTraces'] = {'include': [(pop, 0) for pop in cfg.allpops], 'oneFigPer': 'trace', 'overlay': True, 'saveFig': True, 'showFig': False, 'figSize':(12,8)} #[(pop,0) for pop in alltypes]		## Seen in M1 cfg.py (line 68) 
 #cfg.analysis['plotRaster'] = {'include': cfg.allpops, 'saveFig': True, 'showFig': False, 'popRates': True, 'orderInverse': True, 'timeRange': [0,cfg.duration], 'figSize': (14,12), 'lw': 0.3, 'markerSize': 3, 'marker': '.', 'dpi': 300}      	## Plot a raster
 #cfg.analysis['plotSpikeStats'] = {'stats': ['rate'], 'figSize': (6,12), 'timeRange': [0, 2500], 'dpi': 300, 'showFig': 0, 'saveFig': 1}
 
@@ -144,6 +142,8 @@ cfg.scaleDensity = 1.0 #0.25 #1.0 #0.075 # Should be 1.0 unless need lower cell 
 #------------------------------------------------------------------------------
 # Connectivity
 #------------------------------------------------------------------------------
+cfg.synWeightFractionEE = [0.5, 0.5] # E->E AMPA to NMDA ratio
+cfg.synWeightFractionEI = [0.5, 0.5] # E->I AMPA to NMDA ratio
 cfg.synWeightFractionIE = [0.9, 0.1]  # SOM -> E GABAASlow to GABAB ratio (update this)
 cfg.synWeightFractionII = [0.9, 0.1]  # SOM -> E GABAASlow to GABAB ratio (update this)
 
@@ -169,13 +169,30 @@ cfg.IECellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 1.0}
 
 # Thalamic
 cfg.addIntraThalamicConn = 1.0
-# cfg.addIntraThalamicConn = 1.0
 cfg.addCorticoThalamicConn = 1.0
 cfg.addThalamoCorticalConn = 1.0
 
 cfg.thalamoCorticalGain = 1.0
 cfg.intraThalamicGain = 1.0
 cfg.corticoThalamicGain = 1.0
+
+# these params control IC -> Thalamic Core
+cfg.ICThalweightECore = 1.0
+cfg.ICThalweightICore = 0.25
+cfg.ICThalprobECore = 0.19
+cfg.ICThalprobICore = 0.12
+# these params control IC -> Thalamic Matrix
+cfg.ICThalMatrixCoreFactor = 0.1
+cfg.ICThalweightEMatrix = cfg.ICThalweightECore * cfg.ICThalMatrixCoreFactor
+cfg.ICThalweightIMatrix = cfg.ICThalweightICore * cfg.ICThalMatrixCoreFactor
+cfg.ICThalprobEMatrix = cfg.ICThalprobECore 
+cfg.ICThalprobIMatrix = cfg.ICThalprobICore 
+
+
+# these params added from Christoph Metzner branch
+cfg.thalL4PV = 0.5 
+cfg.thalL4SOM = 0.5 
+cfg.thalL4E = 1.0 
 
 cfg.addSubConn = 1
 
@@ -300,11 +317,16 @@ cfg.IbkgThalamicGain = cfgLoad['IbkgThalamicGain']
 
 # UPDATE WMAT VALUES
 cfg.wmat = cfgLoad['wmat']
+ 
 
-cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat',#'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
-                   'startTime': 1500,#list(np.arange(5000, 9000, 300)),
-                   'weightE': 1.5, # default=0.375
-                   'weightI': 1.0, # default=0.375
-                   'probE': 0.19, 
-                   'probI': 0.19,
+cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat' #'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
+                   'startTime': list(np.arange(4000, 8000, 300)),
+                   'weightECore': cfg.ICThalweightECore,
+                   'weightICore': cfg.ICThalweightICore,
+                   'probECore': cfg.ICThalprobECore, 
+                   'probICore': cfg.ICThalprobICore,
+                   'weightEMatrix': cfg.ICThalweightEMatrix,
+                   'weightIMatrix': cfg.ICThalweightIMatrix,
+                   'probEMatrix': cfg.ICThalprobEMatrix,
+                   'probIMatrix': cfg.ICThalprobIMatrix,
                    'seed': 1}  # SHOULD THIS BE ZERO?                   
