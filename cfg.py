@@ -23,7 +23,7 @@ cfg = specs.SimConfig()
 #------------------------------------------------------------------------------
 # Run parameters
 #------------------------------------------------------------------------------
-cfg.duration = 11e3             ## Duration of the sim, in ms
+cfg.duration = 6e3             ## Duration of the sim, in ms
 cfg.dt = 0.05                   ## Internal Integration Time Step
 cfg.verbose = 0         	## Show detailed messages
 cfg.hParams['celsius'] = 37
@@ -67,7 +67,7 @@ cfg.recordLFP = [[100, y, 100] for y in range(0, 2000, 100)] #+[[100, 2500, 200]
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = '23nov3_BBN_B0'
+cfg.simLabel = 'ASSR_6_11_23'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -320,7 +320,7 @@ cfg.wmat = cfgLoad['wmat']
  
 
 cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat' #'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
-                   'startTime': list(np.arange(4000, 8000, 300)),
+                   'startTime': 1500, #list(np.arange(4000, 8000, 300)),
                    'weightECore': cfg.ICThalweightECore,
                    'weightICore': cfg.ICThalweightICore,
                    'probECore': cfg.ICThalprobECore, 
