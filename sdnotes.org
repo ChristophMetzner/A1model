@@ -10657,6 +10657,30 @@ def custom_spont(filename):
     params['KgbarFactor'] = [0.75, 1.0, 1.25]
 ** blank
 
+**** Christoph Metzner
 
+Simulation from 6/11/23: more activity in layer 4, CSD looks better and matches NHP data better; still no clear entrainment; TC and HTC cells do not follow the 40Hz rhythm as closely as they did before, there seems to be a slow rhythm involved;
 
+-> Simulations for 7/11/23:
+	- 1) Label 'ASSR_7_11_23_1': increase IC-> Thal input (cfg.ICThalweightECore = 1.5 # 1.0 and cfg.ICThalweightICore = 1.0 # 0.25)
+	-> TC entrainment better; little activity in L4 and no in L2/3
+	
+	- 2) Label 'ASSR_7_11_23_2': same as 1) but also increased Thal->L4E (cfg.thalL4E = 1.5 #1.0)
+	-> TC entrainment better; little activity in L4 and no in L2/3; PV4 activity still very high
 
+	- 3) Label 'ASSR_7_11_23_3': cfg.ICThalweightICore = 0.5 # 0.25
+	
+	
+	
+	- 4) Label 'ASSR_7_11_23_3': cfg.ICThalweightICore = 0.5 # 0.25 and cfg.thalL4PV = 0.25 # 0.5
+	
+	
+	- 5) Label 'ASSR_7_11_23_3': cfg.ICThalweightICore = 0.5 # 0.25 and cfg.thalL4PV = 0.25 # 0.5 and cfg.thalL4SOM = 0.25 # 0.5
+	
+	
+	
+	
+	
+	
+	
+	
