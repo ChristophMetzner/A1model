@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_7_11_23_3'
+cfg.simLabel = 'ASSR_7_11_23_4'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -190,7 +190,7 @@ cfg.ICThalprobIMatrix = cfg.ICThalprobICore
 
 
 # these params added from Christoph Metzner branch
-cfg.thalL4PV = 0.5 
+cfg.thalL4PV = 0.25 # 0.5 
 cfg.thalL4SOM = 0.5 
 cfg.thalL4E = 1.5 #1.0 
 
