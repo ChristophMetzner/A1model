@@ -117,7 +117,7 @@ cfg.KgbarFactor = 1.0
 cfg.AMPATau2Factor = 1.0
 cfg.synWeightFractionEE = [0.5, 0.5] # E->E AMPA to NMDA ratio
 cfg.synWeightFractionEI = [0.5, 0.5] # E->I AMPA to NMDA ratio
-cfg.synWeightFractionEI_CustomCort = [0.5, 0.5] # E->I AMPA to NMDA ratio custom for cortex NMDA manipulation
+cfg.synWeightFractionEI_CustomCort = [0.65, 0.35] # E->I AMPA to NMDA ratio custom for cortex NMDA manipulation
 cfg.synWeightFractionSOME = [0.9, 0.1] # SOM -> E GABAASlow to GABAB ratio
 cfg.synWeightFractionNGF = [0.5, 0.5] # NGF GABAA to GABAB ratio
 cfg.synWeightFractionENGF = [0.834, 0.166] # NGF AMPA to NMDA ratio
@@ -144,8 +144,8 @@ cfg.scaleDensity = 1.0 #0.25 #1.0 #0.075 # Should be 1.0 unless need lower cell 
 #------------------------------------------------------------------------------
 # Connectivity
 #------------------------------------------------------------------------------
-cfg.synWeightFractionEE = [0.5, 0.5] # E->E AMPA to NMDA ratio
-cfg.synWeightFractionEI = [0.5, 0.5] # E->I AMPA to NMDA ratio
+# cfg.synWeightFractionEE = [0.5, 0.5] # E->E AMPA to NMDA ratio
+# cfg.synWeightFractionEI = [0.5, 0.5] # E->I AMPA to NMDA ratio
 cfg.synWeightFractionIE = [0.9, 0.1]  # SOM -> E GABAASlow to GABAB ratio (update this)
 cfg.synWeightFractionII = [0.9, 0.1]  # SOM -> E GABAASlow to GABAB ratio (update this)
 
