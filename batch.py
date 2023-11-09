@@ -3063,7 +3063,7 @@ if __name__ == '__main__':
 
     for seed in seeds:
         b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 20000, seed)
-        b.batchLabel = f'v35_batch6_jh_20000ms_seed_{seed}'
+        b.batchLabel = f'v35_NMDA_20000ms_seed_{seed}'
         b.saveFolder = 'data/' + b.batchLabel
         setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
         b.run()  # run batch
