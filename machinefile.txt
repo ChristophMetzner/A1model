@@ -1,3 +1,3 @@
-cursa: 4
-homam: 4
-okda: 4
+cursa slots=4
+homam slots=4
+okda slots=4
