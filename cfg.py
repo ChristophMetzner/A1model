@@ -142,8 +142,6 @@ cfg.scaleDensity = 1.0 #0.25 #1.0 #0.075 # Should be 1.0 unless need lower cell 
 #------------------------------------------------------------------------------
 # Connectivity
 #------------------------------------------------------------------------------
-cfg.synWeightFractionEE = [0.5, 0.5] # E->E AMPA to NMDA ratio
-cfg.synWeightFractionEI = [0.5, 0.5] # E->I AMPA to NMDA ratio
 cfg.synWeightFractionIE = [0.9, 0.1]  # SOM -> E GABAASlow to GABAB ratio (update this)
 cfg.synWeightFractionII = [0.9, 0.1]  # SOM -> E GABAASlow to GABAB ratio (update this)
 
@@ -178,7 +176,7 @@ cfg.corticoThalamicGain = 1.0
 
 # these params control IC -> Thalamic Core
 cfg.ICThalweightECore = 1.5 # 1.0
-cfg.ICThalweightICore = 0.5 # 0.25
+cfg.ICThalweightICore = 1.0 # 0.25
 cfg.ICThalprobECore = 0.19
 cfg.ICThalprobICore = 0.12
 # these params control IC -> Thalamic Matrix
@@ -192,7 +190,7 @@ cfg.ICThalprobIMatrix = cfg.ICThalprobICore
 # these params added from Christoph Metzner branch
 cfg.thalL4PV = 0.25 # 0.5 
 cfg.thalL4SOM = 0.25 # 0.5 
-cfg.thalL4E = 1.5 #1.0 
+cfg.thalL4E = 2.0 #1.0 
 
 cfg.addSubConn = 1
 
