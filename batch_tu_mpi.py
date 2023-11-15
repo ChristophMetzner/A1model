@@ -13,7 +13,7 @@ import numpy as np
 # ----------------------------------------------------------------------------------------------
 # Spontaneous activity different seeds
 # ----------------------------------------------------------------------------------------------
-def spont_batch(filename, seed=0):
+def spont_batch(filename):
     params = specs.ODict()
 
     if not filename:
@@ -41,7 +41,7 @@ def spont_batch(filename, seed=0):
     initCfg['recordStep'] = 0.05
 
     # SET SEEDS FOR CONN AND STIM 
-    initCfg[('seeds', 'conn')] = seed
+    initCfg[('seeds', 'conn')] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     initCfg[('seeds', 'stim')] = 0
 
 
@@ -92,7 +92,7 @@ def spont_batch(filename, seed=0):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'cores': 20,
+            'cores': 4,
             'coresPerNode': 4,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
@@ -104,24 +104,24 @@ def setRunCfg(b, type='mpi_direct'):
 
 if __name__ == '__main__':
 
-    seeds = [0, 1, 2, 3]
-
-    for seed in seeds:
-        b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json', seed)
-        b.batchLabel = f'v35_PV_20000ms_seed_{seed}'
-        b.saveFolder = 'data/' + b.batchLabel
-        setRunCfg(b, 'mpi_direct')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-        b.run()  # run batch
-
-
-
-    # b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
+    # seeds = [0, 1, 2, 3]
     #
-    # b.batchLabel = 'SNR_default'
-    # b.saveFolder = 'data/'+b.batchLabel
-    #
-    # setRunCfg(b, 'mpi_direct')
-    # b.run() # run batch
+    # for seed in seeds:
+    #     b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json', seed)
+    #     b.batchLabel = f'v35_PV_20000ms_seed_{seed}'
+    #     b.saveFolder = 'data/' + b.batchLabel
+    #     setRunCfg(b, 'mpi_direct')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+    #     b.run()  # run batch
+
+
+
+    b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
+
+    b.batchLabel = 'v35_PV_20000ms'
+    b.saveFolder = 'data/'+b.batchLabel
+
+    setRunCfg(b, 'mpi_direct')
+    b.run() # run batch
 
 
 
