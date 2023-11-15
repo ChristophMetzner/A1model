@@ -309,6 +309,7 @@ if cfg.addConn and cfg.IEGain > 0.0:
                 if preType in pre:  # only create rule if celltype matches pop
                     for post in Epops:
                         for l in layerGainLabels:  # used to tune each layer group independently
+                            factor = 1.0
                             
                             prob = '%f * exp(-dist_2D/%f)' % (pmat[pre][post], lmat[pre][post])
                             
