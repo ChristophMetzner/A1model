@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_7_11_23_5'
+cfg.simLabel = 'ASSR_15_11_23_3'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -175,7 +175,7 @@ cfg.intraThalamicGain = 1.0
 cfg.corticoThalamicGain = 1.0
 
 # these params control IC -> Thalamic Core
-cfg.ICThalweightECore = 1.5 # 1.0
+cfg.ICThalweightECore = 2.0 # 1.0
 cfg.ICThalweightICore = 1.0 # 0.25
 cfg.ICThalprobECore = 0.19
 cfg.ICThalprobICore = 0.12
