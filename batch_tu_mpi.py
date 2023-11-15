@@ -13,7 +13,7 @@ import numpy as np
 # ----------------------------------------------------------------------------------------------
 # Spontaneous activity different seeds
 # ----------------------------------------------------------------------------------------------
-def spont_batch(filename):
+def spont_batch(filename, seed=0):
     params = specs.ODict()
 
     if not filename:
@@ -26,7 +26,7 @@ def spont_batch(filename):
     cfgLoad2 = cfgLoad
 
     # #### SET CONN AND STIM SEEDS #### 
-    params[('seeds', 'conn')] = [12345, 23451, 34512, 45123, 51234, 67890, 6789, 90678, 89067, 78906]
+    # params[('seeds', 'conn')] = [12345, 23451, 34512, 45123, 51234, 67890, 6789, 90678, 89067, 78906]
 
     #### GROUPED PARAMS #### 
     groupedParams = [] 
@@ -35,13 +35,14 @@ def spont_batch(filename):
     # initial config
     initCfg = {} # set default options from prev sim
     
-    initCfg['duration'] = 4000 #11500 
-    initCfg['printPopAvgRates'] = [1500, 3500]
+    initCfg['duration'] = 20000
+    initCfg['printPopAvgRates'] = [1000, 20000]
     initCfg['scaleDensity'] = 1.0 
     initCfg['recordStep'] = 0.05
 
     # SET SEEDS FOR CONN AND STIM 
-    initCfg[('seeds', 'conn')] = 0
+    initCfg[('seeds', 'conn')] = seed
+    initCfg[('seeds', 'stim')] = 0
 
 
 
@@ -79,7 +80,7 @@ def spont_batch(filename):
             initCfg.update({p: cfgLoad2[p]})
 
 
-    b = Batch(params=params, netParamsFile='netParams.py', cfgFile='cfg.py', initCfg=initCfg, groupedParams=groupedParams)
+    b = Batch(params=params, netParamsFile='netParams_PV.py', cfgFile='cfg.py', initCfg=initCfg, groupedParams=groupedParams)
     b.method = 'grid'
 
     return b
@@ -91,7 +92,7 @@ def spont_batch(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'nodes': 5,
+            'cores': 20,
             'coresPerNode': 4,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
@@ -103,15 +104,24 @@ def setRunCfg(b, type='mpi_direct'):
 
 if __name__ == '__main__':
 
+    seeds = [0, 1, 2, 3]
+
+    for seed in seeds:
+        b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json', seed)
+        b.batchLabel = f'v35_PV_20000ms_seed_{seed}'
+        b.saveFolder = 'data/' + b.batchLabel
+        setRunCfg(b, 'mpi_direct')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+        b.run()  # run batch
 
 
-    b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'SNR_default'   
-    b.saveFolder = 'data/'+b.batchLabel
-
-    setRunCfg(b, 'mpi_direct')
-    b.run() # run batch
+    # b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
+    #
+    # b.batchLabel = 'SNR_default'
+    # b.saveFolder = 'data/'+b.batchLabel
+    #
+    # setRunCfg(b, 'mpi_direct')
+    # b.run() # run batch
 
 
 
