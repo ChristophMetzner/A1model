@@ -41,7 +41,7 @@ def spont_batch(filename):
     initCfg['recordStep'] = 0.05
 
     # SET SEEDS FOR CONN AND STIM 
-    initCfg[('seeds', 'conn')] = [4, 5, 6]
+    initCfg[('seeds', 'conn')] = [7, 8, 9]
     initCfg[('seeds', 'stim')] = 0
 
 
