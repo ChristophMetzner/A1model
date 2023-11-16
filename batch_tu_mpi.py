@@ -92,7 +92,7 @@ def spont_batch(filename, seed):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'cores': 15,
+            'cores': 8,
             'coresPerNode': 4,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
@@ -104,7 +104,7 @@ def setRunCfg(b, type='mpi_direct'):
 
 if __name__ == '__main__':
 
-    seeds = [0, 1, 2, 3]
+    seeds = [4, 5, 6]
 
     for seed in seeds:
         b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json', seed)
