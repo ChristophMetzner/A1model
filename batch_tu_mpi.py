@@ -104,7 +104,7 @@ def setRunCfg(b, type='mpi_direct'):
 
 if __name__ == '__main__':
 
-    seeds = [4, 5, 6]
+    seeds = [7, 8, 9]
 
     for seed in seeds:
         b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json', seed)
