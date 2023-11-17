@@ -95,8 +95,7 @@ def spont_batch(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'nodes': 5,
-            'coresPerNode': 4,
+            'cores':8,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
             'skip': True}
@@ -111,7 +110,7 @@ if __name__ == '__main__':
 
     b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'SNR_Default'   
+    b.batchLabel = 'test'   
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
