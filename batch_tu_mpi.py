@@ -26,7 +26,9 @@ def spont_batch(filename):
     cfgLoad2 = cfgLoad
 
     # #### SET CONN AND STIM SEEDS #### 
-    # params[('seeds', 'conn')] = [12345, 23451, 34512, 45123, 51234, 67890, 6789, 90678, 89067, 78906]
+    params[('seeds', 'conn')] = [1, 2, 3, 5, 6, 8, 9]
+
+
 
     #### GROUPED PARAMS #### 
     groupedParams = [] 
@@ -40,9 +42,8 @@ def spont_batch(filename):
     initCfg['scaleDensity'] = 1.0 
     initCfg['recordStep'] = 0.05
 
-    # SET SEEDS FOR CONN AND STIM 
-    initCfg[('seeds', 'conn')] = [0, 1, 2, 3]
-    initCfg[('seeds', 'stim')] = 0
+    # SET SEEDS FOR CONN AND STIM
+    initCfg[('seeds', 'conn')] = 0
 
 
 
@@ -92,7 +93,7 @@ def spont_batch(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'cores': 2,
+            'cores': 8,
             'coresPerNode': 4,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
@@ -117,7 +118,7 @@ if __name__ == '__main__':
 
     b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'v35_PV_20000ms_test'
+    b.batchLabel = 'v35_PV_20000ms_remaining_seeds'
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
