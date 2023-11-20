@@ -309,7 +309,7 @@ if cfg.addConn and cfg.IEGain > 0.0:
                 if preType in pre:  # only create rule if celltype matches pop
                     for post in Epops:
                         for l in layerGainLabels:  # used to tune each layer group independently
-                            
+                            factor = 1.0
                             prob = '%f * exp(-dist_2D/%f)' % (pmat[pre][post], lmat[pre][post])
                             
                             if 'SOM' in pre:
@@ -317,9 +317,9 @@ if cfg.addConn and cfg.IEGain > 0.0:
                             elif 'PV' in pre:
                                 synMech = PVSynMech
                                 if l=='3':
-                                    factor = 0.71 # SST reduction 29%
+                                    factor = 0.71 # PV reduction 29%
                                 if l=='4':
-                                    factor = 0.65 # SST reduction 35%
+                                    factor = 0.65 # OV reduction 35%
                             elif 'VIP' in pre:
                                 synMech = VIPSynMech
                             elif 'NGF' in pre:
@@ -330,7 +330,7 @@ if cfg.addConn and cfg.IEGain > 0.0:
                                 'postConds': {'pop': post, 'ynorm': layer[l]},
                                 'synMech': synMech,
                                 'probability': prob,
-                                'weight': wmat[pre][post] * cfg.IEGain * cfg.IECellTypeGain[preType] * cfg.IELayerGain[l], 
+                                'weight': wmat[pre][post] * cfg.IEGain * cfg.IECellTypeGain[preType] * cfg.IELayerGain[l]*factor, 
                                 'synMechWeightFactor': cfg.synWeightFractionEI,
                                 'delay': 'defaultDelay+dist_3D/propVelocity',
                                 'synsPerConn': 1,
