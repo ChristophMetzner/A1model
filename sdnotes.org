@@ -10695,7 +10695,7 @@ Better L4 entrainment! Better CSD! No activity in L2/3
 
 Simulations for 20/11/23:
 	
- -1) 20_11_23_1: test Sam's params
+ -1) 20_11_23_1 (still named 17_11_23_1; rename when finished): test Sam's params
  
 
 cfg.ICThalweightECore = 0.8350476447841453 # 1.0
@@ -10710,6 +10710,19 @@ cfg.thalL4SOM = 0.24260966747847523 # 0.5
 cfg.thalL4E = 1.9540886147587417 #1.0
 
 
-	
+ -2) 20_11_23_2: 
+ 
+ cfg.ICThalweightECore = 1.83 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.12 #0.1
+
+cfg.thalL4PV = 0.125 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.0 #1.0 
+
+
 	
 	
