@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_20_11_23_2'
+cfg.simLabel = 'ASSR_20_11_23_3'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -175,7 +175,7 @@ cfg.intraThalamicGain = 1.0
 cfg.corticoThalamicGain = 1.0
 
 # these params control IC -> Thalamic Core
-cfg.ICThalweightECore = 1.83 # 1.0
+cfg.ICThalweightECore = 0.83 # 1.0
 cfg.ICThalweightICore = 0.75 # 0.25
 cfg.ICThalprobECore = 0.16
 cfg.ICThalprobICore = 0.09
@@ -187,7 +187,7 @@ cfg.ICThalprobEMatrix = cfg.ICThalprobECore
 cfg.ICThalprobIMatrix = cfg.ICThalprobICore 
 
 # these params added from Christoph Metzner branch
-cfg.thalL4PV = 0.125 # 0.5 
+cfg.thalL4PV = 0.075 # 0.5 
 cfg.thalL4SOM = 0.25 # 0.5 
 cfg.thalL4E = 2.0 #1.0 
 
