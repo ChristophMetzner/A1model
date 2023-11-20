@@ -80,9 +80,9 @@ def spont_batch(filename):
 
 
 
-    b = Batch(params=params, netParamsFile='netParams.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
+    #b = Batch(params=params, netParamsFile='netParams.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
     #b = Batch(params=params, netParamsFile='netParams_SST.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
-    #b = Batch(params=params, netParamsFile='netParams_PV.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
+    b = Batch(params=params, netParamsFile='netParams_PV.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
     #b = Batch(params=params, netParamsFile='netParams_NMDA.py', cfgFile='cfg_spont.py', initCfg=initCfg, groupedParams=groupedParams)
     b.method = 'grid'
 

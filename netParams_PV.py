@@ -346,7 +346,7 @@ if cfg.addConn and cfg.IIGain > 0.0:
         for pre in Ipops:
             for post in Ipops:
                 for l in layerGainLabels: 
-                    
+                    factor = 1.0
                     prob = '%f * exp(-dist_2D/%f)' % (pmat[pre][post], lmat[pre][post])
 
                     if 'SOM' in pre:
@@ -367,7 +367,7 @@ if cfg.addConn and cfg.IIGain > 0.0:
                         'postConds': {'pop': post,  'ynorm': layer[l]},
                         'synMech': synMech,
                         'probability': prob,
-                        'weight': wmat[pre][post] * cfg.IIGain * cfg.IILayerGain[l], 
+                        'weight': wmat[pre][post] * cfg.IIGain * cfg.IILayerGain[l]*factor, 
                         'synMechWeightFactor': cfg.synWeightFractionII,
                         'delay': 'defaultDelay+dist_3D/propVelocity',
                         'synsPerConn': 1,
