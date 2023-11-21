@@ -37,8 +37,8 @@ def spont_batch(filename):
     # initial config
     initCfg = {} # set default options from prev sim
     
-    initCfg['duration'] = 200
-    initCfg['printPopAvgRates'] = [10, 200]
+    initCfg['duration'] = 20000
+    initCfg['printPopAvgRates'] = [1000, 20000]
     initCfg['scaleDensity'] = 1.0 
     initCfg['recordStep'] = 0.05
 
@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
     b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'v35_PV_20000ms_remaining_seeds'
+    b.batchLabel = 'v35_PV_20000ms_remaining_seeds_1'
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
