@@ -26,7 +26,7 @@ def spont_batch(filename):
     cfgLoad2 = cfgLoad
 
     # #### SET CONN AND STIM SEEDS #### 
-    params[('seeds', 'conn')] = [1, 2, 3, 5, 6, 8, 9]
+    params[('seeds', 'conn')] = [1, 2]
 
 
 
@@ -37,8 +37,8 @@ def spont_batch(filename):
     # initial config
     initCfg = {} # set default options from prev sim
     
-    initCfg['duration'] = 20000
-    initCfg['printPopAvgRates'] = [1000, 20000]
+    initCfg['duration'] = 200
+    initCfg['printPopAvgRates'] = [10, 200]
     initCfg['scaleDensity'] = 1.0 
     initCfg['recordStep'] = 0.05
 
@@ -93,7 +93,7 @@ def spont_batch(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'cores': 2,
+            'cores': 16,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
             'skip': True}
