@@ -189,7 +189,7 @@ cfg.ICThalprobIMatrix = cfg.ICThalprobICore
 # these params added from Christoph Metzner branch
 cfg.thalL4PV = 0.075 # 0.5 
 cfg.thalL4SOM = 0.25 # 0.5 
-cfg.thalL4E = 2.0 #1.0 
+cfg.thalL4E = 4.0 #1.0 
 
 
 
