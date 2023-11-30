@@ -26,7 +26,7 @@ def spont_batch(filename):
     cfgLoad2 = cfgLoad
 
     # #### SET CONN AND STIM SEEDS #### 
-    params[('seeds', 'conn')] = [3, 5]
+    params[('seeds', 'conn')] = [6]
 
 
 
@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
     b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'v35_PV_20000ms_remaining_seeds_2'
+    b.batchLabel = 'v35_PV_20000ms_remaining_seeds_3'
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
