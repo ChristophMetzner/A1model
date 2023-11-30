@@ -93,7 +93,7 @@ def spont_batch(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'cores': 16,
+            'cores': 32,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
             'skip': True}
