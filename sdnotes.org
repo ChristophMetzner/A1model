@@ -10745,7 +10745,7 @@ cfg.thalL4E = 2.0 #1.0
 
 Simulations for 21/11/23:
 	
- -1) 21_11_23_1: 
+ -1) 4_12_23_1: 
  
 cfg.ICThalweightECore = 1.83 # 1.0
 cfg.ICThalweightICore = 0.75 # 0.25
@@ -10758,7 +10758,7 @@ cfg.thalL4PV = 0.075 # 0.5
 cfg.thalL4SOM = 0.25 # 0.5 
 cfg.thalL4E = 2.0 #1.0 
 
- -2) 21_11_23_2: 
+ -2) 4_12_23_2: 
  
 cfg.ICThalweightECore = 2.5 # 1.0
 cfg.ICThalweightICore = 0.75 # 0.25
@@ -10771,7 +10771,7 @@ cfg.thalL4PV = 0.075 # 0.5
 cfg.thalL4SOM = 0.25 # 0.5 
 cfg.thalL4E = 2.0 #1.0 
 
- -3) 21_11_23_3:
+ -3) 4_12_23_3:
 
 cfg.ICThalweightECore = 2.5 # 1.0
 cfg.ICThalweightICore = 0.75 # 0.25
