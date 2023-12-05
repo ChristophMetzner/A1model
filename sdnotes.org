@@ -10743,7 +10743,7 @@ cfg.thalL4E = 2.0 #1.0
 	
 => Worse than 20_11_23_2; Weaker 40Hz entrainment; still no L2/3 activity
 
-Simulations for 21/11/23:
+Simulations for 4/12/23:
 	
  -1) 4_12_23_1: 
  
@@ -10758,6 +10758,9 @@ cfg.thalL4PV = 0.075 # 0.5
 cfg.thalL4SOM = 0.25 # 0.5 
 cfg.thalL4E = 2.0 #1.0 
 
+
+=> good L4 entrainment; still no L2/3 activity
+
  -2) 4_12_23_2: 
  
 cfg.ICThalweightECore = 2.5 # 1.0
@@ -10770,6 +10773,8 @@ cfg.ICThalMatrixCoreFactor = 0.12 #0.1
 cfg.thalL4PV = 0.075 # 0.5 
 cfg.thalL4SOM = 0.25 # 0.5 
 cfg.thalL4E = 2.0 #1.0 
+
+=> better L4 entrainment than 4_12_23_1 (especially early [1750-2000ms]); still no L2/3 activity
 
  -3) 4_12_23_3:
 
@@ -10784,4 +10789,19 @@ cfg.thalL4PV = 0.075 # 0.5
 cfg.thalL4SOM = 0.25 # 0.5 
 cfg.thalL4E = 4.0 #1.0 
 
+=> stronger L4 entrainment; activity in L3 (weakly modulated by the 40Hz) but still no L2 activity; however, the CSD look very off
 
+Simulations for 5/12/23:
+
+ -1) 5_12_23_3:
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.12 #0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 3.0 #1.0 
