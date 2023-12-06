@@ -10872,6 +10872,8 @@ cfg.L4L3E    = 1.5 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0
 
+=> no IT3 firing, very PV3 and VIP3 firing
+
  -2) 6_12_23_2:
  
 cfg.ICThalweightECore = 2.5 # 1.0
@@ -10904,4 +10906,21 @@ cfg.thalL4E = 2.5 #1.0
 
 cfg.L4L3E    = 3.0 # 1.0
 cfg.L4L3PV   = 1.0
+cfg.L4L3SOM  = 1.0
+
+ -4) 6_12_23_4:
+ 
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.12 #0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 1.0 # 1.0
+cfg.L4L3PV   = 0.5
 cfg.L4L3SOM  = 1.0
