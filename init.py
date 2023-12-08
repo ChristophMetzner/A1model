@@ -22,7 +22,7 @@ from netpyne import sim
 cfg, netParams = sim.readCmdLineArgs(simConfigDefault='cfg.py', netParamsDefault='netParams.py')
 
 # sim.createSimulateAnalyze(netParams, cfg)
-
+print(cfg.simLabel)
 sim.initialize(
     simConfig = cfg, 	
     netParams = netParams)  				# create network object and set cfg and net params
