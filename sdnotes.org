@@ -10931,6 +10931,8 @@ cfg.L4L3E    = 3.0 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0
 
+=> good/high IT3 firing; PV4 and NGF4 firing very high; VIP3 and NGF3 firing very high; L4 and L2 entrainment weaker but L3 entrainment a little stronger than 6_12_23_2; late entrainment very strong 
+
  -2) 8_12_23_2:
 
 cfg.ICThalweightECore = 2.5 # 1.0
@@ -10948,6 +10950,7 @@ cfg.L4L3E    = 1.5 # 1.0
 cfg.L4L3PV   = 0.5
 cfg.L4L3SOM  = 1.0
 
+=> good L4 but weaker L3 and L2 activity; weaker L4 and not L3 and L2 entrainment
 
  -3) 8_12_23_3:
 
@@ -10965,6 +10968,8 @@ cfg.thalL4E = 2.5 #1.0
 cfg.L4L3E    = 1.5 # 1.0
 cfg.L4L3PV   = 0.5
 cfg.L4L3SOM  = 1.0
+
+=> similar to 8_12_23_2
 
 Simulations for 11/12/23:
 
@@ -10986,6 +10991,7 @@ cfg.L4L3E    = 1.0 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0
  
+=> weak entrainment; no L3 and L2 activity; CSD looks better though
  
  -2) 11_12_23_2:
  
@@ -11020,6 +11026,20 @@ cfg.thalL4E = 2.1000452762590345 #1.0
 cfg.L4L3E    = 1.5 # 1.0
 cfg.L4L3PV   = 0.5
 cfg.L4L3SOM  = 1.0
+
+ -4) 11_12_23_4:
  
- 
- 
+cfg.ICThalweightECore = 1.0592777928271448 # 1.0
+cfg.ICThalweightICore = 0.3010148972169486 # 0.25
+cfg.ICThalprobECore = 0.2084546581359147
+cfg.ICThalprobICore = 0.13607374047392148
+
+cfg.ICThalMatrixCoreFactor = 0.08942165875855669 #0.1
+
+cfg.thalL4PV = 0.2761551780556245 # 0.5 
+cfg.thalL4SOM = 0.2881416409955241 # 0.5 
+cfg.thalL4E = 2.1000452762590345 #1.0 
+
+cfg.L4L3E    = 3.0 # 1.0
+cfg.L4L3PV   = 1.0
+cfg.L4L3SOM  = 1.0
