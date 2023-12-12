@@ -10993,22 +10993,7 @@ cfg.L4L3SOM  = 1.0
  
 => weak entrainment; no L3 and L2 activity; CSD looks better though
  
- -2) 11_12_23_2:
- 
-cfg.ICThalweightECore = 1.0592777928271448 # 1.0
-cfg.ICThalweightICore = 0.3010148972169486 # 0.25
-cfg.ICThalprobECore = 0.2084546581359147
-cfg.ICThalprobICore = 0.13607374047392148
 
-cfg.ICThalMatrixCoreFactor = 0.08942165875855669 #0.1
-
-cfg.thalL4PV = 0.2761551780556245 # 0.5 
-cfg.thalL4SOM = 0.2881416409955241 # 0.5 
-cfg.thalL4E = 2.1000452762590345 #1.0 
-
-cfg.L4L3E    = 1.0 # 1.0
-cfg.L4L3PV   = 0.5
-cfg.L4L3SOM  = 1.0
  
  -3) 11_12_23_3:
  
@@ -11027,7 +11012,28 @@ cfg.L4L3E    = 1.5 # 1.0
 cfg.L4L3PV   = 0.5
 cfg.L4L3SOM  = 1.0
 
+
+
  -4) 11_12_23_4:
+ 
+cfg.ICThalweightECore = 1.0592777928271448 # 1.0
+cfg.ICThalweightICore = 0.3010148972169486 # 0.25
+cfg.ICThalprobECore = 0.2084546581359147
+cfg.ICThalprobICore = 0.13607374047392148
+
+cfg.ICThalMatrixCoreFactor = 0.08942165875855669 #0.1
+
+cfg.thalL4PV = 0.2761551780556245 # 0.5 
+cfg.thalL4SOM = 0.2881416409955241 # 0.5 
+cfg.thalL4E = 2.1000452762590345 #1.0 
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 0.5
+cfg.L4L3SOM  = 1.0
+
+Simulations for 12/12/23:
+
+ -1) 12_12_23_1:
  
 cfg.ICThalweightECore = 1.0592777928271448 # 1.0
 cfg.ICThalweightICore = 0.3010148972169486 # 0.25
@@ -11044,7 +11050,7 @@ cfg.L4L3E    = 3.0 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0
 
- -5) 11_12_23_5:
+ -2) 12_12_23_2:
  
 cfg.ICThalweightECore = 1.0592777928271448 # 1.0
 cfg.ICThalweightICore = 0.3010148972169486 # 0.25
@@ -11057,6 +11063,6 @@ cfg.thalL4PV = 0.2761551780556245 # 0.5
 cfg.thalL4SOM = 0.2881416409955241 # 0.5 
 cfg.thalL4E = 2.1000452762590345 #1.0 
 
-cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3E    = 1.0 # 1.0
 cfg.L4L3PV   = 0.5
 cfg.L4L3SOM  = 1.0
