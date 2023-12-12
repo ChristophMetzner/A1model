@@ -67,11 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-<<<<<<< HEAD
-cfg.simLabel = 'ASSR_11_12_23_4'
-=======
 cfg.simLabel = 'ASSR_12_12_23_1'
->>>>>>> 4fc3eb9664c38e9ed280eaffb050ece440c39044
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
