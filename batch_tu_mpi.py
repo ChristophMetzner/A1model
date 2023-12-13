@@ -26,7 +26,7 @@ def spont_batch(filename):
     cfgLoad2 = cfgLoad
 
     # #### SET CONN AND STIM SEEDS #### 
-    params[('seeds', 'conn')] = [9]
+    params[('seeds', 'conn')] = [10, 11, 12, 13, 14]
 
 
 
@@ -81,7 +81,7 @@ def spont_batch(filename):
             initCfg.update({p: cfgLoad2[p]})
 
 
-    b = Batch(params=params, netParamsFile='netParams_PV.py', cfgFile='cfg.py', initCfg=initCfg, groupedParams=groupedParams)
+    b = Batch(params=params, netParamsFile='netParams.py', cfgFile='cfg.py', initCfg=initCfg, groupedParams=groupedParams)
     b.method = 'grid'
 
     return b
@@ -93,7 +93,7 @@ def spont_batch(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'cores': 16,
+            'cores': 12,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
             'skip': True}
@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
     b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'v35_PV_20000ms_remaining_seeds_5'
+    b.batchLabel = 'v35_control_20000ms_10-14'
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
