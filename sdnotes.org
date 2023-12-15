@@ -11133,7 +11133,7 @@ cfg.L4L3SOM  = 1.0
 
 Simulations for 14/12/23:
 
- -1) 12_12_23_1:
+ -1) 14_12_23_1:
 
 cfg.ICThalweightECore = 2.5 # 1.0
 cfg.ICThalweightICore = 0.75 # 0.25
@@ -11150,7 +11150,7 @@ cfg.L4L3E    = 2.0 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0
 
- -2) 12_12_23_2:
+ -2) 14_12_23_2:
 
 cfg.ICThalweightECore = 2.5 # 1.0
 cfg.ICThalweightICore = 0.75 # 0.25
@@ -11166,3 +11166,74 @@ cfg.thalL4E = 2.5 #1.0
 cfg.L4L3E    = 2.0 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0
+
+Simulations for 15/12/23:
+
+ -1) 15_12_23_1:
+ 
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.02 #0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 1.0
+cfg.L4L3SOM  = 1.0 
+
+ -2) 15_12_23_2:
+ 
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.06 #0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 1.0
+cfg.L4L3SOM  = 1.0 
+
+ -3) 15_12_23_3:
+ 
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 0.5
+cfg.L4L3SOM  = 1.0 
+
+ -4) 15_12_23_4:
+ 
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.05 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 2.5 # 1.0
+cfg.L4L3PV   = 1.0
+cfg.L4L3SOM  = 1.0 
+ 
