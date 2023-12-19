@@ -11237,3 +11237,21 @@ cfg.L4L3E    = 2.5 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0 
  
+Simulations for 19/12/23:
+
+ -1) 19_12_23_1:
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.05 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 2.5 # 1.0
+cfg.L4L3PV   = 0.5
+cfg.L4L3SOM  = 1.0 
