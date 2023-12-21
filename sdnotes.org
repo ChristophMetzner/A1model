@@ -11234,6 +11234,6 @@ cfg.thalL4SOM = 0.25 # 0.5
 cfg.thalL4E = 2.5 #1.0 
 
 cfg.L4L3E    = 2.5 # 1.0
-cfg.L4L3PV   = 1.0
+cfg.L4L3PV   = 0.5
 cfg.L4L3SOM  = 1.0 
  
