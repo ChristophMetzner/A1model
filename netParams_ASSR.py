@@ -303,16 +303,24 @@ if cfg.addConn and cfg.EEGain > 0.0:
     for pre in Epops:
         for post in Epops:
             for l in layerGainLabels:  # used to tune each layer group independently
+                scaleFactor = 1.0
                 if connDataSource['E->E/I'] in ['Allen_V1', 'Allen_custom']:
                     prob = '%f * exp(-dist_2D/%f)' % (pmat[pre][post], lmat[pre][post])
                 else:
                     prob = pmat[pre][post]
+                if pre=='ITS4' or pre=='ITP4':
+                    if post=='PV3':
+                        scaleFactor = cfg.L4L3PV#25
+                    elif post=='SOM3':
+                        scaleFactor = cfg.L4L3SOM
+                    elif post=='IT3':
+                        scaleFactor = cfg.L4L3E#25
                 netParams.connParams['EE_'+pre+'_'+post+'_'+l] = { 
                     'preConds': {'pop': pre}, 
                     'postConds': {'pop': post, 'ynorm': layer[l]},
                     'synMech': ESynMech,
                     'probability': prob,
-                    'weight': wmat[pre][post] * cfg.EEGain * cfg.EELayerGain[l], 
+                    'weight': wmat[pre][post] * cfg.EEGain * cfg.EELayerGain[l]*scaleFactor, 
                     'synMechWeightFactor': cfg.synWeightFractionEE,
                     'delay': 'defaultDelay+dist_3D/propVelocity',
                     'synsPerConn': 1,
