@@ -719,7 +719,7 @@ def fIcurve(pops = [], amps = list(np.arange(0.0, 6.5, 0.5)/10.0) ):
 # ----------------------------------------------------------------------------------------------
 # Custom
 # ----------------------------------------------------------------------------------------------
-def custom_spont(filename, sim_duration=11500, seed=0):
+def custom_spont(filename, seed=0):
     params = specs.ODict()
 
     if not filename:
@@ -745,8 +745,8 @@ def custom_spont(filename, sim_duration=11500, seed=0):
     # initial config
     initCfg = {} # set default options from prev sim
     
-    initCfg['duration'] = sim_duration
-    initCfg['printPopAvgRates'] = [1000, sim_duration]
+    initCfg['duration'] = 20000
+    initCfg['printPopAvgRates'] = [1000, 20000]
     initCfg['scaleDensity'] = 1.0
     initCfg['recordStep'] = 0.05
 
@@ -795,7 +795,7 @@ def custom_spont(filename, sim_duration=11500, seed=0):
             initCfg.update({p: cfgLoad2[p]})
 
 
-    b = Batch(params=params, netParamsFile='netParams_SST.py', cfgFile='cfg.py', initCfg=initCfg, groupedParams=groupedParams)
+    b = Batch(params=params, netParamsFile='netParams.py', cfgFile='cfg.py', initCfg=initCfg, groupedParams=groupedParams)
     b.method = 'grid'
 
     return b
@@ -3059,11 +3059,11 @@ if __name__ == '__main__':
     # b.run()  # run batch
 
 
-    seeds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    seeds = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 
     for seed in seeds:
         b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 20000, seed)
-        b.batchLabel = f'v35_SST_20000ms_seed_{seed}'
+        b.batchLabel = f'v35_control_20000ms_seed_{seed}'
         b.saveFolder = 'data/' + b.batchLabel
         setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
         b.run()  # run batch
@@ -3097,7 +3097,7 @@ if __name__ == '__main__':
     #     b = custom('data/v34_batch31/trial_%d/trial_%d_cfg.json' % (trial, trial))
     #     b.batchLabel = 'v34_batch'+str(batchIndex) 
     #     b.saveFolder = 'data/'+b.batchLabel
-    #     b.method = 'grid'  # evol
+    #     b.method = 'grid' # evol
     #     setRunCfg(b, 'hpc_slurm_gcp')
     #     b.run()  # run batch
     #     batchIndex += 1

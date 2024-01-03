@@ -274,11 +274,8 @@ if cfg.addConn and cfg.EIGain > 0.0:
                             prob = '%f * exp(-dist_2D/%f)' % (pmat[pre][post], lmat[pre][post])
                         else:
                             prob = pmat[pre][post]
-                        
                         if 'NGF' in post:
                             synWeightFactor = cfg.synWeightFractionENGF
-                        if 'PV' in post:
-                            synWeightFactor = cfg.synWeightFractionEI_CustomCort
                         else:
                             synWeightFactor = cfg.synWeightFractionEI
                         netParams.connParams['EI_'+pre+'_'+post+'_'+postType+'_'+l] = { 
