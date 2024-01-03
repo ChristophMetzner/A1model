@@ -315,6 +315,10 @@ if cfg.addConn and cfg.EEGain > 0.0:
                         scaleFactor = cfg.L4L3SOM
                     elif post=='IT3':
                         scaleFactor = cfg.L4L3E#25
+                    elif post=='NGF3':
+                        scaleFactor = cfg.L4L3NGF#25
+                    elif post=='VIP3':
+                        scaleFactor = cfg.L4L3VIP#25
                 netParams.connParams['EE_'+pre+'_'+post+'_'+l] = { 
                     'preConds': {'pop': pre}, 
                     'postConds': {'pop': post, 'ynorm': layer[l]},
@@ -544,6 +548,14 @@ if cfg.addConn and cfg.addThalamoCorticalConn:
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
                         scaleFactor = cfg.thalL4E#25
+                    elif post=='NGF4':
+                        syn = ESynMech
+                        synWeightFactor = cfg.synWeightFractionEE
+                        scaleFactor = cfg.thalL4NGF#25
+                    elif post=='VIP4':
+                        syn = ESynMech
+                        synWeightFactor = cfg.synWeightFractionEE
+                        scaleFactor = cfg.thalL4VIP#25
                     else:
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
