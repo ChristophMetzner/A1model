@@ -188,8 +188,16 @@ cfg.ICThalweightIMatrix = cfg.ICThalweightICore * cfg.ICThalMatrixCoreFactor
 cfg.ICThalprobEMatrix = cfg.ICThalprobECore 
 cfg.ICThalprobIMatrix = cfg.ICThalprobICore 
 
+#------------------------------------------------------------------------------
+# ASSR tuning inputs
+#------------------------------------------------------------------------------
+cfg.thalL4PV  = 1.0
+cfg.thalL4SOM = 1.0
+cfg.thalL4E   = 1.0
 
-
+cfg.L4L3E    = 1.0
+cfg.L4L3PV   = 1.0
+cfg.L4L3SOM  = 1.0
 
 cfg.addSubConn = 1
 
@@ -242,12 +250,6 @@ cfg.addNetStim = 0 #1
 
 cfg.tune = {}
 
-#------------------------------------------------------------------------------
-# ASSR tuning inputs
-#------------------------------------------------------------------------------
-cfg.thalL4PV  = 1.0
-cfg.thalL4SOM = 1.0
-cfg.thalL4E   = 1.0
 
 
 # ------------------------ ADD PARAM VALUES FROM .JSON FILES: 
