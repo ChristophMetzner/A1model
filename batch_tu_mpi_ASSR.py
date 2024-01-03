@@ -26,14 +26,17 @@ def assr_batch(filename):
     cfgLoad2 = cfgLoad
 
 
-    minF = 0.1 
-    maxF = 2.0
+    minF_E = 1.25 
+    maxF_E = 1.5
+
+    minF_I = 0.1 
+    maxF_I = 0.25
 
 
     # #### SET CONN AND STIM SEEDS #### 
-    params[('thalL4PV ')] = [minF,maxF]
-    params[('thalL4SOM ')] = [minF,maxF]
-    params[('thalL4E ')] = [minF,maxF]
+    params[('L4L3PV ')] = [minF_I,maxF_]
+    params[('L4L3SOM ')] = [minF_I,maxF_I]
+    params[('L4L3E ')] = [minF_E,maxF_]
     #### GROUPED PARAMS #### 
     groupedParams = [] 
 
@@ -150,9 +153,9 @@ def assr_batch_grid(filename):
     cfgLoad2 = cfgLoad
 
     # #### SET weights#### 
-    params[('thalL4PV')] = [0.5, 0.75]
-    params[('thalL4SOM')] = [0.5, 0.75]
-    params[('thalL4E')] = [1.25, 1.5]
+    params[('L4L3PV')] = [0.5, 0.75]
+    params[('L4L3SOM')] = [0.5, 0.75]
+    params[('L4L3E')] = [1.25, 1.5]
 
     #### GROUPED PARAMS #### 
     groupedParams = [] 
@@ -219,8 +222,7 @@ def assr_batch_grid(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'nodes': 2,
-            'coresPerNode': 12,
+            'cores': 4,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
             'skip': True}
