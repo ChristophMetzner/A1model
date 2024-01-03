@@ -3062,7 +3062,7 @@ if __name__ == '__main__':
     seeds = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 
     for seed in seeds:
-        b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 20000, seed)
+        b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', seed)
         b.batchLabel = f'v35_control_20000ms_seed_{seed}'
         b.saveFolder = 'data/' + b.batchLabel
         setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
