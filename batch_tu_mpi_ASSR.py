@@ -155,7 +155,7 @@ def assr_batch_grid(filename):
     # #### SET weights#### 
     params[('thalL4VIP')] = [0.25, 0.5]
     params[('thalL4NGF')] = [0.25, 0.5]
-    params[('L4L3VIP')] = [0.25] # [0.25, 0.5]
+    params[('L4L3VIP')] = [0.25, 0.5]
     params[('L4L3NGF')] = [0.25] # [0.25, 0.5]
 
     #### GROUPED PARAMS #### 
