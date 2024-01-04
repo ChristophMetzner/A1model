@@ -155,8 +155,8 @@ def assr_batch_grid(filename):
     # #### SET weights#### 
     params[('thalL4VIP')] = [0.25, 0.5]
     params[('thalL4NGF')] = [0.25, 0.5]
-    params[('L4L3VIP')] = [0.25, 0.5]
-    params[('L4L3NGF')] = [0.25, 0.5]
+    params[('L4L3VIP')] = [0.25] # [0.25, 0.5]
+    params[('L4L3NGF')] = [0.25] # [0.25, 0.5]
 
     #### GROUPED PARAMS #### 
     groupedParams = [] 
@@ -239,7 +239,7 @@ if __name__ == '__main__':
     #b = assr_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
     b = assr_batch_grid('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'ASSR_grid_04_01_24'   
+    b.batchLabel = 'ASSR_grid_04_01_24_part1'   
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
