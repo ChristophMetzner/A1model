@@ -719,7 +719,7 @@ def fIcurve(pops = [], amps = list(np.arange(0.0, 6.5, 0.5)/10.0) ):
 # ----------------------------------------------------------------------------------------------
 # Custom
 # ----------------------------------------------------------------------------------------------
-def custom_spont(filename, seed=0):
+def custom_spont(filename):
     params = specs.ODict()
 
     if not filename:
@@ -733,7 +733,7 @@ def custom_spont(filename, seed=0):
 
 
     #params['thalamoCorticalGain'] = [cfgLoad['thalamoCorticalGain']] # [cfgLoad['thalamoCorticalGain']*0.75, cfgLoad['thalamoCorticalGain'], cfgLoad['thalamoCorticalGain']*1.25]
-    #params[('seeds', 'conn')] = [3, 3] #list(range(1)) #[4321+(17*i) for i in range(5)]
+    params[('seeds', 'conn')] = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19] #list(range(1)) #[4321+(17*i) for i in range(5)]
     #params[('seeds', 'stim')] = [2, 3] #list(range(1)) #[1234+(17*i) for i in range(5)]
 
     #params['ihGbar'] = [0.25, 0.5] #[0.75, 1.0, 1.25]
@@ -750,7 +750,7 @@ def custom_spont(filename, seed=0):
     initCfg['scaleDensity'] = 1.0
     initCfg['recordStep'] = 0.05
 
-    initCfg[('seeds', 'conn')] = seed
+    # initCfg[('seeds', 'conn')] = seed
     initCfg[('seeds', 'stim')] = 0
 
     # plotting and saving params
@@ -3052,21 +3052,21 @@ if __name__ == '__main__':
     #         setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
     #         b.run()  # run batch
 
-    # b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', 10000, 2)
-    # b.batchLabel = 'v35_batch6_jh_10000_ms_seed_2'
-    # b.saveFolder = 'data/' + b.batchLabel
-    # setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-    # b.run()  # run batch
+    b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json')
+    b.batchLabel = 'v35_batch6_jh_20000ms_10-19'
+    b.saveFolder = 'data/' + b.batchLabel
+    setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+    b.run()  # run batch
 
 
-    seeds = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-
-    for seed in seeds:
-        b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', seed)
-        b.batchLabel = f'v35_control_20000ms_seed_{seed}'
-        b.saveFolder = 'data/' + b.batchLabel
-        setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
-        b.run()  # run batch
+    # seeds = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    #
+    # for seed in seeds:
+    #     b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json', seed)
+    #     b.batchLabel = f'v35_control_20000ms_seed_{seed}'
+    #     b.saveFolder = 'data/' + b.batchLabel
+    #     setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
+    #     b.run()  # run batch
 
 
     #b = custom_stim('data/v34_batch25/trial_2142/trial_2142_cfg.json')
