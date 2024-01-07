@@ -223,7 +223,7 @@ def assr_batch_grid(filename):
 def setRunCfg(b, type='mpi_direct'):
     if type=='mpi_direct':
         b.runCfg = {'type': 'mpi_direct',
-            'cores': 4,
+            'cores': 8,
             'script': 'init.py',
             'mpiCommand': 'mpiexec',
             'skip': True}
