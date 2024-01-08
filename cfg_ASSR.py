@@ -255,10 +255,6 @@ cfg.addNetStim = 0 #1
 
 cfg.tune = {}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/main
 
 # ------------------------ ADD PARAM VALUES FROM .JSON FILES: 
 # COMMENT THIS OUT IF USING GCP !!! ONLY USE IF USING NEUROSIM!!! 
