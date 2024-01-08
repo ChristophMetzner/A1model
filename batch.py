@@ -733,7 +733,7 @@ def custom_spont(filename):
 
 
     #params['thalamoCorticalGain'] = [cfgLoad['thalamoCorticalGain']] # [cfgLoad['thalamoCorticalGain']*0.75, cfgLoad['thalamoCorticalGain'], cfgLoad['thalamoCorticalGain']*1.25]
-    params[('seeds', 'conn')] = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19] #list(range(1)) #[4321+(17*i) for i in range(5)]
+    params[('seeds', 'conn')] = [10, 11, 12, 13, 14] #list(range(1)) #[4321+(17*i) for i in range(5)]
     #params[('seeds', 'stim')] = [2, 3] #list(range(1)) #[1234+(17*i) for i in range(5)]
 
     #params['ihGbar'] = [0.25, 0.5] #[0.75, 1.0, 1.25]
@@ -3022,7 +3022,7 @@ def setRunCfg(b, type='mpi_bulletin'):
         b.runCfg = {'type': 'hpc_slurm',
             'allocation': 'ni',
             'walltime': '48:00:00',
-            'nodes': 4,
+            'nodes': 1,
             'coresPerNode': 32,
             'email': 'jasmin.m.hulha@campus.tu-berlin.de',
             'folder': '/home/users/j/jasmin.hulha/A1model',
@@ -3053,7 +3053,7 @@ if __name__ == '__main__':
     #         b.run()  # run batch
 
     b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json')
-    b.batchLabel = 'v35_control_jh_20000ms_10-19'
+    b.batchLabel = 'v35_control_jh_20000ms_10-14'
     b.saveFolder = 'data/' + b.batchLabel
     setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
     b.run()  # run batch
