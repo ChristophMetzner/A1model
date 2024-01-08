@@ -177,25 +177,32 @@ cfg.intraThalamicGain = 1.0
 cfg.corticoThalamicGain = 1.0
 
 # these params control IC -> Thalamic Core
-cfg.ICThalweightECore = 1.5 # 1.0
-cfg.ICThalweightICore = 1.0 # 0.25
-cfg.ICThalprobECore = 0.19
-cfg.ICThalprobICore = 0.12
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+
 # these params control IC -> Thalamic Matrix
-cfg.ICThalMatrixCoreFactor = 0.1
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
 cfg.ICThalweightEMatrix = cfg.ICThalweightECore * cfg.ICThalMatrixCoreFactor
 cfg.ICThalweightIMatrix = cfg.ICThalweightICore * cfg.ICThalMatrixCoreFactor
 cfg.ICThalprobEMatrix = cfg.ICThalprobECore 
 cfg.ICThalprobIMatrix = cfg.ICThalprobICore 
 
+# these params added from Christoph Metzner branch
+cfg.thalL4PV = 0.05 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+cfg.thalL4VIP = 1.0
+cfg.thalL4NGF = 1.0
 
-#------------------------------------------------------------------------------
-# ASSR tuning inputs
-#------------------------------------------------------------------------------
-cfg.thalL4PV  = 1.0
-cfg.thalL4SOM = 1.0
-cfg.thalL4E   = 1.0
 
+cfg.L4L3E    = 2.5 # 1.0
+cfg.L4L3PV   = 0.25
+cfg.L4L3SOM  = 1.0
+cfg.L4L3VIP = 1.0
+cfg.L4L3NGF = 1.0
 
 cfg.addSubConn = 1
 
@@ -248,6 +255,10 @@ cfg.addNetStim = 0 #1
 
 cfg.tune = {}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/main
 
 # ------------------------ ADD PARAM VALUES FROM .JSON FILES: 
 # COMMENT THIS OUT IF USING GCP !!! ONLY USE IF USING NEUROSIM!!! 

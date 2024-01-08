@@ -303,16 +303,28 @@ if cfg.addConn and cfg.EEGain > 0.0:
     for pre in Epops:
         for post in Epops:
             for l in layerGainLabels:  # used to tune each layer group independently
+                scaleFactor = 1.0
                 if connDataSource['E->E/I'] in ['Allen_V1', 'Allen_custom']:
                     prob = '%f * exp(-dist_2D/%f)' % (pmat[pre][post], lmat[pre][post])
                 else:
                     prob = pmat[pre][post]
+                if pre=='ITS4' or pre=='ITP4':
+                    if post=='PV3':
+                        scaleFactor = cfg.L4L3PV#25
+                    elif post=='SOM3':
+                        scaleFactor = cfg.L4L3SOM
+                    elif post=='IT3':
+                        scaleFactor = cfg.L4L3E#25
+                    elif post=='NGF3':
+                        scaleFactor = cfg.L4L3NGF#25
+                    elif post=='VIP3':
+                        scaleFactor = cfg.L4L3VIP#25
                 netParams.connParams['EE_'+pre+'_'+post+'_'+l] = { 
                     'preConds': {'pop': pre}, 
                     'postConds': {'pop': post, 'ynorm': layer[l]},
                     'synMech': ESynMech,
                     'probability': prob,
-                    'weight': wmat[pre][post] * cfg.EEGain * cfg.EELayerGain[l], 
+                    'weight': wmat[pre][post] * cfg.EEGain * cfg.EELayerGain[l]*scaleFactor, 
                     'synMechWeightFactor': cfg.synWeightFractionEE,
                     'delay': 'defaultDelay+dist_3D/propVelocity',
                     'synsPerConn': 1,
@@ -480,34 +492,6 @@ if cfg.addConn and cfg.addCorticoThalamicConn:
                     'synsPerConn': 1,
                     'sec': 'soma'}  
 
-#------------------------------------------------------------------------------
-## Thalamocortical 
-if cfg.addConn and cfg.addThalamoCorticalConn:
-    for pre in TEpops+TIpops:
-        for post in Epops+Ipops:
-            if post in pmat[pre]:
-                # for syns use ESynMech, SOMESynMech and SOMISynMech 
-                if pre in TEpops:     # E->E/I
-                    syn = ESynMech
-                    synWeightFactor = cfg.synWeightFractionEE
-                elif post in Epops:  # I->E
-                    syn = SOMESynMech
-                    synWeightFactor = cfg.synWeightFractionIE
-                else:                  # I->I
-                    syn = SOMISynMech
-                    synWeightFactor = [1.0]
-
-                netParams.connParams['ThCx_'+pre+'_'+post] = { 
-                    'preConds': {'pop': pre}, 
-                    'postConds': {'pop': post},
-                    'synMech': syn,
-                    'probability': '%f * exp(-dist_2D/%f)' % (pmat[pre][post], lmat[pre][post]),
-                    'weight': wmat[pre][post] * cfg.thalamoCorticalGain, 
-                    'synMechWeightFactor': synWeightFactor,
-                    'delay': 'defaultDelay+dist_3D/propVelocity',
-                    'synsPerConn': 1,
-                    'sec': 'soma'}  
-
 
 #------------------------------------------------------------------------------
 ## Thalamocortical - this was added from Christoph Metzner's branch
@@ -534,6 +518,14 @@ if cfg.addConn and cfg.addThalamoCorticalConn:
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
                         scaleFactor = cfg.thalL4E#25
+                    elif post=='NGF4':
+                        syn = ESynMech
+                        synWeightFactor = cfg.synWeightFractionEE
+                        scaleFactor = cfg.thalL4NGF#25
+                    elif post=='VIP4':
+                        syn = ESynMech
+                        synWeightFactor = cfg.synWeightFractionEE
+                        scaleFactor = cfg.thalL4VIP#25
                     else:
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
