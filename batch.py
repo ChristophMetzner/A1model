@@ -3021,9 +3021,9 @@ def setRunCfg(b, type='mpi_bulletin'):
     elif type=='hpc_slurm_TUB':
         b.runCfg = {'type': 'hpc_slurm',
             'allocation': 'ni',
-            'walltime': '24:00:00',
+            'walltime': '48:00:00',
             'nodes': 1,
-            'coresPerNode': 32,
+            'coresPerNode': 16,
             'email': 'jasmin.m.hulha@campus.tu-berlin.de',
             'folder': '/home/users/j/jasmin.hulha/A1model',
             'script': 'init.py',
