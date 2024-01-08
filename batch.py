@@ -3053,7 +3053,7 @@ if __name__ == '__main__':
     #         b.run()  # run batch
 
     b = custom_spont('data/v34_batch25/trial_2142/trial_2142_cfg.json')
-    b.batchLabel = 'v35_batch6_jh_20000ms_10-19'
+    b.batchLabel = 'v35_control_jh_20000ms_10-19'
     b.saveFolder = 'data/' + b.batchLabel
     setRunCfg(b, 'hpc_slurm_TUB')  # 'hpc_slurm_gcp') #'mpi_bulletin') #'hpc_slurm_gcp')
     b.run()  # run batch
