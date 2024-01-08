@@ -11150,6 +11150,8 @@ cfg.L4L3E    = 2.0 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0
 
+=> better L3 and L2 (although still weak for L2) activity; good L4 and weak L3+L2 entrainment (late entrainment even stronger); Very high firing of PV4+NGF4, VIP3+NGF3 and NGF2  
+
  -2) 14_12_23_2:
 
 cfg.ICThalweightECore = 2.5 # 1.0
@@ -11166,6 +11168,8 @@ cfg.thalL4E = 2.5 #1.0
 cfg.L4L3E    = 2.0 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0
+
+=> very similar to 14_12_23_1; reducing matrixcorefactor doesn't have a big effect
 
 Simulations for 15/12/23:
 
@@ -11186,6 +11190,8 @@ cfg.L4L3E    = 2.0 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0 
 
+=> ?
+
  -2) 15_12_23_2:
  
 cfg.ICThalweightECore = 2.5 # 1.0
@@ -11202,6 +11208,8 @@ cfg.thalL4E = 2.5 #1.0
 cfg.L4L3E    = 2.0 # 1.0
 cfg.L4L3PV   = 1.0
 cfg.L4L3SOM  = 1.0 
+
+=> also very similar to 14_12_23_1; reducing matrixcorefactor doesn't have a big effect
 
  -3) 15_12_23_3:
  
@@ -11220,6 +11228,8 @@ cfg.L4L3E    = 2.0 # 1.0
 cfg.L4L3PV   = 0.5
 cfg.L4L3SOM  = 1.0 
 
+=> also very similar to the above sims
+
  -4) 15_12_23_4:
  
 cfg.ICThalweightECore = 2.5 # 1.0
@@ -11237,24 +11247,8 @@ cfg.L4L3E    = 2.5 # 1.0
 cfg.L4L3PV   = 0.5
 cfg.L4L3SOM  = 1.0 
  
-Simulations for 19/12/23:
+ => similar to above; better L3 entrainment but weaker L2 entrainment
 
- -1) 19_12_23_1:
-
-cfg.ICThalweightECore = 2.5 # 1.0
-cfg.ICThalweightICore = 0.75 # 0.25
-cfg.ICThalprobECore = 0.16
-cfg.ICThalprobICore = 0.09
-
-cfg.ICThalMatrixCoreFactor = 0.08 #0.1
-
-cfg.thalL4PV = 0.05 # 0.5 
-cfg.thalL4SOM = 0.25 # 0.5 
-cfg.thalL4E = 2.5 #1.0 
-
-cfg.L4L3E    = 2.5 # 1.0
-cfg.L4L3PV   = 0.25
-cfg.L4L3SOM  = 1.0 
 
 Simulations for 20/12/23:
 
@@ -11275,7 +11269,9 @@ cfg.L4L3E    = 2.5 # 1.0
 cfg.L4L3PV   = 0.25
 cfg.L4L3SOM  = 0.5 
 
- -2) 19_12_23_2: (redo 19_12_23_1)
+=> again higher L3 entrainment but weaker L2 (as in 15_12_23_4); but no real effect on high interneuron rates
+
+ -2) 20_12_23_2: 
 
 cfg.ICThalweightECore = 2.5 # 1.0
 cfg.ICThalweightICore = 0.75 # 0.25
@@ -11291,3 +11287,57 @@ cfg.thalL4E = 2.5 #1.0
 cfg.L4L3E    = 2.5 # 1.0
 cfg.L4L3PV   = 0.25
 cfg.L4L3SOM  = 1.0 
+
+=> similar to the above
+
+Simulations for Grid_04_01_24:
+
+Something wrong with part1 (therefore only L4L3NGF=0.5)!
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.05 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 2.5 # 1.0
+cfg.L4L3PV   = 0.25
+cfg.L4L3SOM  = 1.0 
+
+
+thalL4VIP=[0.25,0.5],thalL4NGF=[0.25,0.5],L4L3VIP=[0.25,0.5],L4L3NGF=[0.5]
+
+ -1) 0_0_0_0: thalL4VIP=0.25,thalL4NGF=0.25,L4L3VIP=0.25:
+ => CSD better; good L4 activity, no L3+L2 activity; good L4, no L2+L3 entrainment; high VIP4+NGF4 activity, very high PV3+VIP3 activity, high NGF2 activity (but no L2 activity very likely caused by no L3 activity)
+ -2) 0_0_1_0: thalL4VIP=0.25,thalL4NGF=0.25,L4L3VIP=0.5:
+ => same as 0_0_0_0
+ -3) 0_1_0_0: thalL4VIP=0.25,thalL4NGF=0.5,L4L3VIP=0.25:
+ => similar to the above
+ -4) 0_1_1_0: thalL4VIP=0.25,thalL4NGF=0.5,L4L3VIP=0.5:
+ => similar to the above
+ -5) 1_0_0_0: thalL4VIP=0.5,thalL4NGF=0.25,L4L3VIP=0.25:
+ => similar to the above
+ -6) 1_0_1_0: thalL4VIP=0.5,thalL4NGF=0.25,L4L3VIP=0.5:
+ => similar to the above
+ -7) 1_1_0_0: thalL4VIP=0.5,thalL4NGF=0.5,L4L3VIP=0.25:
+ =>
+ -8) 1_1_1_0: thalL4VIP=0.5,thalL4NGF=0.5,L4L3VIP=0.5:
+
+
+
+Simulations for Grid_07_01_24:
+
+ -1) : 
+
+
+
+
+Simulations for 08_01_24:
+
+ -1) 08_01_24_1:
+ 
