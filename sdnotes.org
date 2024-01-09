@@ -11419,3 +11419,44 @@ cfg.L4L3SOM  = 1.0
 cfg.L4L3VIP = 1.0
 cfg.L4L3NGF = 1.0
 
+ -4) ASSR_grid_08_01_24_lesath
+ 
+
+
+Simulations for 09_01_24:
+
+ -1) ASSR_grid_09_01_24_lesath (8 sims)
+ 
+params[('thalL4VIP')] = [0.05, 0.1]
+params[('thalL4NGF')] = [0.05, 0.1]
+params[('L4L3VIP')] = [0.05, 0.1]
+    
+    # these params control IC -> Thalamic Core
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.25 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+
+# these params control IC -> Thalamic Matrix
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+cfg.ICThalweightEMatrix = cfg.ICThalweightECore * cfg.ICThalMatrixCoreFactor
+cfg.ICThalweightIMatrix = cfg.ICThalweightICore * cfg.ICThalMatrixCoreFactor
+cfg.ICThalprobEMatrix = cfg.ICThalprobECore 
+cfg.ICThalprobIMatrix = cfg.ICThalprobICore 
+
+# these params added from Christoph Metzner branch
+cfg.thalL4PV = 0.05 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+cfg.thalL4VIP = 1.0
+cfg.thalL4NGF = 1.0
+
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 1.0
+cfg.L4L3SOM  = 1.0
+cfg.L4L3VIP = 1.0
+cfg.L4L3NGF = 1.0
+
+
