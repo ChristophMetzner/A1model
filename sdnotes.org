@@ -11363,34 +11363,12 @@ cfg.L4L3SOM  = 1.0
 cfg.L4L3VIP = 0.1
 cfg.L4L3NGF = 1.0
 
- -2) 08_01_24_2:
- 
- # these params control IC -> Thalamic Core
-cfg.ICThalweightECore = 2.5 # 1.0
-cfg.ICThalweightICore = 0.75 # 0.25
-cfg.ICThalprobECore = 0.16
-cfg.ICThalprobICore = 0.09
 
-cfg.ICThalMatrixCoreFactor = 0.08 #0.1
-
-cfg.thalL4PV = 0.05 # 0.5 
-cfg.thalL4SOM = 0.25 # 0.5 
-cfg.thalL4E = 2.0 #1.0 
-
-cfg.thalL4VIP = 0.1
-cfg.thalL4NGF = 0.1
-
-cfg.L4L3E    = 1.5 # 1.0
-cfg.L4L3PV   = 0.15
-cfg.L4L3SOM  = 1.0
-
-cfg.L4L3VIP = 0.1
-cfg.L4L3NGF = 1.0
 
 ## E->I by target cell type
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} # scales down NGF activity!?!
 
- -3) 08_01_24_3: SamNs PopGain params
+ -2) 08_01_24_2: SamNs PopGain params
  
  cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in generation 204 of the same optimization
  
@@ -11421,6 +11399,26 @@ cfg.L4L3NGF = 1.0
 
  -4) ASSR_grid_08_01_24_lesath
  
+thalL4VIP =[0.25, 0.5], thalL4NGF =[0.25, 0.5], L4L3VIP =[0.25, 0.5], L4L3NGF =[0.25, 0.5]
+
+
+# these params control IC -> Thalamic Core
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.25 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.05 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 1.0
+cfg.L4L3SOM  = 1.0
+
 
 
 Simulations for 09_01_24:
@@ -11459,4 +11457,27 @@ cfg.L4L3SOM  = 1.0
 cfg.L4L3VIP = 1.0
 cfg.L4L3NGF = 1.0
 
+ -2) 09_01_24_1:
+ 
+ # these params control IC -> Thalamic Core
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.05 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.0 #1.0 
+
+cfg.thalL4VIP = 0.1
+cfg.thalL4NGF = 0.1
+
+cfg.L4L3E    = 1.5 # 1.0
+cfg.L4L3PV   = 0.15
+cfg.L4L3SOM  = 1.0
+
+cfg.L4L3VIP = 0.1
+cfg.L4L3NGF = 1.0
 
