@@ -11368,6 +11368,10 @@ cfg.L4L3NGF = 1.0
 ## E->I by target cell type
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} # scales down NGF activity!?!
 
+=> scaling down NGF activity works. Scaling from factor 1.0 -> 0.5 brings down (compared to 20_12_23_2) NGF4: 384 -> 75.6 (early)/  368 -> 92.7 (late), NGF3:  296 -> 23.3 (early)/ 247 -> 18.9 (late) , NGF2:  460 -> 78.7 (early)/ 517 -> 73.6 (late)
+=> however, this has little effect on L3 and L2 activity and entrainment
+
+
  -2) 08_01_24_2: SamNs PopGain params
  
  cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in generation 204 of the same optimization
@@ -11481,8 +11485,9 @@ cfg.L4L3SOM  = 1.0
 cfg.L4L3VIP = 0.1
 cfg.L4L3NGF = 1.0
 
+cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} 
 
--2) 09_01_24_2: SamNs PopGain params! Rerun this because of bugs in the spike output!! 
+-3) 09_01_24_2: SamNs PopGain params! Rerun this because of bugs in the spike output!! 
  
  cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in generation 204 of the same optimization
  
@@ -11510,3 +11515,37 @@ cfg.L4L3SOM  = 1.0
 
 cfg.L4L3VIP = 1.0
 cfg.L4L3NGF = 1.0
+
+cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} 
+
+ -4) 09_01_24_3:
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.05 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.thalL4VIP = 1.0
+cfg.thalL4NGF = 1.0
+
+
+cfg.L4L3E    = 2.5 # 1.0
+cfg.L4L3PV   = 0.25
+cfg.L4L3SOM  = 1.0 
+
+cfg.L4L3VIP = 1.0
+cfg.L4L3NGF = 1.0
+
+
+## E->I by target cell type
+cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} # scales down NGF activity!?!
+
+
+
+
