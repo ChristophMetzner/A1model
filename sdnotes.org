@@ -11592,6 +11592,8 @@ cfg.L4L3NGF = 1.0
 
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} 
 
+=> no L3+L2 activity, weak L4 activity; very high PV4 activity, PV3 very high, VIP3 high, NGF overall lower but still wuite high; very weak L4 entrainment, none in L3+L2
+
 
  -2) 10_01_24_2:
  
@@ -11624,6 +11626,8 @@ cfg.L4L3NGF = 1.0
 
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.1} 
 
+=> same as 10_01_24_1, lowering NGF celltype gain hardly had any effect
+
  -3) 10_01_24_3:
  
   cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in generation 204 of the same optimization
@@ -11655,6 +11659,8 @@ cfg.L4L3NGF = 1.0
 
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} 
 
+=> similar to the above
+
  -4) 10_01_24_4:
  
   cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in generation 204 of the same optimization
@@ -11685,3 +11691,32 @@ cfg.L4L3VIP = 0.1
 cfg.L4L3NGF = 1.0
 
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.1} 
+
+=> 
+
+Sims for 12_01_24:
+
+ -1) 12_01_24_1 (based on 14_12_23_1: better L3 and L2 (although still weak for L2) activity; good L4 and weak L3+L2 entrainment (late entrainment even stronger); Very high firing of PV4+NGF4, VIP3+NGF3 and NGF2  )
+
+cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 1.0, 'SOM3': 1.0, 'PV3': 1.0, 'VIP3': 1.0, 'NGF3': 1.0, 'SOM4': 1.0, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 1.0, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} 
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 1.0
+cfg.L4L3SOM  = 1.0
+
+cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} 
+
+=> 
+
+ -2) 12_01_24_2 (based on SamN's params) 
