@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_12_01_24_2'
+cfg.simLabel = 'ASSR_12_01_24_4'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -169,7 +169,7 @@ cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1
 
 # gains from E -> I based on postsynaptic cortical I neuron population
 #cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 1.0, 'SOM3': 1.0, 'PV3': 1.0, 'VIP3': 1.0, 'NGF3': 1.0, 'SOM4': 1.0, 'PV4': 1.0, 'VIP4': 1.0, 'NGF4': 1.0, 'SOM5A': 1.0, 'PV5A': 1.4, 'VIP5A': 1.25, 'NGF5A': 0.8, 'SOM5B': 1.0, 'PV5B': 1.4, 'VIP5B': 1.4, 'NGF5B': 0.9, 'SOM6': 1.0, 'PV6': 1.4, 'VIP6': 1.4, 'NGF6': 0.65}
-cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 1.0, 'SOM3': 1.0, 'PV3': 1.0, 'VIP3': 1.0, 'NGF3': 1.0, 'SOM4': 1.0, 'PV4': 1.0, 'VIP4': 1.0, 'NGF4': 1.0, 'SOM5A': 1.0, 'PV5A': 1.4, 'VIP5A': 1.25, 'NGF5A': 0.8, 'SOM5B': 1.0, 'PV5B': 1.45, 'VIP5B': 1.4, 'NGF5B': 0.9500000000000001, 'SOM6': 1.0, 'PV6': 1.4, 'VIP6': 1.3499999999999999, 'NGF6': 0.65} # this is from after generation 203 of optunaERP_23dec23_ , values used in generation 204 of the same optimization
+cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 1.0, 'SOM3': 1.0, 'PV3': 0.5, 'VIP3': 1.0, 'NGF3': 1.0, 'SOM4': 1.0, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 1.0, 'SOM5A': 1.0, 'PV5A': 1.4, 'VIP5A': 1.25, 'NGF5A': 0.8, 'SOM5B': 1.0, 'PV5B': 1.45, 'VIP5B': 1.4, 'NGF5B': 0.9500000000000001, 'SOM6': 1.0, 'PV6': 1.4, 'VIP6': 1.3499999999999999, 'NGF6': 0.65} # this is from after generation 203 of optunaERP_23dec23_ , values used in generation 204 of the same optimization
 #cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 1.0, 'SOM3': 1.0, 'PV3': 1.0, 'VIP3': 1.0, 'NGF3': 1.0, 'SOM4': 1.0, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 1.0, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} # Tune single pops by hand
 #cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 1.0, 'SOM3': 1.0, 'PV3': 1.0, 'VIP3': 1.0, 'NGF3': 1.0, 'SOM4': 1.0, 'PV4': 1.0, 'VIP4': 1.0, 'NGF4': 1.0, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} # default
 
