@@ -11717,7 +11717,8 @@ cfg.L4L3SOM  = 1.0
 
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} 
 
-=> 
+=> L4 activity strong, L3 also strong, no L2; NGF4 exteremely high (>400) and PV4 very high (128Hz); PV3 good, NGF3 (>400Hz); nothing in L2; entrainment good in L4, very strong in L3
+
 
  -2) 12_01_24_2 (based on SamN's params) 
  
@@ -11750,7 +11751,11 @@ cfg.L4L3NGF = 1.0
 
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} 
 
+=> CSD better (too strong input to L1); L4 activity, very little L3 and no L2; PV3(125Hz)+VIP3(76Hz) very high; NGF2(75Hz) still quite high; entrainment in L4 good (substantially weaker than 12_01_24_1 though; power ~5-6 vs ~12-14)
+
  -3) 12_01_24_3 (based on 14_12_23_1: better L3 and L2 (although still weak for L2) activity; good L4 and weak L3+L2 entrainment (late entrainment even stronger); Very high firing of PV4+NGF4, VIP3+NGF3 and NGF2  )
+
+cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
 
 cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 1.0, 'SOM3': 1.0, 'PV3': 0.5, 'VIP3': 1.0, 'NGF3': 1.0, 'SOM4': 1.0, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 1.0, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} 
 
@@ -11770,6 +11775,8 @@ cfg.L4L3PV   = 0.1
 cfg.L4L3SOM  = 1.0
 
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} 
+
+=> L4 activity good, no L3 activity, but good L2 activity; PV4 good (~7Hz), VIP4(115Hz)+NGF4(135Hz) very high; PV3(135Hz)+VIP3(96Hz)+NGF3(70Hz) very high; NGF2(234Hz) very high; entrainment in L4 very high (power ~40), in L2 very good (~12), none in L3
 
  -4) 12_01_24_4 (based on SamN's params) 
  
@@ -11801,4 +11808,34 @@ cfg.L4L3VIP = 0.1
 cfg.L4L3NGF = 1.0
 
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5}
+
+=> L4 activity good, L2 activity good, L3 activity very weak; PV4 good (~6Hz), VIP4(67Hz)+NGF4(124Hz) quite high; PV3(119Hz)+VIP3(107Hz)+NGF3(39Hz) very high; NGF2(135Hz) very high; entrainment weaker than 12_01_24_3 L4 (~8), L2(~0.5), L3 none
+
+Sims for 15_01_24:
+
+ -1) 15_01_24_1 
+ 
+cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
+ 
+cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 1.0, 'SOM3': 1.0, 'PV3': 0.25, 'VIP3': 0.5, 'NGF3': 1.0, 'SOM4': 1.0, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 1.0, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} 
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 3.0 # 1.0
+cfg.L4L3PV   = 0.1
+cfg.L4L3SOM  = 1.0
+
+
+cfg.L4L3VIP = 0.1
+
+cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.1} 
 
