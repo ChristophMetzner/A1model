@@ -153,9 +153,10 @@ def assr_batch_grid(filename):
     cfgLoad2 = cfgLoad
 
     # #### SET weights#### 
-    params[('thalL4VIP')] = [0.05, 0.1]
-    params[('thalL4NGF')] = [0.05, 0.1]
-    params[('L4L3VIP')] = [0.05, 0.1]
+    params[('seeds','conn')] = [12345, 23451, 34512, 45123, 51234, 67890, 6789, 90678, 89067, 78906]
+    #params[('thalL4VIP')] = [0.05, 0.1]
+    #params[('thalL4NGF')] = [0.05, 0.1]
+    #params[('L4L3VIP')] = [0.05, 0.1]
 
 
     #### GROUPED PARAMS #### 
@@ -239,7 +240,7 @@ if __name__ == '__main__':
     #b = assr_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
     b = assr_batch_grid('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'ASSR_grid_09_01_24_lesath'   
+    b.batchLabel = 'ASSR_noise_grid_15_01_24'   
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
