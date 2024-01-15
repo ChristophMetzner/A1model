@@ -153,7 +153,7 @@ def assr_batch_grid(filename):
     cfgLoad2 = cfgLoad
 
     # #### SET weights#### 
-    params[('seeds','conn')] = [12345, 23451, 34512, 45123, 51234, 67890, 6789, 90678, 89067, 78906]
+    params[('seeds','conn')] = [12345, 23451, 34512, 45123, 51234]#, 67890, 6789, 90678, 89067, 78906]
     #params[('thalL4VIP')] = [0.05, 0.1]
     #params[('thalL4NGF')] = [0.05, 0.1]
     #params[('L4L3VIP')] = [0.05, 0.1]
