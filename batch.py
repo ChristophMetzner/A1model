@@ -751,6 +751,7 @@ def custom_spont(filename):
     initCfg['recordStep'] = 0.05
 
     # initCfg[('seeds', 'conn')] = seed
+    initCfg[('seeds', 'conn')] = 0
     initCfg[('seeds', 'stim')] = 0
 
     # plotting and saving params
