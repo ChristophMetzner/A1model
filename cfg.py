@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_17_01_24_2'
+cfg.simLabel = 'ASSR_17_01_24_3'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -164,7 +164,7 @@ cfg.IILayerGain = {'1': 1.0, '2': 1.0, '3': 1.0, '4': 1.0 , '5A': 1.0, '5B': 1.0
 # E -> E based on postsynaptic cortical E neuron population
 # cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.0, 'CT5A': 1.1, 'IT5B': 0.375, 'CT5B': 1.1, 'PT5B': 1.0, 'IT6': 1.0, 'CT6': 1.0}
 #cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
-cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 2.0, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
+cfg.EEPopGain = {'IT2': 2.0, 'IT3': 2.0, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
 #cfg.EEPopGain = {'IT2': 1.0, 'IT3': 1.0, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.0, 'CT5A': 1.0, 'IT5B': 1.0, 'CT5B': 1.0, 'PT5B': 1.0, 'IT6': 1.0, 'CT6': 1.0} # default
 
 
