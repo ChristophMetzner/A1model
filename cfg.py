@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_22_01_24_SAM_test_40Hz'
+cfg.simLabel = 'ASSR_22_01_24_SAM_test_40Hz_hdry_test'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
