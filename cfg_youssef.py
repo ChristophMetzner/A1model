@@ -347,7 +347,7 @@ cfg.IbkgThalamicGain = cfgLoad['IbkgThalamicGain']
 cfg.wmat = cfgLoad['wmat']
 
 
-#cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat', #'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
+cfg.ICThalInput = {}#'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat', #'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
 #                   'startTime': 1500, #list(np.arange(4000, 8000, 300)),
 #                   'weightECore': cfg.ICThalweightECore,
 #                   'weightICore': cfg.ICThalweightICore,
@@ -359,15 +359,4 @@ cfg.wmat = cfgLoad['wmat']
 #                   'probIMatrix': cfg.ICThalprobIMatrix,
 #                   'seed': 1}  # SHOULD THIS BE ZERO?   
                    
-                   
-#cfg.ICThalInput = {'file': 'data/ICoutput/SAM_Tone_input_40Hz.mat', #'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
-#                   'startTime': 1500, #list(np.arange(4000, 8000, 300)),
-#                   'weightECore': cfg.ICThalweightECore,
-#                   'weightICore': cfg.ICThalweightICore,
-#                   'probECore': cfg.ICThalprobECore, 
-#                   'probICore': cfg.ICThalprobICore,
-#                   'weightEMatrix': cfg.ICThalweightEMatrix,
-#                   'weightIMatrix': cfg.ICThalweightIMatrix,
-#                   'probEMatrix': cfg.ICThalprobEMatrix,
-#                   'probIMatrix': cfg.ICThalprobIMatrix,
-#                   'seed': 1}  # SHOULD THIS BE ZERO?                   
+                  
