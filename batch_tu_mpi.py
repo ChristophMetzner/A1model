@@ -26,7 +26,7 @@ def spont_batch(filename):
     cfgLoad2 = cfgLoad
 
     # #### SET CONN AND STIM SEEDS #### 
-    params[('seeds', 'conn')] = [16, 17, 18]
+    params[('seeds', 'conn')] = [19]
 
 
 
