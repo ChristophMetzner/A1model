@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
     b = spont_batch('data/v34_batch25/trial_2142/trial_2142_cfg.json')
 
-    b.batchLabel = 'v35_control_20000ms_16-18'
+    b.batchLabel = 'v35_control_20000ms_19'
     b.saveFolder = 'data/'+b.batchLabel
 
     setRunCfg(b, 'mpi_direct')
