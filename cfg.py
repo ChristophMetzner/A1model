@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_23_01_24_SAM_40Hz_test'
+cfg.simLabel = 'ASSR_23_01_24_2'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -164,7 +164,7 @@ cfg.IILayerGain = {'1': 1.0, '2': 1.0, '3': 1.0, '4': 1.0 , '5A': 1.0, '5B': 1.0
 # E -> E based on postsynaptic cortical E neuron population
 # cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.0, 'CT5A': 1.1, 'IT5B': 0.375, 'CT5B': 1.1, 'PT5B': 1.0, 'IT6': 1.0, 'CT6': 1.0}
 #cfg.EEPopGain = {'IT2': 1.3125, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
-cfg.EEPopGain = {'IT2': 2.5, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
+cfg.EEPopGain = {'IT2': 2.5, 'IT3': 1.75, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
 #cfg.EEPopGain = {'IT2': 1.0, 'IT3': 1.0, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.0, 'CT5A': 1.0, 'IT5B': 1.0, 'CT5B': 1.0, 'PT5B': 1.0, 'IT6': 1.0, 'CT6': 1.0} # default
 
 
@@ -347,20 +347,7 @@ cfg.IbkgThalamicGain = cfgLoad['IbkgThalamicGain']
 cfg.wmat = cfgLoad['wmat']
 
 
-#cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat', #'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
-#                   'startTime': 1500, #list(np.arange(4000, 8000, 300)),
-#                   'weightECore': cfg.ICThalweightECore,
-#                   'weightICore': cfg.ICThalweightICore,
-#                   'probECore': cfg.ICThalprobECore, 
-#                   'probICore': cfg.ICThalprobICore,
-#                   'weightEMatrix': cfg.ICThalweightEMatrix,
-#                   'weightIMatrix': cfg.ICThalweightIMatrix,
-#                   'probEMatrix': cfg.ICThalprobEMatrix,
-#                   'probIMatrix': cfg.ICThalprobIMatrix,
-#                   'seed': 1}  # SHOULD THIS BE ZERO?   
-                   
-                   
-cfg.ICThalInput = {'file': 'data/ICoutput/SAM_Tone_input_40Hz.mat', #'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
+cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100CF.mat', #'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
                    'startTime': 1500, #list(np.arange(4000, 8000, 300)),
                    'weightECore': cfg.ICThalweightECore,
                    'weightICore': cfg.ICThalweightICore,
@@ -370,4 +357,17 @@ cfg.ICThalInput = {'file': 'data/ICoutput/SAM_Tone_input_40Hz.mat', #'data/ICout
                    'weightIMatrix': cfg.ICThalweightIMatrix,
                    'probEMatrix': cfg.ICThalprobEMatrix,
                    'probIMatrix': cfg.ICThalprobIMatrix,
-                   'seed': 1}  # SHOULD THIS BE ZERO?                   
+                   'seed': 1}  # SHOULD THIS BE ZERO?   
+                   
+                   
+#cfg.ICThalInput = {'file': 'data/ICoutput/SAM_Tone_input_40Hz.mat', #'data/ICoutput/ICoutput_CF_5256_6056_wav_BBN_100ms_burst.mat', # BBN_trials/ICoutput_CF_9600_10400_wav_BBN_100ms_burst_AN.mat', 
+#                   'startTime': 1500, #list(np.arange(4000, 8000, 300)),
+#                   'weightECore': cfg.ICThalweightECore,
+#                   'weightICore': cfg.ICThalweightICore,
+#                   'probECore': cfg.ICThalprobECore, 
+#                   'probICore': cfg.ICThalprobICore,
+#                   'weightEMatrix': cfg.ICThalweightEMatrix,
+#                   'weightIMatrix': cfg.ICThalweightIMatrix,
+#                   'probEMatrix': cfg.ICThalprobEMatrix,
+#                   'probIMatrix': cfg.ICThalprobIMatrix,
+#                   'seed': 1}  # SHOULD THIS BE ZERO?                   
