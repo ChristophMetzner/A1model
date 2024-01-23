@@ -12100,7 +12100,7 @@ cfg.L4L3VIP = 0.1
 
 cfg.EICellTypeGain= {'PV': 1.0, 'SOM': 1.0, 'VIP': 1.0, 'NGF': 0.5} 
 
-=> CSD looks better, although still a lot of activity in L1; L4 activity good, L3 weaker but good, no L2; SOM4(57Hz) still a bit high; PV3(121Hz)+VIP3(99Hz) still very high; PV2(40Hz) quite high for no pyr activity; entrainment L4(~90-95)+L3(); MUA 
+=> CSD looks better, although still a lot of activity in L1; L4 activity good, L3 weaker but good, no L2; SOM4(57Hz) still a bit high; PV3(121Hz)+VIP3(99Hz) still very high; PV2(40Hz) quite high for no pyr activity; entrainment L4(~90-95)+L3(~0.35); MUA goodish 
 
 Sims for 22_01_24:
  -1) 22_01_24_1 
