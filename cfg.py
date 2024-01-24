@@ -219,8 +219,8 @@ cfg.L4L3SOM  = 1.0
 cfg.L4L3VIP = 0.1
 cfg.L4L3NGF = 1.0
 
-
-
+cfg.artFBweight = 1.0
+cfg.artFBprob = 0.1
 
 cfg.addSubConn = 1
 

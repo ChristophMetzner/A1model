@@ -848,8 +848,8 @@ if cfg.addBkgConn:
             'sec': 'apic_uppertrunk', 
             'loc': 0.5,
             'synMech': ESynMech,
-            'probability': cfg.artFB['probE'],
-            'weight': cfg.artFB['weightE'],
+            'probability': cfg.artFB['prob'],
+            'weight': cfg.artFB['weight'],
             'synMechWeightFactor': cfg.synWeightFractionEE,
             'delay': cfg.delayBkg}
 
