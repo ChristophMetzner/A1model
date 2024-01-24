@@ -731,11 +731,10 @@ if cfg.addBkgConn:
         # load file with FB input rates
         import pickle
         with open(cfg.artFB['file'], "rb") as fp:   # Unpickling
-	    spkTimes= pickle.load(fp)
+            spkTimes= pickle.load(fp)
         numCells = len(spkTimes)
-        netParams.popParams['FB'] = {'cellModel': 'VecStim', 'numCells': numCells, 'ynormRange': layer['cochlear'],
-            'spkTimes': spkTimes}       
-
+        netParams.popParams['FB'] = {'cellModel': 'VecStim', 'numCells': numCells, 'ynormRange': layer['cochlear'],'spkTimes': spkTimes}       
+            
     # excBkg/I -> thalamus + cortex
     with open('cells/bkgWeightPops.json', 'r') as f:
         weightBkg = json.load(f)
