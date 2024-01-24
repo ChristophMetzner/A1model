@@ -730,7 +730,6 @@ if cfg.addBkgConn:
     if cfg.artFB:
         # load file with FB input rates
         import pickle
-
         with open(cfg.artFB['file'], "rb") as fp:   # Unpickling
 	    spkTimes= pickle.load(fp)
         numCells = len(spkTimes)
