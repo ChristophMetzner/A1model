@@ -19,7 +19,7 @@ import matplotlib; matplotlib.use('Agg')  # to avoid graphics error in servers
 
 from netpyne import sim
 
-cfg, netParams = sim.readCmdLineArgs(simConfigDefault='cfg.py', netParamsDefault='netParams.py')
+cfg, netParams = sim.readCmdLineArgs(simConfigDefault='cfg.py', netParamsDefault='netParams_addFB.py')
 
 # sim.createSimulateAnalyze(netParams, cfg)
 print(cfg.simLabel)
