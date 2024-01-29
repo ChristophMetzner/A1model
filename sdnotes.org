@@ -12324,7 +12324,7 @@ cfg.artFB = 1
 cfg.artFBweight = 1.0
 cfg.artFBprob = 0.1
 
- -1) 26_01_24_artFB_test_1 
+ -2) 29_01_24_artFB_test_2 
 
 cfg.EEPopGain = {'IT2': 2.5, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
  
@@ -12347,11 +12347,13 @@ cfg.L4L3SOM  = 1.0
 
 
 cfg.L4L3VIP = 0.1
+cfg.L4L3NGF = 1.0
 
+cfg.artFB = 1
 cfg.artFBweight = 5.0
 cfg.artFBprob = 0.1
 
- -2) 26_01_24_artFB_test_2 
+ -3) 29_01_24_artFB_test_3 
 
 cfg.EEPopGain = {'IT2': 2.5, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
  
@@ -12374,11 +12376,14 @@ cfg.L4L3SOM  = 1.0
 
 
 cfg.L4L3VIP = 0.1
+cfg.L4L3NGF = 1.0
 
+
+cfg.artFB = 1
 cfg.artFBweight = 2.5
 cfg.artFBprob = 0.1
 
- -3) 26_01_24_artFB_test_3 
+ -4) 29_01_24_artFB_test_4 
 
 cfg.EEPopGain = {'IT2': 2.5, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
  
@@ -12401,6 +12406,9 @@ cfg.L4L3SOM  = 1.0
 
 
 cfg.L4L3VIP = 0.1
+cfg.L4L3NGF = 1.0
 
+
+cfg.artFB = 1
 cfg.artFBweight = 2.5
 cfg.artFBprob = 0.5
