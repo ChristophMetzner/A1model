@@ -576,7 +576,7 @@ if cfg.addSubConn:
         'density': 'uniform'}
 
     #------------------------------------------------------------------------------
-'''    # E -> E5,6: soma,dendrites (all)
+    '''    # E -> E5,6: soma,dendrites (all)
     netParams.subConnParams['E->E5,6'] = {
         'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
         'postConds': {'pops': ['IT5A', 'CT5A', 'PT5B', 'CT5B', 'IT6', 'CT6']},
@@ -591,7 +591,7 @@ if cfg.addSubConn:
         'sec': 'all',
         'groupSynMechs': ESynMech, 
         'density': 'uniform'}
-'''        
+    '''        
 
 
     #------------------------------------------------------------------------------
