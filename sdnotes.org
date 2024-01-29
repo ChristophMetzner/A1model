@@ -12503,7 +12503,7 @@ cfg.L4L3VIP = 0.1
 cfg.L4L3NGF = 1.0
 
 
-cfg.artFB = 1 # this switches the feedback off regardless of the weight and prob below
+cfg.artFB = 1 
 cfg.artFBweight = 1.0
 cfg.artFBprob = 0.1
 
