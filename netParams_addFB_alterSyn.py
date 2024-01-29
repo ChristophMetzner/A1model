@@ -574,7 +574,26 @@ if cfg.addSubConn:
         'sec': 'all',
         'groupSynMechs': ESynMech, 
         'density': 'uniform'}
-        
+
+    #------------------------------------------------------------------------------
+'''    # E -> E5,6: soma,dendrites (all)
+    netParams.subConnParams['E->E5,6'] = {
+        'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
+        'postConds': {'pops': ['IT5A', 'CT5A', 'PT5B', 'CT5B', 'IT6', 'CT6']},
+        'sec': 'all',
+        'groupSynMechs': ESynMech, 
+        'density': 'uniform'}
+
+    # E -> E5B: soma,dendrites (all)
+    netParams.subConnParams['E->EIT5B'] = {
+        'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
+        'postConds': {'pops': ['IT5B']},
+        'sec': 'all',
+        'groupSynMechs': ESynMech, 
+        'density': 'uniform'}
+'''        
+
+
     #------------------------------------------------------------------------------
     # E -> I: soma, dendrite (all)
     netParams.subConnParams['E->I'] = {
@@ -649,10 +668,28 @@ if cfg.addSubConn:
 
     #------------------------------------------------------------------------------
     #  TCM -> E: apical
+    #netParams.subConnParams['TCM->E'] = {
+    #    'preConds': {'cellType': ['TCM']}, 
+    #    'postConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']},
+    #    'sec': 'apic',
+    #    'groupSynMechs': ESynMech, 
+    #    'density': 'uniform'}
+
+    #------------------------------------------------------------------------------
+    #  TCM -> E: apical
     netParams.subConnParams['TCM->E'] = {
         'preConds': {'cellType': ['TCM']}, 
-        'postConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']},
+        'postConds': {'cellType': ['IT2','IT5A','IT5B','IT6', 'ITS4', 'PT', 'CT']},
         'sec': 'apic',
+        'groupSynMechs': ESynMech, 
+        'density': 'uniform'}
+
+    #------------------------------------------------------------------------------
+    #  TCM -> 3: apical
+    netParams.subConnParams['TCM->3'] = {
+        'preConds': {'cellType': ['TCM']}, 
+        'postConds': {'cellType': ['IT3']},
+        'sec': 'apic_trunk',
         'groupSynMechs': ESynMech, 
         'density': 'uniform'}
         
