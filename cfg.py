@@ -361,7 +361,7 @@ cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100
                    'probIMatrix': cfg.ICThalprobIMatrix,
                    'seed': 1}  # SHOULD THIS BE ZERO?   
 
-cfg.artFB = {'file':'data/FBinput/FBinput_test_numCells200.pkl',
+cfg.artFB = {'file':'data/FBinput/FBinput_test_numCell200.pkl',
              'weight': cfg.artFBweight,
              'prob': cfg.artFBprob,
             }                   
