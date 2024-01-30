@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_29_01_24_alter_syn_test_2'
+cfg.simLabel = 'ASSR_30_01_24_artFB_test_1'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -221,7 +221,7 @@ cfg.L4L3NGF = 1.0
 
 cfg.artFB = 1
 cfg.artFBweight = 1.0
-cfg.artFBprob = 0.1
+cfg.artFBprob = 0.5
 
 cfg.addSubConn = 1
 
@@ -361,7 +361,7 @@ cfg.ICThalInput = {'file': 'data/ICoutput/40Hz_10kHz_4s_AM_click_train_1kBMF_100
                    'probIMatrix': cfg.ICThalprobIMatrix,
                    'seed': 1}  # SHOULD THIS BE ZERO?   
 
-cfg.artFB = {'file':'data/FBinput/FBinput_test.pkl',
+cfg.artFB = {'file':'data/FBinput/FBinput_test_numCells200.pkl',
              'weight': cfg.artFBweight,
              'prob': cfg.artFBprob,
             }                   
