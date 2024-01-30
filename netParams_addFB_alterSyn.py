@@ -679,16 +679,16 @@ if cfg.addSubConn:
     #  TCM -> E: apical
     netParams.subConnParams['TCM->E'] = {
         'preConds': {'cellType': ['TCM']}, 
-        'postConds': {'cellType': ['IT2','IT5A','IT5B','IT6', 'ITS4', 'CT']},
+        'postConds': {'cellType': ['IT2','IT3','IT6', 'ITS4', 'CT']},
         'sec': 'apic',
         'groupSynMechs': ESynMech, 
         'density': 'uniform'}
 
     #------------------------------------------------------------------------------
-    #  TCM -> 5B: apical
-    netParams.subConnParams['TCM->5B'] = {
+    #  TCM -> 5: apical
+    netParams.subConnParams['TCM->5'] = {
         'preConds': {'cellType': ['TCM']}, 
-        'postConds': {'cellType': ['IT5B','PT5B']},
+        'postConds': {'cellType': ['IT5A','IT5B','PT5B']},
         'sec': 'apic_trunk',
         'groupSynMechs': ESynMech, 
         'density': 'uniform'}

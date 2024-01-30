@@ -12453,37 +12453,6 @@ cfg.artFBprob = 0.5
 
 => also hardly any effect (check implementation for bugs!)
 
- -6) 29_01_24_artFB_alterSyn_test_1 (tests both together) 
-
-cfg.EEPopGain = {'IT2': 2.5, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
- 
-cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 0.1, 'SOM3': 0.25, 'PV3': 0.15, 'VIP3': 0.25, 'NGF3': 0.1, 'SOM4': 0.5, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 0.1, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} 
-
-cfg.ICThalweightECore = 2.5 # 1.0
-cfg.ICThalweightICore = 0.75 # 0.25
-cfg.ICThalprobECore = 0.16
-cfg.ICThalprobICore = 0.09
-
-cfg.ICThalMatrixCoreFactor = 0.08 #0.1
-
-cfg.thalL4PV = 0.075 # 0.5 
-cfg.thalL4SOM = 0.25 # 0.5 
-cfg.thalL4E = 2.5 #1.0 
-
-cfg.L4L3E    = 2.0 # 1.0
-cfg.L4L3PV   = 0.1
-cfg.L4L3SOM  = 1.0
-
-
-cfg.L4L3VIP = 0.1
-cfg.L4L3NGF = 1.0
-
-
-cfg.artFB = 1 
-cfg.artFBweight = 1.0
-cfg.artFBprob = 0.1
-
-# place TCM->5B connections on the apical trunk (avoiding the tuft in L1/L2)
 
 
 Sims for 30_01_24:
@@ -12579,3 +12548,36 @@ cfg.artFBweight = 5.0
 cfg.artFBprob = 0.5
 
 # input file: FBinput_test_numCell200.pkl
+
+
+-4) 30_01_24_alterSyn_test_1 
+
+cfg.EEPopGain = {'IT2': 2.5, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
+ 
+cfg.EIPopGain = {'NGF1': 1.0, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 0.1, 'SOM3': 0.25, 'PV3': 0.15, 'VIP3': 0.25, 'NGF3': 0.1, 'SOM4': 0.5, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 0.1, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} 
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 0.1
+cfg.L4L3SOM  = 1.0
+
+
+cfg.L4L3VIP = 0.1
+cfg.L4L3NGF = 1.0
+
+
+cfg.artFB = 0 # this switches the feedback off regardless of the weight and prob below
+cfg.artFBweight = 2.5
+cfg.artFBprob = 0.5
+
+# place TCM->5 connections (i.e. IT5A, IT5B, PT5B) on the apical trunk (avoiding the tuft in L1/L2)
