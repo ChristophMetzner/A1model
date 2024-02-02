@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_02_02_24_alterSyn_test_2'
+cfg.simLabel = 'ASSR_02_02_24_artFB_test_1'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -198,7 +198,7 @@ cfg.ICThalprobECore = 0.16
 cfg.ICThalprobICore = 0.09
 
 # these params control IC -> Thalamic Matrix
-cfg.ICThalMatrixCoreFactor = 0.08 #0.1
+cfg.ICThalMatrixCoreFactor = 0.0 #0.1
 cfg.ICThalweightEMatrix = cfg.ICThalweightECore * cfg.ICThalMatrixCoreFactor
 cfg.ICThalweightIMatrix = cfg.ICThalweightICore * cfg.ICThalMatrixCoreFactor
 cfg.ICThalprobEMatrix = cfg.ICThalprobECore 
@@ -219,7 +219,7 @@ cfg.L4L3SOM  = 1.0
 cfg.L4L3VIP = 0.1
 cfg.L4L3NGF = 1.0
 
-cfg.artFB = 0
+cfg.artFB = 1
 cfg.artFBweight = 10.0
 cfg.artFBprob = 0.5
 
