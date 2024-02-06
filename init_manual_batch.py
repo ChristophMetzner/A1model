@@ -14,7 +14,7 @@ from netpyne import sim
 
 
 
-def run(seed,label)
+def run(seed,label):
 	cfg, netParams = sim.readCmdLineArgs(simConfigDefault='cfg.py', netParamsDefault='netParams_addFV_alterSyn.py')
 
 	cfg.seeds = {'conn': seed, 'stim': 1, 'loc': 1}
