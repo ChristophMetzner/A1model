@@ -154,12 +154,12 @@ def assr_batch_grid(filename):
 
     # #### SET weights#### 
     #params[('seeds','conn')] = [12345, 23451, 34512, 45123, 51234] 
-    params[('seeds','conn')] = [67890, 6789, 90678, 89067, 78906]
+    #params[('seeds','conn')] = [67890, 6789, 90678, 89067, 78906]
     #params[('seeds','conn')] = [11111, 22222, 33333, 44444, 55555]
     #params[('thalL4VIP')] = [0.05, 0.1]
     #params[('thalL4NGF')] = [0.05, 0.1]
     #params[('L4L3VIP')] = [0.05, 0.1]
-
+    params[('artFBweight')] = np.arange(10.0,60.0,10.0)
 
     #### GROUPED PARAMS #### 
     groupedParams = [] 
@@ -174,7 +174,7 @@ def assr_batch_grid(filename):
     initCfg['recordStep'] = 0.05
 
     # SET SEEDS FOR CONN AND STIM 
-    initCfg[('seeds', 'conn')] = 0
+    initCfg[('seeds', 'conn')] = 23451
 
 
 

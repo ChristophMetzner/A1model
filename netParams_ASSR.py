@@ -645,15 +645,36 @@ if cfg.addSubConn:
         'groupSynMechs': ESynMech, 
         'density': 'uniform'} 
 
-    #------------------------------------------------------------------------------
-    #  TCM -> E: apical
-    netParams.subConnParams['TCM->E'] = {
-        'preConds': {'cellType': ['TCM']}, 
-        'postConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']},
-        'sec': 'apic',
-        'groupSynMechs': ESynMech, 
-        'density': 'uniform'}
-        
+    if cfg.alterSyn:
+
+        #------------------------------------------------------------------------------
+        #  TCM -> E: apical
+        netParams.subConnParams['TCM->E'] = {
+            'preConds': {'cellType': ['TCM']}, 
+            'postConds': {'cellType': ['IT2','IT3','IT6', 'ITS4', 'CT']},
+            'sec': 'apic',
+            'groupSynMechs': ESynMech, 
+            'density': 'uniform'}
+
+        #------------------------------------------------------------------------------
+        #  TCM -> 5: apical
+        netParams.subConnParams['TCM->5'] = {
+            'preConds': {'cellType': ['TCM']}, 
+            'postConds': {'cellType': ['IT5A','IT5B','PT5B']},
+            'sec': 'apic_trunk',
+            'groupSynMechs': ESynMech, 
+            'density': 'uniform'}
+    
+    else:
+        #------------------------------------------------------------------------------
+        #  TCM -> E: apical
+        netParams.subConnParams['TCM->E'] = {
+            'preConds': {'cellType': ['TCM']}, 
+            'postConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']},
+            'sec': 'apic',#'apic',
+            'groupSynMechs': ESynMech, 
+            'density': 'uniform'}
+
 
 #------------------------------------------------------------------------------
 # Background inputs 
@@ -725,7 +746,15 @@ if cfg.addBkgConn:
         netParams.popParams['IC'] = {'cellModel': 'VecStim', 'numCells': numCells, 'ynormRange': layer['cochlear'],
             'spkTimes': spkTimes}
 
-
+    if cfg.artFB:
+        # load file with FB input rates
+        print('Add artificial feedback')
+        import pickle
+        with open(cfg.artFB['file'], "rb") as fp:   # Unpickling
+            spkTimes= pickle.load(fp)
+        numCells = len(spkTimes)
+        netParams.popParams['FB'] = {'cellModel': 'VecStim', 'numCells': numCells, 'ynormRange': layer['cochlear'],'spkTimes': spkTimes} 
+        
     # excBkg/I -> thalamus + cortex
     with open('cells/bkgWeightPops.json', 'r') as f:
         weightBkg = json.load(f)
@@ -830,7 +859,18 @@ if cfg.addBkgConn:
             'delay': cfg.delayBkg}  
         
 
-
+    if cfg.artFB:
+        # FB -> L5 apical dendrites in L2
+        netParams.connParams['FB->L5'] = { 
+            'preConds': {'pop': 'FB'}, 
+            'postConds': {'pop': ['IT5A', 'IT5B','PT5B']},
+            'sec': 'apic_uppertrunk', 
+            'loc': 0.5,
+            'synMech': ESynMech,
+            'probability': cfg.artFB['prob'],
+            'weight': cfg.artFB['weight'],
+            'synMechWeightFactor': cfg.synWeightFractionEE,
+            'delay': cfg.delayBkg}
 #------------------------------------------------------------------------------
 # Current inputs (IClamp)
 #------------------------------------------------------------------------------
