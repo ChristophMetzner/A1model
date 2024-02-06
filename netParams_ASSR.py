@@ -751,6 +751,7 @@ if cfg.addBkgConn:
         print('Add artificial feedback')
         with open(cfg.artFB['file'], "rb") as fp:   # Unpickling
             spkTimes= pickle.load(fp)
+        print('Feedback spike times loaded')
         numCells = len(spkTimes)
         netParams.popParams['FB'] = {'cellModel': 'VecStim', 'numCells': numCells, 'ynormRange': layer['cochlear'],'spkTimes': spkTimes}    
         
