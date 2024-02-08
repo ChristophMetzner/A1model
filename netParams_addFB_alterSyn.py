@@ -622,13 +622,22 @@ if cfg.addSubConn:
            'density': 'uniform'} 
 
     #------------------------------------------------------------------------------
-    # NGF1 -> E: apic_tuft
-    netParams.subConnParams['NGF1->E'] = {
-        'preConds': {'pops': ['NGF1']}, 
-        'postConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']},
-        'sec': 'apic_tuft',
-        'groupSynMechs': NGFSynMech, 
-        'density': 'uniform'} 
+    if cfg.alterSyn3:
+        # NGF1 -> E: apic_tuft
+        netParams.subConnParams['NGF1->E'] = {
+            'preConds': {'pops': ['NGF1']}, 
+            'postConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']},
+            'sec': 'apic_uppertrunk',
+            'groupSynMechs': NGFSynMech, 
+            'density': 'uniform'}    
+    else:
+        # NGF1 -> E: apic_tuft
+        netParams.subConnParams['NGF1->E'] = {
+            'preConds': {'pops': ['NGF1']}, 
+            'postConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']},
+            'sec': 'apic_tuft',
+            'groupSynMechs': NGFSynMech, 
+            'density': 'uniform'} 
 
     #------------------------------------------------------------------------------
     # NGF2,3,4 -> E2,3,4: apic_trunk
