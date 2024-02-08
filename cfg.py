@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_06_02_24_artFB_test_2'
+cfg.simLabel = 'ASSR_08_02_24_L2L3_test_1'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -226,7 +226,8 @@ cfg.artFBprob = 0.5
 cfg.addSubConn = 1
 
 
-cfg.alterSyn = 1
+cfg.alterSyn = 0
+cfg.alterSyn2 = 1
 
 ## full weight conn matrix
 with open('conn/conn.pkl', 'rb') as fileObj: connData = pickle.load(fileObj)

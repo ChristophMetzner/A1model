@@ -595,13 +595,31 @@ if cfg.addSubConn:
 
 
     #------------------------------------------------------------------------------
-    # E -> I: soma, dendrite (all)
-    netParams.subConnParams['E->I'] = {
-        'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
-        'postConds': {'cellType': ['PV','SOM','NGF', 'VIP']},
-        'sec': 'all',
-        'groupSynMechs': ESynMech, 
-        'density': 'uniform'} 
+    
+    if cfg.alterSyn2:
+       # E -> I: soma, dendrite (all)
+       netParams.subConnParams['E->I'] = {
+           'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
+           'postConds': {'cellType': ['PV','SOM','NGF2','NGF3','NGF4','NGF5','NGF6', 'VIP']},
+           'sec': 'all',
+           'groupSynMechs': ESynMech, 
+           'density': 'uniform'} 
+       # E -> NGF1: soma, dendrite (all)
+       netParams.subConnParams['E->I'] = {
+           'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
+           'postConds': {'cellType': ['NGF1']},
+           'sec': 'all',
+           'groupSynMechs': ESynMech, 
+           'density': 'uniform'} 
+    
+    else:
+       # E -> I: soma, dendrite (all)
+       netParams.subConnParams['E->I'] = {
+           'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
+           'postConds': {'cellType': ['PV','SOM','NGF', 'VIP']},
+           'sec': 'all',
+           'groupSynMechs': ESynMech, 
+           'density': 'uniform'} 
 
     #------------------------------------------------------------------------------
     # NGF1 -> E: apic_tuft
@@ -666,33 +684,36 @@ if cfg.addSubConn:
         'groupSynMechs': ESynMech, 
         'density': 'uniform'} 
 
-    #------------------------------------------------------------------------------
-    #  TCM -> E: apical
-    netParams.subConnParams['TCM->E'] = {
-        'preConds': {'cellType': ['TCM']}, 
-        'postConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']},
-        'sec': 'apic_trunk',#'apic',
-        'groupSynMechs': ESynMech, 
-        'density': 'uniform'}
 
-    #------------------------------------------------------------------------------
-    #  TCM -> E: apical
-    #netParams.subConnParams['TCM->E'] = {
-    #    'preConds': {'cellType': ['TCM']}, 
-    #    'postConds': {'cellType': ['IT2','IT3','IT6', 'ITS4', 'CT']},
-    #    'sec': 'apic',
-    #    'groupSynMechs': ESynMech, 
-    #    'density': 'uniform'}
+    if cfg.alterSyn:
 
-    #------------------------------------------------------------------------------
-    #  TCM -> 5: apical
-    #netParams.subConnParams['TCM->5'] = {
-    #    'preConds': {'cellType': ['TCM']}, 
-    #    'postConds': {'cellType': ['IT5A','IT5B','PT5B']},
-    #    'sec': 'apic_trunk',
-    #    'groupSynMechs': ESynMech, 
-    #    'density': 'uniform'}
-        
+        #------------------------------------------------------------------------------
+        #  TCM -> E: apical
+        netParams.subConnParams['TCM->E'] = {
+            'preConds': {'cellType': ['TCM']}, 
+            'postConds': {'cellType': ['IT2','IT3','IT6', 'ITS4', 'CT']},
+            'sec': 'apic',
+            'groupSynMechs': ESynMech, 
+            'density': 'uniform'}
+
+        #------------------------------------------------------------------------------
+        #  TCM -> 5: apical
+        netParams.subConnParams['TCM->5'] = {
+            'preConds': {'cellType': ['TCM']}, 
+            'postConds': {'cellType': ['IT5A','IT5B','PT5B']},
+            'sec': 'apic_trunk',
+            'groupSynMechs': ESynMech, 
+            'density': 'uniform'}
+    
+    else:
+        #------------------------------------------------------------------------------
+        #  TCM -> E: apical
+        netParams.subConnParams['TCM->E'] = {
+            'preConds': {'cellType': ['TCM']}, 
+            'postConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']},
+            'sec': 'apic',#'apic',
+            'groupSynMechs': ESynMech, 
+            'density': 'uniform'}
 
 #------------------------------------------------------------------------------
 # Background inputs 
