@@ -346,6 +346,8 @@ if cfg.addConn and cfg.EIGain > 0.0:
                         
                         if 'NGF' in post:
                             synWeightFactor = cfg.synWeightFractionENGF
+                        if 'NGF1' in post:
+                            synWeightFactor = cfg.synWeightFractionENGF*cfg.ENGF1    
                         if 'PV' in post:
                             synWeightFactor = cfg.synWeightFractionEI_CustomCort
                         else:
