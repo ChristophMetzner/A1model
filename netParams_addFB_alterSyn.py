@@ -528,6 +528,10 @@ if cfg.addConn and cfg.addThalamoCorticalConn:
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
                         scaleFactor = cfg.thalL4VIP#25
+                    elif post=='NGF1':
+                        syn = ESynMech
+                        synWeightFactor = cfg.synWeightFractionEE
+                        scaleFactor = cfg.thalL1NGF#25
                     else:
                         syn = ESynMech
                         synWeightFactor = cfg.synWeightFractionEE
@@ -596,33 +600,17 @@ if cfg.addSubConn:
 
     #------------------------------------------------------------------------------
     
-    if cfg.alterSyn2:
-       # E -> I: soma, dendrite (all)
-       netParams.subConnParams['E->I'] = {
-           'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
-           'postConds': {'cellType': ['PV','SOM','NGF2','NGF3','NGF4','NGF5','NGF6', 'VIP']},
-           'sec': 'all',
-           'groupSynMechs': ESynMech, 
-           'density': 'uniform'} 
-       # E -> NGF1: soma, dendrite (all)
-       netParams.subConnParams['E->I'] = {
-           'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
-           'postConds': {'cellType': ['NGF1']},
-           'sec': 'all',
-           'groupSynMechs': ESynMech, 
-           'density': 'uniform'} 
-    
-    else:
-       # E -> I: soma, dendrite (all)
-       netParams.subConnParams['E->I'] = {
-           'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
-           'postConds': {'cellType': ['PV','SOM','NGF', 'VIP']},
-           'sec': 'all',
-           'groupSynMechs': ESynMech, 
-           'density': 'uniform'} 
+
+    # E -> I: soma, dendrite (all)
+    netParams.subConnParams['E->I'] = {
+        'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
+        'postConds': {'cellType': ['PV','SOM','NGF', 'VIP']},
+        'sec': 'all',
+        'groupSynMechs': ESynMech, 
+        'density': 'uniform'} 
 
     #------------------------------------------------------------------------------
-    if cfg.alterSyn3:
+    if cfg.alterSyn2:
         # NGF1 -> E: apic_tuft
         netParams.subConnParams['NGF1->E'] = {
             'preConds': {'pops': ['NGF1']}, 

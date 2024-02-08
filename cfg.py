@@ -212,6 +212,8 @@ cfg.thalL4E = 2.5 #1.0
 cfg.thalL4VIP = 1.0
 cfg.thalL4NGF = 1.0
 
+cfg.thalL1NGF = 0.01
+
 cfg.L4L3E    = 2.0 # 1.0
 cfg.L4L3PV   = 0.1
 cfg.L4L3SOM  = 1.0
@@ -228,8 +230,8 @@ cfg.addSubConn = 1
 
 cfg.alterSyn = 0
 cfg.alterSyn2 = 0
-cfg.alterSyn3 = 1
-cfg.alterSyn4 = 0
+cfg.alterSyn3 = 0
+
 
 
 ## full weight conn matrix

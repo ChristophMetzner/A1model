@@ -13014,6 +13014,8 @@ cfg.thalL4PV = 0.075 # 0.5
 cfg.thalL4SOM = 0.25 # 0.5 
 cfg.thalL4E = 2.5 #1.0 
 
+cfg.thalL1NGF = 0.01
+
 cfg.L4L3E    = 2.0 # 1.0
 cfg.L4L3PV   = 0.1
 cfg.L4L3SOM  = 1.0
@@ -13028,7 +13030,7 @@ cfg.artFBprob = 0.5
 
 cfg.alterSyn = 0
 cfg.alterSyn2 = 0
-cfg.alterSyn3 = 1
+cfg.alterSyn3 = 0
 # altered synaptic input to NGF1->E
 
  -3) 08_02_24_L2L3_test_3
@@ -13064,6 +13066,6 @@ cfg.artFBprob = 0.5
 
 cfg.alterSyn = 0
 cfg.alterSyn2 = 0
-cfg.alterSyn3 = 0
-cfg.alterSyn4 = 1
+cfg.alterSyn3 = 1
+
 # altered synaptic input to TCM->NGF1
