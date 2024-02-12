@@ -13158,7 +13158,7 @@ cfg.artFB = 0
 cfg.artFBweight = 10.0
 cfg.artFBprob = 0.5
 
-cfg.alterSyn = 1
+cfg.alterSyn = 0
 cfg.alterSyn2 = 1
 # altered synaptic input to E->NGF1
 
@@ -13198,7 +13198,7 @@ cfg.artFB = 0
 cfg.artFBweight = 10.0
 cfg.artFBprob = 0.5
 
-cfg.alterSyn = 0
+cfg.alterSyn = 1
 cfg.alterSyn2 = 1
 # altered synaptic input to E->NGF1
 
