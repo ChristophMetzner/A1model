@@ -198,7 +198,7 @@ cfg.ICThalprobECore = 0.16
 cfg.ICThalprobICore = 0.09
 
 # these params control IC -> Thalamic Matrix
-cfg.ICThalMatrixCoreFactor = 0.0
+cfg.ICThalMatrixCoreFactor = 0.1
 cfg.ICThalweightEMatrix = cfg.ICThalweightECore * cfg.ICThalMatrixCoreFactor
 cfg.ICThalweightIMatrix = cfg.ICThalweightICore * cfg.ICThalMatrixCoreFactor
 cfg.ICThalprobEMatrix = cfg.ICThalprobECore 
