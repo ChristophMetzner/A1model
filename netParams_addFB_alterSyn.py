@@ -309,16 +309,8 @@ if cfg.addConn and cfg.EEGain > 0.0:
                 else:
                     prob = pmat[pre][post]
                 if pre=='ITS4' or pre=='ITP4':
-                    if post=='PV3':
-                        scaleFactor = cfg.L4L3PV#25
-                    elif post=='SOM3':
-                        scaleFactor = cfg.L4L3SOM
-                    elif post=='IT3':
+                    if post=='IT3':
                         scaleFactor = cfg.L4L3E#25
-                    elif post=='NGF3':
-                        scaleFactor = cfg.L4L3NGF#25
-                    elif post=='VIP3':
-                        scaleFactor = cfg.L4L3VIP#25
                 netParams.connParams['EE_'+pre+'_'+post+'_'+l] = { 
                     'preConds': {'pop': pre}, 
                     'postConds': {'pop': post, 'ynorm': layer[l]},
@@ -339,26 +331,35 @@ if cfg.addConn and cfg.EIGain > 0.0:
             for postType in Itypes:
                 if postType in post: # only create rule if celltype matches pop
                     for l in layerGainLabels:  # used to tune each layer group independently
+                        scaleFactor = 1.0
                         if connDataSource['E->E/I'] in ['Allen_V1', 'Allen_custom']:
                             prob = '%f * exp(-dist_2D/%f)' % (pmat[pre][post], lmat[pre][post])
                         else:
                             prob = pmat[pre][post]
                         
                         if 'NGF' in post:
-                            synWeightFactor = cfg.synWeightFractionENGF
-                        factor = 1.0
-                        if 'NGF1' in post:
-                            factor = cfg.ENGF1    
-                        if 'PV' in post:
+                            synWeightFactor = cfg.synWeightFractionENGF   
+                        elif 'PV' in post:
                             synWeightFactor = cfg.synWeightFractionEI_CustomCort
                         else:
-                            synWeightFactor = cfg.synWeightFractionEI #cfg.synWeightFractionEI_CustomCort  #cfg.synWeightFractionEI
+                            synWeightFactor = cfg.synWeightFractionEI #cfg.synWeightFractionEI_CustomCort  #cfg.synWeightFractionEI   
+                        if 'NGF1' in post:
+                            scaleFactor = cfg.ENGF1  
+                        if pre=='ITS4' or pre=='ITP4':
+                            if post=='PV3':
+                                scaleFactor = cfg.L4L3PV#25
+                            elif post=='SOM3':
+                                scaleFactor = cfg.L4L3SOM
+                            elif post=='NGF3':
+                                scaleFactor = cfg.L4L3NGF#25
+                            elif post=='VIP3':
+                                scaleFactor = cfg.L4L3VIP#25
                         netParams.connParams['EI_'+pre+'_'+post+'_'+postType+'_'+l] = { 
                             'preConds': {'pop': pre}, 
                             'postConds': {'pop': post, 'cellType': postType, 'ynorm': layer[l]},
                             'synMech': ESynMech,
                             'probability': prob,
-                            'weight': wmat[pre][post] * cfg.EIGain * cfg.EICellTypeGain[postType] * cfg.EILayerGain[l] * cfg.EIPopGain[post]*factor, 
+                            'weight': wmat[pre][post] * cfg.EIGain * cfg.EICellTypeGain[postType] * cfg.EILayerGain[l] * cfg.EIPopGain[post]*scaleFactor, 
                             'synMechWeightFactor': synWeightFactor,
                             'delay': 'defaultDelay+dist_3D/propVelocity',
                             'synsPerConn': 1,
