@@ -84,7 +84,7 @@ cfg.ICThalweightICore = 0.75 # 0.25
 cfg.ICThalprobECore = 0.16
 cfg.ICThalprobICore = 0.09
 
-cfg.ICThalMatrixCoreFactor = 0.0 #0.1
+cfg.ICThalMatrixCoreFactor = 0.1
 
 cfg.thalL4PV = 0.075 # 0.5 
 cfg.thalL4SOM = 0.25 # 0.5 
