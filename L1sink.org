@@ -27,7 +27,7 @@ Potential sources of the L1 sink:
 			d) VIP2
 			e) NGF2
 			
-			
+### ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ###	
 13/02/24
 
 Sim1: Set matrix input to exc. and inh. cells to 0 -> 1.1a-e +1.2a-e
@@ -72,6 +72,8 @@ cfg.alterSyn = 0
 cfg.alterSyn2 = 0
 
 
+=> no effect on L1 sink!
+
 Sim2: Set recurrent excitation input to exc. cells (L5 and L6; other E->E recurrent conns already target proximal dendrites) to proximal dendrites-> 2.1a-c
 
 Params:
@@ -114,6 +116,7 @@ cfg.alterSyn = 0
 cfg.alterSyn2 = 0
 cfg.alterSyn3 = 1
 
+=> No effect on L1 sink!
 
 Sim3: Set recurrent excitation input to inh. cells in L1 and L2 to 0 -> 2.2a-e
 
@@ -157,12 +160,149 @@ cfg.alterSyn = 0
 cfg.alterSyn2 = 0
 cfg.alterSyn3 = 0
 
-
+=> no effect on L1 sink
 
 Sim4: Set recurrent excitation input to IT2 cells to 0 (IT2 cells sit in L2 and receive input to their dendrites which are in L2 and L3, so they might also cause the L1/L2 sink)
 
 Params:
 cfg.EEPopGain = {'IT2': 0.0, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
+ 
+cfg.EIPopGain = {'NGF1': 0.1, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 0.1, 'SOM3': 0.25, 'PV3': 0.15, 'VIP3': 0.25, 'NGF3': 0.1, 'SOM4': 0.5, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 0.1, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} 
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.thalL4VIP = 1.0
+cfg.thalL4NGF = 1.0
+
+cfg.thalL1NGF = 1.0
+cfg.ENGF1 = 1.0
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 0.1
+cfg.L4L3SOM  = 1.0
+
+cfg.L4L3VIP = 0.1
+cfg.L4L3NGF = 1.0
+
+cfg.artFB = 0
+cfg.artFBweight = 0.0
+cfg.artFBprob = 0.0
+
+cfg.addSubConn = 1
+
+
+cfg.alterSyn = 0
+cfg.alterSyn2 = 0
+cfg.alterSyn3 = 0
+
+=> removed the L1 sink!
+
+### ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ###
+14/02/24
+
+Goal 1: Explore sink strength as a function of IT2 EEPopGain (sims 1-3)
+
+Goal 2: Find out which of the excitatory inputs mainly drives the L1 sink (sims )
+
+
+
+Sim1: Set EEPopGain IT2 = 1.0
+
+Params:
+cfg.EEPopGain = {'IT2': 1.0, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
+ 
+cfg.EIPopGain = {'NGF1': 0.1, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 0.1, 'SOM3': 0.25, 'PV3': 0.15, 'VIP3': 0.25, 'NGF3': 0.1, 'SOM4': 0.5, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 0.1, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} 
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.thalL4VIP = 1.0
+cfg.thalL4NGF = 1.0
+
+cfg.thalL1NGF = 1.0
+cfg.ENGF1 = 1.0
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 0.1
+cfg.L4L3SOM  = 1.0
+
+cfg.L4L3VIP = 0.1
+cfg.L4L3NGF = 1.0
+
+cfg.artFB = 0
+cfg.artFBweight = 0.0
+cfg.artFBprob = 0.0
+
+cfg.addSubConn = 1
+
+
+cfg.alterSyn = 0
+cfg.alterSyn2 = 0
+cfg.alterSyn3 = 0
+
+Sim2: Set EEPopGain IT2 = 0.5
+
+Params:
+cfg.EEPopGain = {'IT2': 0.5, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
+ 
+cfg.EIPopGain = {'NGF1': 0.1, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 0.1, 'SOM3': 0.25, 'PV3': 0.15, 'VIP3': 0.25, 'NGF3': 0.1, 'SOM4': 0.5, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 0.1, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} 
+
+cfg.ICThalweightECore = 2.5 # 1.0
+cfg.ICThalweightICore = 0.75 # 0.25
+cfg.ICThalprobECore = 0.16
+cfg.ICThalprobICore = 0.09
+
+cfg.ICThalMatrixCoreFactor = 0.1
+
+cfg.thalL4PV = 0.075 # 0.5 
+cfg.thalL4SOM = 0.25 # 0.5 
+cfg.thalL4E = 2.5 #1.0 
+
+cfg.thalL4VIP = 1.0
+cfg.thalL4NGF = 1.0
+
+cfg.thalL1NGF = 1.0
+cfg.ENGF1 = 1.0
+
+cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3PV   = 0.1
+cfg.L4L3SOM  = 1.0
+
+cfg.L4L3VIP = 0.1
+cfg.L4L3NGF = 1.0
+
+cfg.artFB = 0
+cfg.artFBweight = 0.0
+cfg.artFBprob = 0.0
+
+cfg.addSubConn = 1
+
+
+cfg.alterSyn = 0
+cfg.alterSyn2 = 0
+cfg.alterSyn3 = 0
+
+Sim3: Set EEPopGain IT2 = 0.1
+
+Params:
+cfg.EEPopGain = {'IT2': 0.1, 'IT3': 1.55, 'ITP4': 1.0, 'ITS4': 1.0, 'IT5A': 1.05, 'CT5A': 1.1500000000000001, 'IT5B': 0.425, 'CT5B': 1.1500000000000001, 'PT5B': 1.05, 'IT6': 1.05, 'CT6': 1.05} # this is from after generation 203 of optunaERP_23dec23_ , values used in
  
 cfg.EIPopGain = {'NGF1': 0.1, 'SOM2': 1.0, 'PV2': 1.0, 'VIP2': 1.0, 'NGF2': 0.1, 'SOM3': 0.25, 'PV3': 0.15, 'VIP3': 0.25, 'NGF3': 0.1, 'SOM4': 0.5, 'PV4': 0.5, 'VIP4': 1.0, 'NGF4': 0.1, 'SOM5A': 1.0, 'PV5A': 1.0, 'VIP5A': 1.0, 'NGF5A': 1.0, 'SOM5B': 1.0, 'PV5B': 1.0, 'VIP5B': 1.0, 'NGF5B': 1.0, 'SOM6': 1.0, 'PV6': 1.0, 'VIP6': 1.0, 'NGF6': 1.0} 
 
