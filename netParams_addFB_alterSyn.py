@@ -567,39 +567,37 @@ if cfg.addConn and cfg.addThalamoCorticalConn:
 if cfg.addSubConn:
     #------------------------------------------------------------------------------
     # E -> E2/3,4: soma,dendrites <200um
-    netParams.subConnParams['E->E2,3,4'] = {
+    netParams.subConnParams['E->3,4'] = {
         'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
-        'postConds': {'pops': ['IT2', 'IT3', 'ITP4', 'ITS4']},
+        'postConds': {'pops': ['IT3', 'ITP4', 'ITS4']},
         'sec': 'proximal',
+        'groupSynMechs': ESynMech, 
+        'density': 'uniform'} 
+
+    # E -> E2/3,4: soma,dendrites <200um
+    netParams.subConnParams['E->E2'] = {
+        'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
+        'postConds': {'pops': ['IT2']},
+        'sec': 'Bdend',
         'groupSynMechs': ESynMech, 
         'density': 'uniform'} 
 
     #------------------------------------------------------------------------------
     # E -> E5,6: soma,dendrites (all)
-    netParams.subConnParams['E->E5,6'] = {
-        'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
-        'postConds': {'pops': ['IT5A', 'CT5A', 'IT5B', 'PT5B', 'CT5B', 'IT6', 'CT6']},
-        'sec': 'all',
-        'groupSynMechs': ESynMech, 
-        'density': 'uniform'}
-
-    #------------------------------------------------------------------------------
-    '''    # E -> E5,6: soma,dendrites (all)
-    netParams.subConnParams['E->E5,6'] = {
-        'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
-        'postConds': {'pops': ['IT5A', 'CT5A', 'PT5B', 'CT5B', 'IT6', 'CT6']},
-        'sec': 'all',
-        'groupSynMechs': ESynMech, 
-        'density': 'uniform'}
-
-    # E -> E5B: soma,dendrites (all)
-    netParams.subConnParams['E->EIT5B'] = {
-        'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
-        'postConds': {'pops': ['IT5B']},
-        'sec': 'all',
-        'groupSynMechs': ESynMech, 
-        'density': 'uniform'}
-    '''        
+    if cfg.alterSyn3:
+        netParams.subConnParams['E->E5,6'] = {
+            'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
+            'postConds': {'pops': ['IT5A', 'CT5A', 'IT5B', 'PT5B', 'CT5B', 'IT6', 'CT6']},
+            'sec': 'proximal',
+            'groupSynMechs': ESynMech, 
+            'density': 'uniform'}
+    else:
+        netParams.subConnParams['E->E5,6'] = {
+            'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
+            'postConds': {'pops': ['IT5A', 'CT5A', 'IT5B', 'PT5B', 'CT5B', 'IT6', 'CT6']},
+            'sec': 'all',
+            'groupSynMechs': ESynMech, 
+            'density': 'uniform'}
 
 
     #------------------------------------------------------------------------------
