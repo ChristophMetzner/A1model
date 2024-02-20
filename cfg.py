@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_20_02_24_L1sink_3'
+cfg.simLabel = 'ASSR_20_02_24_L1sink_4'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -239,7 +239,7 @@ cfg.alterSyn3 = 0
 with open('conn/conn.pkl', 'rb') as fileObj: connData = pickle.load(fileObj)
 cfg.wmat = connData['wmat']
 
-cfg.seeds = {'conn': 45123, 'stim': 1, 'loc': 1}
+cfg.seeds = {'conn': 51234, 'stim': 1, 'loc': 1}
 #------------------------------------------------------------------------------
 # Background inputs
 #------------------------------------------------------------------------------
