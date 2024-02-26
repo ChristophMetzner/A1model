@@ -586,7 +586,7 @@ if cfg.addSubConn:
         'preConds': {'cellType': ['IT', 'ITS4', 'PT', 'CT']}, 
         'postConds': {'pops': ['IT2']},
         'sec': 'Bdend',
-        'loc': cfg.L2RecExcLoc
+        'loc': cfg.L2RecExcLoc,
         'groupSynMechs': ESynMech, 
         'density': 'uniform'} 
 
