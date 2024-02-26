@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_26_02_24_L1sink_2'
+cfg.simLabel = 'ASSR_26_02_24_L1sink_1_test'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -233,7 +233,7 @@ cfg.alterSyn = 0
 cfg.alterSyn2 = 0
 cfg.alterSyn3 = 0
 
-cfg.L2RecExcLoc = 0.8 # location of the synapse along the basal dendrite of IT2 cells (for now nseg=5, i.e. there are only 5 possible locations)
+cfg.L2RecExcLoc = 1.0 # location of the synapse along the basal dendrite of IT2 cells (for now nseg=5, i.e. there are only 5 possible locations)
 
 
 ## full weight conn matrix
