@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_20_02_24_L1sink_4'
+cfg.simLabel = 'ASSR_26_02_24_L1sink_1'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -233,13 +233,14 @@ cfg.alterSyn = 0
 cfg.alterSyn2 = 0
 cfg.alterSyn3 = 0
 
+cfg.L2RecExcLoc = 0.2 # location of the synapse along the basal dendrite of IT2 cells (for now nseg=5, i.e. there are only 5 possible locations)
 
 
 ## full weight conn matrix
 with open('conn/conn.pkl', 'rb') as fileObj: connData = pickle.load(fileObj)
 cfg.wmat = connData['wmat']
 
-cfg.seeds = {'conn': 51234, 'stim': 1, 'loc': 1}
+cfg.seeds = {'conn': 23451, 'stim': 1, 'loc': 1}
 #------------------------------------------------------------------------------
 # Background inputs
 #------------------------------------------------------------------------------
