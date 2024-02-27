@@ -73,23 +73,23 @@ layerGroups = { '1-3': [layer['1'][0], layer['3'][1]],  # L1-3
 #------------------------------------------------------------------------------
 ## Load cell rules previously saved using netpyne format (DOES NOT INCLUDE VIP, NGF and spiny stellate)
 ## include conditions ('conds') for each cellRule
-cellParamLabels = ['IT2_reduced', 'IT3_reduced', 'ITP4_reduced', 'ITS4_reduced',
-                    'IT5A_reduced', 'CT5A_reduced', 'IT5B_reduced',
-                    'PT5B_reduced', 'CT5B_reduced', 'IT6_reduced', 'CT6_reduced',
-                    'PV_reduced', 'SOM_reduced', 'VIP_reduced', 'NGF_reduced',
-                    'RE_reduced', 'TC_reduced', 'HTC_reduced', 'TI_reduced']  # , 'TI_reduced']
-
-#cellParamLabels = ['IT3_reduced', 'ITP4_reduced', 'ITS4_reduced',
+#cellParamLabels = ['IT2_reduced', 'IT3_reduced', 'ITP4_reduced', 'ITS4_reduced',
 #                    'IT5A_reduced', 'CT5A_reduced', 'IT5B_reduced',
 #                    'PT5B_reduced', 'CT5B_reduced', 'IT6_reduced', 'CT6_reduced',
 #                    'PV_reduced', 'SOM_reduced', 'VIP_reduced', 'NGF_reduced',
 #                    'RE_reduced', 'TC_reduced', 'HTC_reduced', 'TI_reduced']  # , 'TI_reduced']
 
+cellParamLabels = ['IT3_reduced', 'ITP4_reduced', 'ITS4_reduced',
+                    'IT5A_reduced', 'CT5A_reduced', 'IT5B_reduced',
+                    'PT5B_reduced', 'CT5B_reduced', 'IT6_reduced', 'CT6_reduced',
+                    'PV_reduced', 'SOM_reduced', 'VIP_reduced', 'NGF_reduced',
+                    'RE_reduced', 'TC_reduced', 'HTC_reduced', 'TI_reduced']  # , 'TI_reduced']
+
 
 for ruleLabel in cellParamLabels:
     netParams.loadCellParamsRule(label=ruleLabel, fileName='cells/' + ruleLabel + '_cellParams.json')  # Load cellParams for each of the above cell subtype
 
-#netParams.loadCellParamsRule(label='IT2_reduced', fileName='cells/IT2_reduced_cellParams_nseg.json')  # Load cellParams for IT2 separately with an increased nseg
+netParams.loadCellParamsRule(label='IT2_reduced', fileName='cells/IT2_reduced_cellParams_nseg.json')  # Load cellParams for IT2 separately with an increased nseg
 
 # ## Reduce T-type calcium channel conductances (cfg.tTypeCorticalFactor ; cfg.tTypeThalamicFactor)
 # for cellLabel in ['TC_reduced', 'HTC_reduced', 'RE_reduced']:
@@ -320,7 +320,7 @@ if cfg.addConn and cfg.EEGain > 0.0:
                         scaleFactor = cfg.L4L3E#25
                 if pre=='IT6' or pre=='CT6':
                     if post=='IT2':
-                        scaleFactor = 0.0
+                        scaleFactor = 1.0
                 netParams.connParams['EE_'+pre+'_'+post+'_'+l] = { 
                     'preConds': {'pop': pre}, 
                     'postConds': {'pop': post, 'ynorm': layer[l]},
