@@ -318,7 +318,7 @@ if cfg.addConn and cfg.EEGain > 0.0:
                 if pre=='ITS4' or pre=='ITP4':
                     if post=='IT3':
                         scaleFactor = cfg.L4L3E#25
-                if pre=='IT5A' or pre=='CT5A':
+                if pre=='IT5B' or pre=='CT5B' or pre=='PT5B':
                     if post=='IT2':
                         scaleFactor = 0.0
                 netParams.connParams['EE_'+pre+'_'+post+'_'+l] = { 
