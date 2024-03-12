@@ -733,7 +733,7 @@ def custom_spont(filename):
 
 
     #params['thalamoCorticalGain'] = [cfgLoad['thalamoCorticalGain']] # [cfgLoad['thalamoCorticalGain']*0.75, cfgLoad['thalamoCorticalGain'], cfgLoad['thalamoCorticalGain']*1.25]
-    params[('seeds', 'conn')] = [10, 11, 12, 13, 14] #list(range(1)) #[4321+(17*i) for i in range(5)]
+    params[('seeds', 'conn')] = [10, 11] #list(range(1)) #[4321+(17*i) for i in range(5)]
     #params[('seeds', 'stim')] = [2, 3] #list(range(1)) #[1234+(17*i) for i in range(5)]
 
     #params['ihGbar'] = [0.25, 0.5] #[0.75, 1.0, 1.25]
@@ -745,8 +745,8 @@ def custom_spont(filename):
     # initial config
     initCfg = {} # set default options from prev sim
     
-    initCfg['duration'] = 20000
-    initCfg['printPopAvgRates'] = [1000, 20000]
+    initCfg['duration'] = 2600000
+    initCfg['printPopAvgRates'] = [1000, 2600000]
     initCfg['scaleDensity'] = 1.0
     initCfg['recordStep'] = 0.05
 
@@ -3022,7 +3022,7 @@ def setRunCfg(b, type='mpi_bulletin'):
     elif type=='hpc_slurm_TUB':
         b.runCfg = {'type': 'hpc_slurm',
             'allocation': 'ni',
-            'walltime': '48:00:00',
+            'walltime': '240:00:00',
             'nodes': 1,
             'coresPerNode': 32,
             'email': 'jasmin.m.hulha@campus.tu-berlin.de',
