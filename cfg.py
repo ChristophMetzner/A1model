@@ -23,7 +23,7 @@ cfg = specs.SimConfig()
 #------------------------------------------------------------------------------
 # Run parameters
 #------------------------------------------------------------------------------
-cfg.duration = 4e3 #30e3             ## Duration of the sim, in ms
+cfg.duration = 260e3             ## Duration of the sim, in ms
 cfg.dt = 0.05                   ## Internal Integration Time Step
 cfg.verbose = 0         	## Show detailed messages
 cfg.hParams['celsius'] = 37
@@ -69,8 +69,8 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'HPC_test_4e3ms'
-cfg.saveFolder = 'data/HPC_test'                	## Set file output name
+cfg.simLabel = 'Hurst_test_11'
+cfg.saveFolder = 'data/'                	## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
 cfg.saveDataInclude = ['simData', 'simConfig', 'netParams', 'net'] 
@@ -85,7 +85,7 @@ cfg.saveCellConns = False
 #
 
 #cfg.analysis['plotTraces'] = {'include': [(pop, 0) for pop in cfg.allpops], 'oneFigPer': 'trace', 'overlay': True, 'saveFig': True, 'showFig': False, 'figSize':(12,8)} #[(pop,0) for pop in alltypes]		## Seen in M1 cfg.py (line 68) 
-cfg.analysis['plotRaster'] = {'include': cfg.allpops, 'saveFig': True, 'showFig': False, 'popRates': True, 'orderInverse': True, 'timeRange': [0,cfg.duration], 'figSize': (14,12), 'lw': 0.3, 'markerSize': 3, 'marker': '.', 'dpi': 300}      	## Plot a raster
+#cfg.analysis['plotRaster'] = {'include': cfg.allpops, 'saveFig': True, 'showFig': False, 'popRates': True, 'orderInverse': True, 'timeRange': [0,cfg.duration], 'figSize': (14,12), 'lw': 0.3, 'markerSize': 3, 'marker': '.', 'dpi': 300}      	## Plot a raster
 #cfg.analysis['plotSpikeStats'] = {'stats': ['rate'], 'figSize': (6,12), 'timeRange': [0, 2500], 'dpi': 300, 'showFig': 0, 'saveFig': 1}
 
 #cfg.analysis['plotLFP'] = {'plots': ['timeSeries'], 'electrodes': [10], 'maxFreq': 80, 'figSize': (8,4), 'saveData': False, 'saveFig': True, 'showFig': False} # 'PSD', 'spectrogram'
@@ -185,7 +185,7 @@ cfg.addSubConn = 1
 with open('conn/conn.pkl', 'rb') as fileObj: connData = pickle.load(fileObj)
 cfg.wmat = connData['wmat']
 
-
+cfg.seeds = {'conn': 11, 'stim': 1, 'loc': 1}
 #------------------------------------------------------------------------------
 # Background inputs
 #------------------------------------------------------------------------------
