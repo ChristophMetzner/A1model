@@ -654,32 +654,63 @@ def fig_traces(batchLabel, simLabel, timeRange):
 def fig_CSD():
     from netpyne import sim
     
-    targetFolder = 'data/v34_batch27'
+    targetFolder = '../data/simDataFiles/spont/v34_batch27/'    #'data/v34_batch27'
 
-    filenames = ['data/v34_batch27/v34_batch27_%d_%d.pkl' % (iseed, cseed) for iseed in [0] for cseed in [0]]
+    filenames = ['../data/simDataFiles/spont/v34_batch27/A1_v34_batch27_v34_batch27_%d_%d.pkl' % (iseed, cseed) for iseed in [0] for cseed in [0]]  # v34_batch27_%d_%d.pkl
 
     # find all individual sim labels whose files need to be gathered
     #filenames = [targetFolder+f for f in os.listdir(targetFolder) if f.endswith('.pkl')]
 
     layer_bounds= {'L1': 100, 'L2': 160, 'L3': 950, 'L4': 1250, 'L5A': 1334, 'L5B': 1550, 'L6': 2000}
+    fontsize = 16
+
+    import matplotlib; matplotlib.rcParams.update({'font.size': fontsize})
 
     for filename in filenames:
         sim.load(filename, instantiate=False)
-        
-        tranges = [[x, x+1000] for x in range(500, 600, 100)]
-        for t in tranges:# (2100, 2200,100):    
-            sim.analysis.plotCSD(**{
-                'spacing_um': 100, 
-                'layer_lines': 1, 
-                'layer_bounds': layer_bounds, 
-                'overlay': 'LFP',
-                'timeRange': [t[0], t[1]], 
-                'smooth': 30,
-                'saveFig': filename[:-4]+'_CSD_LFP_%d-%d' % (t[0], t[1]), 
-                'figSize': (4.1,8.2), 
-                'dpi': 300, 
-                'showFig': 0})
-            
+        timeRange = [1000,2000]
+        #tranges = [[x, x+1000] for x in range(500, 600, 100)]
+        #for t in tranges:# (2100, 2200,100):    
+
+        fig, axs = sim.plotting.plotCSD(**{
+            'spacing_um': 100, 
+            'layer_lines': 1, 
+            'layer_bounds': layer_bounds, 
+            'overlay': 'LFP',
+            'timeRange': timeRange,
+            'smooth': 30,
+            'saveFig': filename[:-4]+'_CSD_LFP_%d-%d' % (timeRange[0], timeRange[1]), 
+            'figSize': (4.1,8.2), 
+            'dpi': 300, 
+            'colorbar': True,
+            'showFig': 0})              #analysis.plotCSD(**{   # [t[0], t[1]],  #  (t[0], t[1]), 
+
+
+        # axs[0].set_title('NEW TEST TITLE')
+        xticks = np.array([1000, 1500, 2000])
+        axs[0].set_xticks(xticks)#, fontsize=fontsize, fontname='Arial')
+        axs[0].set_xticklabels(['1.0', '1.5', '2.0'])
+        axs[0].set_xlabel('Time (s)')
+
+
+        ## ! THIS DOESN'T WORK bc gs_outer not defined!!! 
+        # ax_bottom = plt.subplot(gs_outer[1,1])
+        # fig.colorbar(spline,cax=ax_bottom,orientation='horizontal',use_gridspec=True)
+        # ax_bottom.set_xlabel(r'CSD (mV/mm$^2$)', fontsize=12)
+
+        ## ! No mappable was found 
+        # plt.colorbar()
+
+        # fig.colorbar(spline, cax=axs[0])
+        plt.show()
+
+
+        # ax = plt.gca()
+        # ax.set_title('NEW TITLE')
+        # plt.show()
+        #plt.xticks([1000, 1500, 2000],['1.0', '1.5', '2.0'])
+        #plt.title('HELLO')
+        #ax.set_xticks([1000, 1500, 2000], ['1.0', '1.5', '2.0'])#, fontsize=fontsize, fontname='Arial')
 
 def fig_optuna_fitness():
     import optunaAnalysis as oa
@@ -1117,6 +1148,7 @@ if __name__ == '__main__':
 
     #fig_optuna_fitness()
     
-    fig_LFP_PSD_matrix()
+    # fig_LFP_PSD_matrix()
+    fig_CSD()
 
     #fig_CSD_comparison()

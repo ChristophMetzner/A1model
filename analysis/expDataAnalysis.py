@@ -1150,7 +1150,8 @@ def plotLFP(dat,tt,timeRange=None,trigtimes=None, triglines=False, electrodes=['
 
     for i,elec in enumerate(electrodes):
       if elec == 'avg':
-        lfpPlot = np.mean(lfp, axis=0)
+        lfpPlot = np.mean(lfp, axis=0)  # np.mean(lfp, axis=0)
+        print('shape of lfpPlot: ' + str(lfpPlot.shape))
 
       elif elec in ['supra', 'infra', 'gran']:
         if dbpath is None:
@@ -1429,24 +1430,25 @@ def plot_LFP_PSD(dataFile, LFP_data, electrodes):
 
     allData = []
 
-    for timeRange in tranges:
-        #plotLFP(dat=LFP_data, tt=tt, timeRange=[7500,8500], plots=['spectrogram'], electrodes=[2,8,13,18], maxFreq=80, saveFig=True, fn=fullPath, dbpath=dbpath) # fn=fullPath,dbpath = dbpath,  # 16,19 #[4,12]
-        out = sim.analysis.plotLFP(**{
-                'inputLFP': LFP_data.T,
-                'plots': ['PSD'], 
-                'electrodes': electrodes, 
-                'timeRange': timeRange,
-                'maxFreq': 50, 
-                'figSize': (8,12), 
-                'saveData': False, 
-                'saveFig': '../data/NHPdata/spont/spont_LFP_PSD/%s_lfp_psd_%d_%d.png' % (dataFile[:-4], timeRange[0], timeRange[1]),
-                'showFig': False})
-        allData.append(out[1]['allSignal'])
+    # for timeRange in tranges:
+        # allData = plotLFP(dat=LFP_data, tt=tt, timeRange=[7500,8500], plots=['spectrogram'], 
+        # electrodes=[2,8,13,18], maxFreq=80, saveFig=True, fn=fullPath, dbpath=dbpath) # fn=fullPath,dbpath = dbpath,  # 16,19 #[4,12]
+        # out = sim.analysis.plotLFP(**{
+                # 'inputLFP': LFP_data.T,
+                # 'plots': ['PSD'], 
+                # 'electrodes': electrodes, 
+                # 'timeRange': timeRange,
+                # 'maxFreq': 50, 
+                # 'figSize': (8,12), 
+                # 'saveData': False, 
+                # 'saveFig': '../data/NHPdata/spont/contproc/A1/spont_LFP_PSD/%s_lfp_psd_%d_%d.png' % (dataFile[:-4], timeRange[0], timeRange[1]),    #'../data/NHPdata/spont/spont_LFP_PSD/%s_lfp_psd_%d_%d.png' % (dataFile[:-4], timeRange[0], timeRange[1]),
+                # 'showFig': False})
+        # allData.append(out[1]['allSignal'])
         
-    with open('../data/NHPdata/spont/spont_LFP_PSD/%s_10sec_allData.pkl' % (dataFile[:-4]), 'wb') as f:
-        pkl.dump({'allData': allData, 'allFreqs': out[1]['allFreqs']}, f)    
+    # with open('../data/NHPdata/spont/spont_LFP_PSD/%s_10sec_allData.pkl' % (dataFile[:-4]), 'wb') as f:
+    #     pkl.dump({'allData': allData, 'allFreqs': out[1]['allFreqs']}, f)    
 
-
+    # return allData
 
 
 def plot_LFP_PSD_combined(dataFile, norm=False):
@@ -1499,7 +1501,7 @@ def plot_LFP_PSD_combined(dataFile, norm=False):
 if __name__ == '__main__':
 
     # Parent data directory containing .mat files
-    origDataDir = '../data/NHPdata/spont/'   # LOCAL DIR 
+    origDataDir = '../data/NHPdata/BBN/'  #'../data/NHPdata/spont/contproc/A1/'  #  #'../data/NHPdata/spont/'   # LOCAL DIR 
 
     ## Sort these files by recording region 
     # DataFiles = sortFiles(origDataDir, [1, 3, 7]) # path to data .mat files  # recording regions of interest
@@ -1512,7 +1514,7 @@ if __name__ == '__main__':
 
     test = 1 # set to 1 if testing a particular monkey, 0 if going through all files in data dir
     testFiles = ['1-bu031032017@os_eye06_20.mat', '2-ma031032023@os_eye06_20.mat', '2-rb031032016@os_eye06_20.mat', '2-rb045046026@os_eye06_20.mat']   # CHANGE FILE HERE IF LOOKING AT SPECIFIC MONKEY
-    testFiles = ['2-rb031032016@os_eye06_20.mat']
+    testFiles = ['1-rb067068029@os.mat'] #['1-rb067068029@os.mat'] ## <-- BBN #['2-rb031032016@os_eye06_20.mat'] # <<- SPONT
 
     if test:
         dataFiles = testFiles
@@ -1541,8 +1543,9 @@ if __name__ == '__main__':
                 # NOTE: make samprds and spacing_um args in this function as well for increased accessibility??? 
 
         ##### SET PATH TO .csv LAYER FILE ##### 
-        dbpath = '../data/NHPdata/spont/21feb02_A1_spont_layers.csv'  # GCP # CHANGE ACCORDING TO MACHINE USED TO RUN 
-        
+        #dbpath = '../data/NHPdata/spont/contproc/A1/21feb02_A1_spont_layers.csv'  #'../data/NHPdata/spont/21feb02_A1_spont_layers.csv'  # GCP # CHANGE ACCORDING TO MACHINE USED TO RUN 
+        dbpath = '../data/NHPdata/BBN/19jun21_A1_ERP_Layers.csv' 
+
         ##### GET LAYERS FOR OVERLAY #####
         s1low,s1high,s2low,s2high,glow,ghigh,i1low,i1high,i2low,i2high = getflayers(fullPath,dbpath=dbpath,getmid=False,abbrev=False) # fullPath is to data file, dbpath is to .csv layers file 
         lchan = {}
@@ -1554,25 +1557,31 @@ if __name__ == '__main__':
         
 
 
-        ### Plot batches of CSDs:
-        ## Set up time ranges for loop
-        tranges = [[x, x+200] for x in range(2000, 3000, 200)] # bring it down to 175-250 if possible
-        tranges = [[2800, 3000]]
-        for t in tranges:
-            plotCSD(fn=fullPath,dat=CSD_data,tt=tt,
-                    trigtimes=None,timeRange=[t[0], t[1]],
-                    showFig=False, figSize=(6,9), 
-                    layerLines=True, layerBounds=lchan, 
-                    overlay='LFP', LFP_data=LFP_data, smooth=33,
-                    saveFig=dataFile[:-4]+'_CSD_%d-%d' % (t[0], t[1]))
+        # ### Plot batches of CSDs:
+        # ## Set up time ranges for loop
+        # tranges = [[x, x+200] for x in range(2000, 3000, 200)] # bring it down to 175-250 if possible
+        # tranges = [[2800, 3000]]
+        # for t in tranges:
+        #     plotCSD(fn=fullPath,dat=CSD_data,tt=tt,
+        #             trigtimes=None,timeRange=[t[0], t[1]],
+        #             showFig=False, figSize=(6,9), 
+        #             layerLines=True, layerBounds=lchan, 
+        #             overlay='LFP', LFP_data=LFP_data, smooth=33,
+        #             saveFig=dataFile[:-4]+'_CSD_%d-%d' % (t[0], t[1]))
 
         # -----------------------
         # LFPs
         
-        #electrodes = ['avg', list(range(s1low, glow)), list(range(glow, i1low)), list(range(i1low, i2high))]
+        electrodes = [1, 11, 13] #['supra', 'gran', 'infra'] #[1, 7, 13]#['avg', 'supra', 'gran', 'infra']#, list(range(s1low, glow)), list(range(glow, i1low)), list(range(i1low, i2high))]
         
         #plot LFP PSDs
-        #plot_LFP_PSD(dataFile, LFP_data, electrodes)
+        allData = plotLFP(dat=LFP_data, tt=tt, timeRange=[15000,85000], plots=['PSD'], electrodes=electrodes, minFreq=0.1, maxFreq=3, stepFreq=0.1, normSignal=False, normPSD=False, saveFig=True, fn=fullPath, dbpath=dbpath) 
+          # timeRange=[15000,85000] # [0,10000]
+        # plot_LFP_PSD(dataFile, LFP_data, electrodes)
+        # allData = plot_LFP_PSD(dataFile, LFP_data, electrodes)
         
-        #plot LFP PSD combined    
-        #plot_LFP_PSD_combined(dataFile, norm=True)
+        # plot LFP PSD combined    
+        # plot_LFP_PSD_combined(dataFile, norm=True)
+
+
+

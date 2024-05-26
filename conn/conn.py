@@ -797,10 +797,10 @@ lmat['TC'] = {}
 lmat['HTC'] = {}
 
 for post in wmat['TC'].keys():
-    lmat['TC'][post] = 500  # um - arbitrary value
+    lmat['TC'][post] = 5  # um - arbitrary value
 
 for post in wmat['HTC'].keys():
-    lmat['HTC'][post] = 1000  # um - arbitrary value
+    lmat['HTC'][post] = 5  # um - arbitrary value
 
 # --------------------------------------------------
 ## MATRIX THALAMOCORTICAL (from old model; partly from Bonj12, Bazhenov https://www.jneurosci.org/content/32/15/5250.full and discuss with Lakatos)
@@ -882,7 +882,7 @@ wmat['TCM']['NGF6']	    = TCMweight  # 0.25  #* thalfctr
 # Length constant (matrix more broadly tunes spatially than core)
 lmat['TCM'] = {}
 for post in wmat['TCM'].keys():
-    lmat['TCM'][post] = 1000  # um - arbitrary value
+    lmat['TCM'][post] = 100  # um - arbitrary value
 
 # --------------------------------------------------
 # Save data to pkl file
