@@ -68,48 +68,48 @@ layer = {'1': [0.00, 0.05], '2': [0.05, 0.08], '3': [0.08, 0.475], '4': [0.475, 
 #------------------------------------------------------------------------------
 ## Load cell rules previously saved using netpyne format (DOES NOT INCLUDE VIP, NGF and spiny stellate)
 ## include conditions ('conds') for each cellRule
-cellParamLabels = { 'IT2_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['2']},
-                    'IT3_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['3']},
-                    'ITP4_reduced': {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['4']},
-                    'IT5A_reduced': {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['5A']},
-                    'CT5A_reduced': {'cellModel': 'HH_reduced', 'cellType': 'CT', 'ynorm': layer['5A']},
-                    'IT5B_reduced': {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['5B']},
-                    'PT5B_reduced': {'cellModel': 'HH_reduced', 'cellType': 'PT', 'ynorm': layer['5B']},
-                    'CT5B_reduced': {'cellModel': 'HH_reduced', 'cellType': 'CT', 'ynorm': layer['5B']},
-                    'IT6_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['6']},
-                    'CT6_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'CT', 'ynorm': layer['6']},
-                    'PV_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'PV', 'ynorm': [layer['2'][0],layer['6'][1]]},
-                    'SOM_reduced': {'cellModel': 'HH_reduced', 'cellType': 'SOM', 'ynorm': [layer['2'][0], layer['6'][1]]}}
+# cellParamLabels = { 'IT2_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['2']},
+#                     'IT3_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['3']},
+#                     'ITP4_reduced': {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['4']},
+#                     'IT5A_reduced': {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['5A']},
+#                     'CT5A_reduced': {'cellModel': 'HH_reduced', 'cellType': 'CT', 'ynorm': layer['5A']},
+#                     'IT5B_reduced': {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['5B']},
+#                     'PT5B_reduced': {'cellModel': 'HH_reduced', 'cellType': 'PT', 'ynorm': layer['5B']},
+#                     'CT5B_reduced': {'cellModel': 'HH_reduced', 'cellType': 'CT', 'ynorm': layer['5B']},
+#                     'IT6_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'IT', 'ynorm': layer['6']},
+#                     'CT6_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'CT', 'ynorm': layer['6']},
+#                     'PV_reduced':  {'cellModel': 'HH_reduced', 'cellType': 'PV', 'ynorm': [layer['2'][0],layer['6'][1]]},
+#                     'SOM_reduced': {'cellModel': 'HH_reduced', 'cellType': 'SOM', 'ynorm': [layer['2'][0], layer['6'][1]]}}
 
-## Import VIP cell rule from hoc file 
-netParams.importCellParams(label='VIP_reduced', conds={'cellType': 'VIP', 'cellModel': 'HH_reduced'}, fileName='cells/vipcr_cell.hoc', cellName='VIPCRCell_EDITED', importSynMechs=True)
-netParams.cellParams['VIP_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'VIP', 'ynorm': [layer['2'][0], layer['6'][1]]}
+# ## Import VIP cell rule from hoc file 
+# netParams.importCellParams(label='VIP_reduced', conds={'cellType': 'VIP', 'cellModel': 'HH_reduced'}, fileName='cells/vipcr_cell.hoc', cellName='VIPCRCell_EDITED', importSynMechs=True)
+# netParams.cellParams['VIP_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'VIP', 'ynorm': [layer['2'][0], layer['6'][1]]}
 
-## Import NGF cell rule from hoc file
-netParams.importCellParams(label='NGF_reduced', conds={'cellType': 'NGF', 'cellModel': 'HH_reduced'}, fileName='cells/ngf_cell.hoc', cellName='ngfcell', importSynMechs=True)
-netParams.cellParams['NGF_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'NGF', 'ynorm': [layer['1'][0], layer['6'][1]]}
+# ## Import NGF cell rule from hoc file
+# netParams.importCellParams(label='NGF_reduced', conds={'cellType': 'NGF', 'cellModel': 'HH_reduced'}, fileName='cells/ngf_cell.hoc', cellName='ngfcell', importSynMechs=True)
+# netParams.cellParams['NGF_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'NGF', 'ynorm': [layer['1'][0], layer['6'][1]]}
 
-## Import L4 Spiny Stellate cell rule from .py file
-netParams.importCellParams(label='ITS4_reduced', conds={'cellType': 'ITS4', 'cellModel': 'HH_reduced'}, fileName='cells/ITS4.py', cellName='ITS4_cell')
-netParams.cellParams['ITS4_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'ITS4', 'ynorm': layer['4']}
+# ##Import L4 Spiny Stellate cell rule from .py file
+# netParams.importCellParams(label='ITS4_reduced', conds={'cellType': 'ITS4', 'cellModel': 'HH_reduced'}, fileName='cells/ITS4.py', cellName='ITS4_cell')
+# netParams.cellParams['ITS4_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'ITS4', 'ynorm': layer['4']}
 
 ## THALAMIC CELL MODELS
 
-# Import RE (reticular) cell rule from .py file 
-netParams.importCellParams(label='RE_reduced', conds={'cellType': 'RE', 'cellModel': 'HH_reduced'}, fileName='cells/sRE.py', cellName='sRE', importSynMechs=True)
-netParams.cellParams['RE_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'RE', 'ynorm': layer['thal']}
+# # Import RE (reticular) cell rule from .py file 
+# netParams.importCellParams(label='RE_reduced', conds={'cellType': 'RE', 'cellModel': 'HH_reduced'}, fileName='cells/sRE.py', cellName='sRE', importSynMechs=True)
+# netParams.cellParams['RE_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'RE', 'ynorm': layer['thal']}
 
-# Import TC cell rule from .py file 
-netParams.importCellParams(label='TC_reduced', conds={'cellType': 'TC', 'cellModel': 'HH_reduced'}, fileName='cells/sTC.py', cellName='sTC', importSynMechs=True)
-netParams.cellParams['TC_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'TC', 'ynorm': layer['thal']}
+# # Import TC cell rule from .py file 
+# netParams.importCellParams(label='TC_reduced', conds={'cellType': 'TC', 'cellModel': 'HH_reduced'}, fileName='cells/sTC.py', cellName='sTC', importSynMechs=True)
+# netParams.cellParams['TC_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'TC', 'ynorm': layer['thal']}
 
-# Import HTC cell rule from .py file 
-netParams.importCellParams(label='HTC_reduced', conds={'cellType': 'HTC', 'cellModel': 'HH_reduced'}, fileName='cells/sHTC.py', cellName='sHTC', importSynMechs=True)
-netParams.cellParams['HTC_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'HTC', 'ynorm': layer['thal']}
+# # Import HTC cell rule from .py file 
+# netParams.importCellParams(label='HTC_reduced', conds={'cellType': 'HTC', 'cellModel': 'HH_reduced'}, fileName='cells/sHTC.py', cellName='sHTC', importSynMechs=True)
+# netParams.cellParams['HTC_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'HTC', 'ynorm': layer['thal']}
 
-# Import Thalamic Interneuron cell from .py file 
-netParams.importCellParams(label='TI_reduced', conds={'cellType': 'TI', 'cellModel': 'HH_reduced'}, fileName='cells/sTI.py', cellName='sTI_cell', importSynMechs=True)
-netParams.cellParams['TI_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'TI', 'ynorm': layer['thal']}
+# # Import Thalamic Interneuron cell from .py file 
+# netParams.importCellParams(label='TI_reduced', conds={'cellType': 'TI', 'cellModel': 'HH_reduced'}, fileName='cells/sTI.py', cellName='sTI_cell', importSynMechs=True)
+# netParams.cellParams['TI_reduced']['conds'] = {'cellModel': 'HH_reduced', 'cellType': 'TI', 'ynorm': layer['thal']}
 
 # Load cell rules from .pkl / .json file 
 cellParamLabels = ['IT2_reduced', 'IT3_reduced', 'ITP4_reduced', 'ITS4_reduced',
@@ -152,10 +152,10 @@ for ruleLabel in netParams.cellParams.keys():
             secLists['apic_uppertrunk'] = ['Adend2']
             secLists['apic_tuft'] = ['Adend3']
 
-        elif ruleLabel in ['ITS4_reduced']:
-            secLists['all'] = secLists['proximal'] = ['soma', 'dend', 'dend1']
-            secLists['dend_all'] = secLists['apic'] = secLists['apic_trunk'] = secLists['apic_lowertrunk'] = \
-                secLists['apic_uppertrunk'] = secLists['apic_tuft'] = ['dend', 'dend1']
+        # elif ruleLabel in ['ITS4_reduced']:
+        #     secLists['all'] = secLists['proximal'] = ['soma', 'dend', 'dend1']
+        #     secLists['dend_all'] = secLists['apic'] = secLists['apic_trunk'] = secLists['apic_lowertrunk'] = \
+        #         secLists['apic_uppertrunk'] = secLists['apic_tuft'] = ['dend', 'dend1']
 
         elif ruleLabel in ['PV_reduced', 'SOM_reduced', 'NGF_reduced', 'TI_reduced']:
             secLists['all'] = secLists['proximal'] = ['soma', 'dend']
@@ -267,7 +267,7 @@ if add3DGeom:
                     
 
 # save cellParams rules to .pkl file
-saveCellParams = True
+saveCellParams = False
 if saveCellParams:
     for ruleLabel in netParams.cellParams.keys():
         netParams.saveCellParamsRule(label=ruleLabel, fileName='cells/' + ruleLabel + '_cellParams.json')
@@ -341,7 +341,8 @@ netParams.popParams['TCM'] =    {'cellType': 'TC',  'cellModel': 'HH_reduced',  
 netParams.popParams['HTC'] =    {'cellType': 'HTC', 'cellModel': 'HH_reduced',  'ynormRange': layer['thal'],   'density': 0.25*thalDensity}   
 netParams.popParams['IRE'] =    {'cellType': 'RE',  'cellModel': 'HH_reduced',  'ynormRange': layer['thal'],   'density': thalDensity}     
 netParams.popParams['IREM'] =   {'cellType': 'RE', 'cellModel': 'HH_reduced',   'ynormRange': layer['thal'],   'density': thalDensity}
-netParams.popParams['TI'] =     {'cellType': 'TI',  'cellModel': 'HH_reduced',  'ynormRange': layer['thal'],   'density': 2*0.33 * thalDensity} ## Winer & Larue 1996; Huang et al 1999 
+netParams.popParams['TI'] =     {'cellType': 'TI',  'cellModel': 'HH_reduced',  'ynormRange': layer['thal'],   'density': 0.33 * thalDensity} ## Winer & Larue 1996; Huang et al 1999 
+netParams.popParams['TIM'] =    {'cellType': 'TI',  'cellModel': 'HH_reduced',  'ynormRange': layer['thal'],   'density': 0.33 * thalDensity} ## Winer & Larue 1996; Huang et al 1999 
 
 
 if cfg.singleCellPops:

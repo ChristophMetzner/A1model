@@ -1,54 +1,78 @@
-# input.py
+#
 # Generate cochlear input spikes to use auditory thalamocortical model
 import numpy as np
+import soundfile as sf # pip install soundfile
 
 rng = np.random.RandomState()
 
-def cochlearInputSpikes(freqRange=[4800, 5200], #[125, 20000], #[9000, 11000],  
-                        numCenterFreqs=4, #100,
-                        numCells=4*100, #10000,  # should be ~100 * numCFs
-                        duration=1000,
-                        toneFreq=5000,
-                        loudnessDBs=50,
-                        plotRaster=False): 
+def readwav (fn):
+  # read a wav file 
+  dat, sampr = sf.read(fn)
+  return dat, sampr
 
-    
-    import matplotlib.pyplot as plt
+def writewav (dat, fn, sampr):
+  # write array dat to wav file fn using sampling rate sampr
+  sf.write(fn, dat, sampr)
+
+def cochlearSpikes (freqRange=[125, 20000],numCenterFreqs=100,loudnessScale=1, lfnwave=[],lonset=[]):
+  dout = {}; i = 0
+  for fnwave,onset in zip(lfnwave,lonset):
+    d = cochlearInputSpikes(freqRange=freqRange,numCenterFreqs=numCenterFreqs,loudnessScale=loudnessScale,fnwave=fnwave,onset=onset)
+    if i == 0:
+      dout = d
+    else:
+      for spktA,spktB in zip(d['spkT'],dout['spkT']):
+        for t in spktA: spktB.append(t)
+    i += 1
+  return dout
+
+def cochlearInputSpikes (freqRange=[125, 20000],
+                         numCenterFreqs=100,
+                         loudnessScale=1,
+                         fnwave=None,onset=0):
     import scipy.signal as dsp
     import cochlea
-
-    fs = 100e3
-
+    numCells = numCenterFreqs * 100 # should be ~100 * numCFs
+    sampr = 100e3    
     # Make sound
-    t = np.arange(0, duration/1000.0, 1/fs)
-    s = dsp.chirp(t, toneFreq-100, t[-1], toneFreq+100)
-    s = cochlea.set_dbspl(s, loudnessDBs)
-    pad = np.zeros(int(10e-3 * fs))
-    sound = np.concatenate( (s, pad) )
-
+    if fnwave=='chirp':
+      duration = 1000
+      toneFreq = 5000
+      t = np.arange(0, duration/1000.0, 1/sampr)
+      s = dsp.chirp(t, toneFreq-100, t[-1], toneFreq+100)
+      s = cochlea.set_dbspl(s, 50 * loudnessScale)      
+    elif fnwave:
+      dat, sampr = readwav(fnwave)
+      if sampr < 100e3:
+        from scipy.signal import resample
+        N = int(len(dat) * 100e3 / sampr)
+        dat = resample(dat, N)
+        sampr = 100000
+      s = dat * loudnessScale
+      # print('s range:',np.amin(s),np.amax(s))
+    else:
+      s = []
+    # pad = np.zeros(int(10e-3 * sampr))
+    sound = s # np.concatenate( (s, pad) )
+    # print('sound range:',np.amin(sound),np.amax(sound))
     # Run model
     anf = cochlea.run_zilany2014(
         sound,
-        fs,
+        sampr,
         anf_num=(numCells/numCenterFreqs, 0, 0),  # the desired number of auditory nerve fibers per frequency channel (CF)
         cf=(freqRange[0], freqRange[1], numCenterFreqs), # the center frequency(s) of the simulated auditory nerve fibers
         seed=0,
         powerlaw='approximate',
         species='human',
+        ffGn=False
     )
-
-    # Accumulate spike trains
-    #anf_acc = th.accumulate(anf, keep=['cf', 'duration'])
-    #anf_acc.sort_values('cf', ascending=False, inplace=True)
-
-    # Plot auditory nerve response
-    if plotRaster:
-        pass
-
     # generate list of spk times
-    spkTimes = [list(anf.iloc[i]['spikes']*1000.) for i in range(numCells)]
-    
-    return spkTimes
+    if len(s) > 0:
+      spkTimes = [list(anf.iloc[i]['spikes']*1000. + onset) for i in range(numCells)]
+    else:
+      spkTimes = [[] for i in range(numCells)]
+    cf = [anf.iloc[i]['cf'] for i in range(numCells)]    
+    return {'spkT':spkTimes, 'cf':cf}
 
 
 # def cochlearInputSpikesBrianHears(freqRange=[9000,11000], # orig: [20, 20000],

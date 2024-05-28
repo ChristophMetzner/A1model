@@ -184,9 +184,7 @@ if __name__ == '__main__':
 
     # manual scaling adjustments based on simulation with automatically calculated bkg weights (finetuning)
     NGFfactor = 2.5
-    
     ITS4factor = 25 # make similar to ITP4 since updated cell but did not update bkg weight estimates (v22_batch28)
-
     manualScaling = {'NGF1': 1.0 * NGFfactor, 'SOM2': 0.75, 'VIP2': 0.75, 'NGF2': 1.0 * NGFfactor, 
                     'SOM3': 1.0, 'VIP3': 1.25, 'NGF3': 1.0 * NGFfactor, 
                     'ITP4': 1.1, 'ITS4': ITS4factor, 'SOM4': 1.0, 'PV4': 0.9, 'VIP4': 1.0, 'NGF4': 1.0 * NGFfactor, 
@@ -194,6 +192,7 @@ if __name__ == '__main__':
                     'PT5B': 2.0, 'IT5B': 0.075, 'CT5B': 0.75, 'SOM5B': 1.25, 'PV5B': 1.25, 'VIP5B': 1.1, 'NGF5B': 1.0 * NGFfactor, 
                     'IT6': 0.1, 'CT6': 0.75, 'SOM6': 1.1, 'PV6': 0.75, 'NGF6': 1.0 * NGFfactor, 
                     'TC': 1.25, 'TCM': 1.25, 'HTC': 1.25, 'TI': 1.25, 'TIM': 2.0}  
+
     # run calculation
     bkgWeights = calculateBkgWeightPops(pops, weights, rates, targetRates, manualScaling,
                                         savePath=dataFolder + '/' + batchLabel + '/', saveToCells=True)
