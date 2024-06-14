@@ -69,7 +69,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'Hurst_test_13'
+cfg.simLabel = 'Hurst_test_14'
 cfg.saveFolder = 'data/'                	## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -185,7 +185,7 @@ cfg.addSubConn = 1
 with open('conn/conn.pkl', 'rb') as fileObj: connData = pickle.load(fileObj)
 cfg.wmat = connData['wmat']
 
-cfg.seeds = {'conn': 13, 'stim': 1, 'loc': 1}
+cfg.seeds = {'conn': 14, 'stim': 1, 'loc': 1}
 #------------------------------------------------------------------------------
 # Background inputs
 #------------------------------------------------------------------------------
