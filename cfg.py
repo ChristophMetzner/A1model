@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_18_06_24_L1sink_1'
+cfg.simLabel = 'ASSR_24_06_24_L1sink_1'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -198,7 +198,7 @@ cfg.ICThalprobECore = 0.16
 cfg.ICThalprobICore = 0.09
 
 # these params control IC -> Thalamic Matrix
-cfg.ICThalMatrixCoreFactor = 0.1
+cfg.ICThalMatrixCoreFactor = 0.05
 cfg.ICThalweightEMatrix = cfg.ICThalweightECore * cfg.ICThalMatrixCoreFactor
 cfg.ICThalweightIMatrix = cfg.ICThalweightICore * cfg.ICThalMatrixCoreFactor
 cfg.ICThalprobEMatrix = cfg.ICThalprobECore 
