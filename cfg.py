@@ -67,7 +67,7 @@ cfg.recordDipole = True
 # Saving
 #------------------------------------------------------------------------------
 
-cfg.simLabel = 'ASSR_24_06_24_L1sink_1'
+cfg.simLabel = 'ASSR_25_06_24_L1sink_1'
 cfg.saveFolder = 'data/' + cfg.simLabel  ## Set file output name
 cfg.savePickle = True         							## Save pkl file
 cfg.saveJson = False           							## Save json file
@@ -215,16 +215,16 @@ cfg.thalL4NGF = 1.0
 cfg.thalL1NGF = 1.0
 cfg.ENGF1 = 1.0
 
-cfg.L4L3E    = 2.0 # 1.0
+cfg.L4L3E    = 0.75 # 1.0
 cfg.L4L3PV   = 0.1
-cfg.L4L3SOM  = 1.0
+cfg.L4L3SOM  = 0.5
 
 cfg.L4L3VIP = 0.1
 cfg.L4L3NGF = 1.0
 
-cfg.artFB = 1
-cfg.artFBweight = 0.5
-cfg.artFBprob = 0.5
+cfg.artFB = 0
+cfg.artFBweight = 0.0
+cfg.artFBprob = 0.0
 
 cfg.addSubConn = 1
 
